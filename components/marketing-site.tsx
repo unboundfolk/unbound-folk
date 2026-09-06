@@ -478,13 +478,13 @@ function HeroSection() {
 
           {/* Headline */}
           <h1 className="text-5xl font-bold leading-[0.9] tracking-tighter text-white drop-shadow-xl sm:text-6xl lg:text-7xl xl:text-[6rem]">
-            Look the Part.<br />
-            <span className="text-lime-300">Run Like One.</span>
+            Sharp Brand.<br />
+            <span className="text-lime-300">Smart Systems.</span>
           </h1>
 
           {/* Subtitle */}
           <p className="mt-7 max-w-xl text-lg leading-8 text-white/75 drop-shadow-sm">
-            We make brands look sharp and businesses run better — through design, AI, and custom-built systems.
+            We help businesses in Malaysia stand out visually and operate smarter — through creative design, AI, and custom-built systems.
           </p>
 
           {/* CTAs */}
