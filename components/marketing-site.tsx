@@ -436,12 +436,6 @@ function ShowreelModal({ onClose }: { onClose: () => void }) {
 function HeroSection() {
   const reduce = useReducedMotion();
   const [showReel, setShowReel] = useState(false);
-  const badges = [
-    { label: "Creative", icon: Palette, pos: "bottom-[38%] left-[4%] lg:left-[6%]" },
-    { label: "AI-Powered", icon: BrainCircuit, pos: "top-[28%] right-[4%] lg:right-[8%]" },
-    { label: "Automation", icon: Workflow, pos: "bottom-[22%] right-[4%] lg:right-[12%]" },
-    { label: "Systems", icon: MonitorCog, pos: "top-[32%] left-[4%] lg:left-[8%]" },
-  ];
   return (
     <>
     {showReel && <ShowreelModal onClose={() => setShowReel(false)} />}
@@ -466,45 +460,6 @@ function HeroSection() {
       {/* ── Additional gradient for text legibility ── */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#05070a]/80 via-transparent to-[#05070a]/40" aria-hidden="true" />
 
-      {/* ── Floating badges ── */}
-      {badges.map((b, i) => {
-        const Icon = b.icon;
-        return (
-          <motion.div
-            key={b.label}
-            initial={reduce ? false : { opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.6 + i * 0.12, ease: pageEase }}
-          >
-            <motion.div
-              animate={reduce ? undefined : { y: [0, i % 2 ? 8 : -8, 0] }}
-              transition={{ duration: 4 + i * 0.8, repeat: Infinity, ease: "easeInOut" }}
-              className={cx(
-                "absolute hidden items-center gap-2 rounded-2xl border border-white/15 bg-slate-950/75 px-4 py-3 text-sm font-semibold text-white shadow-2xl backdrop-blur-md sm:flex",
-                b.pos
-              )}
-            >
-              <Icon size={15} className="text-lime-300" />
-              {b.label}
-            </motion.div>
-          </motion.div>
-        );
-      })}
-
-      {/* ── Play Showreel floating button ── */}
-      <motion.button
-        initial={reduce ? false : { opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7, delay: 1.1, ease: pageEase }}
-        onClick={() => setShowReel(true)}
-        className="absolute bottom-[14%] left-1/2 hidden -translate-x-1/2 items-center gap-3 rounded-full border border-lime-300/30 bg-slate-950/80 py-3 pl-3 pr-5 text-sm font-bold text-white shadow-2xl backdrop-blur-md transition hover:border-lime-300/60 hover:bg-slate-950 sm:flex"
-        aria-label="Play showreel"
-      >
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-lime-300 text-slate-950">
-          <Play size={14} fill="currentColor" />
-        </span>
-        Play Showreel
-      </motion.button>
 
       {/* ── Centred content ── */}
       <div className="relative z-10 flex min-h-[100dvh] flex-col items-center justify-center px-5 pb-24 pt-32 text-center sm:px-8">
@@ -536,9 +491,12 @@ function HeroSection() {
             <ButtonLink href="/contact">
               Book a Discovery Call <ArrowRight size={16} />
             </ButtonLink>
-            <ButtonLink href="/work" variant="secondary">
-              View Our Work <Play size={15} />
-            </ButtonLink>
+            <button
+              onClick={() => setShowReel(true)}
+              className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 text-sm font-bold text-white backdrop-blur-sm transition hover:border-white/40 hover:bg-white/15"
+            >
+              <Play size={14} fill="currentColor" /> Play Showreel
+            </button>
           </div>
         </motion.div>
 
