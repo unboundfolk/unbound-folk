@@ -394,90 +394,128 @@ function HeroVisual() {
 function HeroSection() {
   const reduce = useReducedMotion();
   const badges = [
-    { label: "Creative", icon: Palette, pos: "top-[22%] left-[6%]" },
-    { label: "AI", icon: BrainCircuit, pos: "top-[12%] right-[10%]" },
-    { label: "Automation", icon: Workflow, pos: "bottom-[30%] left-[8%]" },
-    { label: "Systems", icon: MonitorCog, pos: "bottom-[16%] right-[6%]" },
+    { label: "Creative", icon: Palette, pos: "bottom-[38%] left-[4%] lg:left-[6%]" },
+    { label: "AI-Powered", icon: BrainCircuit, pos: "top-[28%] right-[4%] lg:right-[8%]" },
+    { label: "Automation", icon: Workflow, pos: "bottom-[22%] right-[4%] lg:right-[12%]" },
+    { label: "Systems", icon: MonitorCog, pos: "top-[32%] left-[4%] lg:left-[8%]" },
   ];
   return (
-    <section className="relative overflow-hidden lg:flex lg:min-h-[100dvh]">
-      {/* Text panel */}
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 28 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: pageEase }}
-        className="relative z-10 flex flex-col justify-center px-5 pb-12 pt-28 sm:px-8 lg:w-[56%] lg:pb-20 lg:pl-10 lg:pr-12 lg:pt-0 xl:pl-14"
+    <section className="relative min-h-[100dvh] overflow-hidden">
+      {/* ── Video background ── */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+        aria-hidden="true"
       >
-        <p className="mb-6 inline-flex w-fit rounded-full border border-lime-300/25 bg-lime-300/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-lime-200">
-          Creative studio + systems partner
-        </p>
-        <h1 className="text-5xl font-bold leading-[0.92] tracking-tighter text-white sm:text-6xl lg:text-7xl xl:text-[5.25rem]">
-          Look the Part.<br />Run Like One.
-        </h1>
-        <p className="mt-6 max-w-md text-lg leading-8 text-slate-300">
-          Unbound Folk is a creative-tech studio in Malaysia. We make brands look sharp and help businesses run better — through design, AI, and custom-built systems.
-        </p>
-        <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href="/contact">Book a Discovery Call <ArrowRight size={16} /></ButtonLink>
-          <ButtonLink href="/work" variant="secondary">View Our Work <Play size={15} /></ButtonLink>
-        </div>
-        {/* Mini stats */}
-        <div className="mt-12 grid grid-cols-3 gap-4 border-t border-white/10 pt-8">
+        <source src="/hero-bg.mp4" type="video/mp4" />
+        {/* Fallback image while video loads */}
+        <Image src="/12.jpg" alt="" fill className="object-cover" priority aria-hidden="true" />
+      </video>
+
+      {/* ── 30% dark overlay (user-requested) ── */}
+      <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
+
+      {/* ── Additional gradient for text legibility ── */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#05070a]/80 via-transparent to-[#05070a]/40" aria-hidden="true" />
+
+      {/* ── Floating badges ── */}
+      {badges.map((b, i) => {
+        const Icon = b.icon;
+        return (
+          <motion.div
+            key={b.label}
+            initial={reduce ? false : { opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.6 + i * 0.12, ease: pageEase }}
+          >
+            <motion.div
+              animate={reduce ? undefined : { y: [0, i % 2 ? 8 : -8, 0] }}
+              transition={{ duration: 4 + i * 0.8, repeat: Infinity, ease: "easeInOut" }}
+              className={cx(
+                "absolute hidden items-center gap-2 rounded-2xl border border-white/15 bg-slate-950/75 px-4 py-3 text-sm font-semibold text-white shadow-2xl backdrop-blur-md sm:flex",
+                b.pos
+              )}
+            >
+              <Icon size={15} className="text-lime-300" />
+              {b.label}
+            </motion.div>
+          </motion.div>
+        );
+      })}
+
+      {/* ── Centred content ── */}
+      <div className="relative z-10 flex min-h-[100dvh] flex-col items-center justify-center px-5 pb-24 pt-32 text-center sm:px-8">
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: pageEase }}
+          className="flex max-w-4xl flex-col items-center"
+        >
+          {/* Pill badge */}
+          <span className="mb-8 inline-flex items-center gap-2 rounded-full border border-lime-300/30 bg-lime-300/10 px-5 py-2 text-xs font-bold uppercase tracking-[0.22em] text-lime-200 backdrop-blur-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-lime-300" />
+            Creative Studio + Systems Partner · Malaysia
+          </span>
+
+          {/* Headline */}
+          <h1 className="text-5xl font-bold leading-[0.9] tracking-tighter text-white drop-shadow-xl sm:text-6xl lg:text-7xl xl:text-[6rem]">
+            Look the Part.<br />
+            <span className="text-lime-300">Run Like One.</span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="mt-7 max-w-xl text-lg leading-8 text-white/75 drop-shadow-sm">
+            We make brands look sharp and businesses run better — through design, AI, and custom-built systems.
+          </p>
+
+          {/* CTAs */}
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <ButtonLink href="/contact">
+              Book a Discovery Call <ArrowRight size={16} />
+            </ButtonLink>
+            <ButtonLink href="/work" variant="secondary">
+              View Our Work <Play size={15} />
+            </ButtonLink>
+          </div>
+        </motion.div>
+
+        {/* ── Mini stats row ── */}
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: pageEase }}
+          className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 border-t border-white/15 pt-10"
+        >
           {[
             { v: "Creative", l: "Visual content & brand" },
             { v: "Systems", l: "Custom software & AI" },
             { v: "Malaysia", l: "Studio based in KL" },
-          ].map(({ v, l }) => (
-            <div key={v}>
+          ].map(({ v, l }, i) => (
+            <div key={v} className={cx("text-center", i < 2 && "sm:border-r sm:border-white/15 sm:pr-10")}>
               <p className="text-base font-bold text-white">{v}</p>
-              <p className="mt-1 text-xs leading-4 text-slate-500">{l}</p>
+              <p className="mt-1 text-xs text-white/50">{l}</p>
             </div>
           ))}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
-      {/* Mobile image */}
+      {/* ── Scroll indicator ── */}
       <motion.div
         initial={reduce ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: pageEase, delay: 0.2 }}
-        className="relative h-64 w-full overflow-hidden lg:hidden"
+        transition={{ delay: 1.4, duration: 0.6 }}
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
       >
-        <Image src="/12.jpg" alt="Unbound Folk creative work" fill sizes="100vw" className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/30 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#05070a]/40 to-transparent" />
-      </motion.div>
-
-      {/* Desktop right image panel */}
-      <motion.div
-        initial={reduce ? false : { opacity: 0, scale: 1.04 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.1, ease: pageEase, delay: 0.05 }}
-        className="absolute inset-y-0 right-0 hidden w-[46%] overflow-hidden lg:block"
-      >
-        <Image src="/12.jpg" alt="Unbound Folk creative work" fill sizes="46vw" className="object-cover" priority />
-        {/* Left edge blend into dark background */}
-        <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-[#05070a] to-transparent" />
-        {/* Top/bottom vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#05070a]/65 via-transparent to-[#05070a]/25" />
-        {/* Floating category badges */}
-        {badges.map((b, i) => {
-          const Icon = b.icon;
-          return (
-            <motion.div
-              key={b.label}
-              animate={reduce ? undefined : { y: [0, i % 2 ? 10 : -10, 0] }}
-              transition={{ duration: 4 + i, repeat: Infinity, ease: "easeInOut" }}
-              className={cx(
-                "absolute flex items-center gap-2 rounded-2xl border border-white/15 bg-slate-950/80 px-4 py-3 text-sm font-semibold shadow-2xl backdrop-blur-md",
-                b.pos
-              )}
-            >
-              <Icon size={16} className="text-lime-300" />
-              {b.label}
-            </motion.div>
-          );
-        })}
+        <motion.div
+          animate={reduce ? undefined : { y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="flex h-10 w-6 items-start justify-center rounded-full border border-white/25 pt-2"
+        >
+          <div className="h-1.5 w-1 rounded-full bg-white/60" />
+        </motion.div>
       </motion.div>
     </section>
   );
@@ -505,21 +543,19 @@ function TrustSection() {
   const items = [
     "Founders", "SME Teams", "E-commerce Brands", "Service Companies",
     "Operations Teams", "Creative Leads", "Product Studios", "Growing Businesses",
+    "Startups", "Retail Brands", "Tech Companies", "Agencies",
   ];
   const doubled = [...items, ...items];
   return (
-    <section className="overflow-hidden border-y border-white/10 bg-white/[0.02] py-5">
+    <section className="overflow-hidden border-y border-white/[0.07] bg-white/[0.015] py-4">
       <div className="relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#05070a] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#05070a] to-transparent" />
-        <div
-          className="flex whitespace-nowrap"
-          style={{ animation: "marquee 32s linear infinite" }}
-        >
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[#05070a] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-[#05070a] to-transparent" />
+        <div className="flex whitespace-nowrap" style={{ animation: "marquee 40s linear infinite" }}>
           {doubled.map((item, i) => (
-            <span key={i} className="mx-6 shrink-0 text-sm font-semibold tracking-wide text-slate-400">
+            <span key={i} className="mx-8 shrink-0 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
               {item}
-              <span className="ml-6 text-white/20">·</span>
+              <span className="ml-8 text-lime-300/25">✦</span>
             </span>
           ))}
         </div>
@@ -530,22 +566,40 @@ function TrustSection() {
 
 function ProblemSection() {
   return (
-    <Section
-      title="Most Businesses Are Losing on Two Fronts at Once."
-      copy="Externally, your brand isn't making the impression it should. Internally, your team is burning time on things that should be automatic. Both problems are fixable — and they're more connected than you think."
-    >
-      <div className="grid gap-4 md:grid-cols-2">
-        {[
-          ["How you look", "First impressions happen fast. If your visuals, content, or brand feel inconsistent or dated, customers move on before you get to say anything."],
-          ["How you operate", "Manual follow-ups, scattered approvals, data living in five places — these don't just slow your team down. They quietly cap how big you can grow."],
-        ].map(([title, copy]) => (
-          <Reveal key={title} className="rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-7 backdrop-blur">
-            <p className="text-2xl font-semibold text-white">{title}</p>
-            <p className="mt-3 leading-7 text-slate-300">{copy}</p>
+    <section className="relative px-5 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+          <Reveal>
+            <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-5xl">
+              Most Businesses Are Losing on Two Fronts at Once.
+            </h2>
+            <p className="mt-6 max-w-lg text-base leading-7 text-slate-400">
+              Externally, your brand isn't making the impression it should. Internally, your team is burning time on things that should be automatic. Both are fixable — and more connected than you think.
+            </p>
           </Reveal>
-        ))}
+          <div className="flex flex-col gap-4">
+            {[
+              {
+                label: "01",
+                title: "How you look",
+                copy: "First impressions happen fast. If your visuals, content, or brand feel inconsistent or dated, customers move on before you get to say anything.",
+              },
+              {
+                label: "02",
+                title: "How you operate",
+                copy: "Manual follow-ups, scattered approvals, data in five places — these don't just slow your team down. They quietly cap how big you can grow.",
+              },
+            ].map(({ label, title, copy }) => (
+              <Reveal key={title} className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition hover:border-lime-300/20 hover:bg-white/[0.05]">
+                <span className="mb-4 block font-mono text-xs font-bold tracking-[0.18em] text-lime-300/50">{label}</span>
+                <p className="text-xl font-bold text-white">{title}</p>
+                <p className="mt-3 leading-7 text-slate-400">{copy}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }
 
@@ -716,13 +770,16 @@ function FAQSection({ items = faqs }: { items?: typeof faqs }) {
 function CTASection({ title = "Ready to Stop Leaving Growth on the Table?", copy = "Book a discovery call. We'll spend 30 minutes understanding where you're stuck — and tell you honestly whether we can help.", cta = "Book a Discovery Call" }) {
   return (
     <section className="px-5 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-lime-300/20 bg-lime-300 p-8 text-slate-950 shadow-[0_30px_120px_rgba(190,242,100,0.18)] sm:p-12">
-        <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-lime-300 p-10 shadow-[0_40px_140px_rgba(190,242,100,0.22)] sm:p-14 lg:p-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
           <div>
-            <h2 className="max-w-3xl text-3xl font-bold tracking-tighter sm:text-5xl">{title}</h2>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-800">{copy}</p>
+            <h2 className="max-w-3xl text-3xl font-bold tracking-tighter text-slate-950 sm:text-5xl">{title}</h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-700">{copy}</p>
           </div>
-          <Link href="/contact" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-slate-950 px-6 text-sm font-bold text-white">
+          <Link
+            href="/contact"
+            className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-slate-950 px-8 text-sm font-bold text-white transition hover:bg-slate-800"
+          >
             {cta} <ArrowRight size={16} />
           </Link>
         </div>
