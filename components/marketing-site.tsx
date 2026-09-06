@@ -500,24 +500,6 @@ function HeroSection() {
           </div>
         </motion.div>
 
-        {/* ── Mini stats row ── */}
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: pageEase }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 border-t border-white/15 pt-10"
-        >
-          {[
-            { v: "Creative", l: "Visual content & brand" },
-            { v: "Systems", l: "Custom software & AI" },
-            { v: "Malaysia", l: "Studio based in KL" },
-          ].map(({ v, l }, i) => (
-            <div key={v} className={cx("text-center", i < 2 && "sm:border-r sm:border-white/15 sm:pr-10")}>
-              <p className="text-base font-bold text-white">{v}</p>
-              <p className="mt-1 text-xs text-white/50">{l}</p>
-            </div>
-          ))}
-        </motion.div>
       </div>
 
       {/* ── Scroll indicator ── */}
