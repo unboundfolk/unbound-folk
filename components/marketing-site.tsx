@@ -545,7 +545,7 @@ export function HomePage() {
     <SiteShell>
       <main>
         <HeroSection />
-        <TrustSection />
+
         <ProblemSection />
         <PillarsSection />
         <WhySection />
