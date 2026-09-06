@@ -415,8 +415,8 @@ function HeroSection() {
         <Image src="/12.jpg" alt="" fill className="object-cover" priority aria-hidden="true" />
       </video>
 
-      {/* ── 30% dark overlay (user-requested) ── */}
-      <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
+      {/* ── 50% dark overlay + blur ── */}
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" aria-hidden="true" />
 
       {/* ── Additional gradient for text legibility ── */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#05070a]/80 via-transparent to-[#05070a]/40" aria-hidden="true" />
