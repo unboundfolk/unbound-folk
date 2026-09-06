@@ -410,7 +410,7 @@ function HeroSection() {
         className="absolute inset-0 h-full w-full object-cover"
         aria-hidden="true"
       >
-        <source src="/hero-bg.mp4" type="video/mp4" />
+        <source src="https://pub-bbbfbd5704db4bcb97e12fd006199ff8.r2.dev/UF-Showreel-2026.mp4" type="video/mp4" />
         {/* Fallback image while video loads */}
         <Image src="/12.jpg" alt="" fill className="object-cover" priority aria-hidden="true" />
       </video>
