@@ -391,8 +391,51 @@ function HeroVisual() {
   );
 }
 
+const SHOWREEL_URL = "https://pub-bbbfbd5704db4bcb97e12fd006199ff8.r2.dev/UF-Showreel-2026.mp4";
+
+function ShowreelModal({ onClose }: { onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/85 p-4 backdrop-blur-md"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.92, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.92, opacity: 0 }}
+          transition={{ duration: 0.3, ease: pageEase }}
+          className="relative w-full max-w-5xl overflow-hidden rounded-2xl bg-black shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20"
+            aria-label="Close showreel"
+          >
+            <X size={18} />
+          </button>
+          <video
+            src={SHOWREEL_URL}
+            controls
+            autoPlay
+            className="aspect-video w-full"
+            aria-label="Unbound Folk Showreel 2026"
+          />
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 function HeroSection() {
   const reduce = useReducedMotion();
+  const [showReel, setShowReel] = useState(false);
   const badges = [
     { label: "Creative", icon: Palette, pos: "bottom-[38%] left-[4%] lg:left-[6%]" },
     { label: "AI-Powered", icon: BrainCircuit, pos: "top-[28%] right-[4%] lg:right-[8%]" },
@@ -400,6 +443,8 @@ function HeroSection() {
     { label: "Systems", icon: MonitorCog, pos: "top-[32%] left-[4%] lg:left-[8%]" },
   ];
   return (
+    <>
+    {showReel && <ShowreelModal onClose={() => setShowReel(false)} />}
     <section className="relative min-h-[100dvh] overflow-hidden">
       {/* ── Video background ── */}
       <video
@@ -415,8 +460,8 @@ function HeroSection() {
         <Image src="/12.jpg" alt="" fill className="object-cover" priority aria-hidden="true" />
       </video>
 
-      {/* ── 50% dark overlay + blur ── */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" aria-hidden="true" />
+      {/* ── 70% dark overlay + frosted glass blur ── */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-[10px]" aria-hidden="true" />
 
       {/* ── Additional gradient for text legibility ── */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#05070a]/80 via-transparent to-[#05070a]/40" aria-hidden="true" />
@@ -445,6 +490,21 @@ function HeroSection() {
           </motion.div>
         );
       })}
+
+      {/* ── Play Showreel floating button ── */}
+      <motion.button
+        initial={reduce ? false : { opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.7, delay: 1.1, ease: pageEase }}
+        onClick={() => setShowReel(true)}
+        className="absolute bottom-[14%] left-1/2 hidden -translate-x-1/2 items-center gap-3 rounded-full border border-lime-300/30 bg-slate-950/80 py-3 pl-3 pr-5 text-sm font-bold text-white shadow-2xl backdrop-blur-md transition hover:border-lime-300/60 hover:bg-slate-950 sm:flex"
+        aria-label="Play showreel"
+      >
+        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-lime-300 text-slate-950">
+          <Play size={14} fill="currentColor" />
+        </span>
+        Play Showreel
+      </motion.button>
 
       {/* ── Centred content ── */}
       <div className="relative z-10 flex min-h-[100dvh] flex-col items-center justify-center px-5 pb-24 pt-32 text-center sm:px-8">
@@ -518,6 +578,7 @@ function HeroSection() {
         </motion.div>
       </motion.div>
     </section>
+    </>
   );
 }
 
