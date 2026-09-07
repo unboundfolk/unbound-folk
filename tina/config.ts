@@ -25,6 +25,7 @@ export default defineConfig({
         label: "Homepage",
         path: "content/pages",
         format: "json",
+        match: { include: "homepage" },
         fields: [
           // Hero
           {
@@ -146,6 +147,7 @@ export default defineConfig({
         label: "Creative Page",
         path: "content/pages",
         format: "json",
+        match: { include: "creative" },
         fields: [
           {
             type: "object",
@@ -196,6 +198,7 @@ export default defineConfig({
         label: "Systems Page",
         path: "content/pages",
         format: "json",
+        match: { include: "systems" },
         fields: [
           {
             type: "object",
@@ -246,6 +249,7 @@ export default defineConfig({
         label: "About Page",
         path: "content/pages",
         format: "json",
+        match: { include: "about" },
         fields: [
           {
             type: "object",
@@ -280,6 +284,7 @@ export default defineConfig({
         label: "Global Settings",
         path: "content/pages",
         format: "json",
+        match: { include: "global" },
         fields: [
           {
             type: "object",
