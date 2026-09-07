@@ -2,8 +2,8 @@ import { defineConfig } from "tinacms";
 
 export default defineConfig({
   branch: process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || "main",
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID!,
-  token: process.env.TINA_TOKEN!,
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+  token: process.env.TINA_TOKEN,
 
   build: {
     outputFolder: "admin",
@@ -24,9 +24,7 @@ export default defineConfig({
         name: "homepage",
         label: "Homepage",
         path: "content/pages",
-        match: { include: "homepage" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
         fields: [
           {
             type: "object",

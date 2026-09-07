@@ -21,9 +21,7 @@ var config_default = defineConfig({
         name: "homepage",
         label: "Homepage",
         path: "content/pages",
-        match: { include: "homepage" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
         fields: [
           {
             type: "object",
