@@ -101,13 +101,6 @@ export default defineConfig({
           { type: "string", name: "outcome", label: "The Result", ui: { component: "textarea" } },
           { type: "number", name: "order", label: "Display Order" },
         ],
-        ui: {
-          filename: {
-            readonly: false,
-            slugify: (values) =>
-              values?.title?.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "") || "untitled",
-          },
-        },
       },
 
       // ─── FAQs ────────────────────────────────────────────────
@@ -121,13 +114,6 @@ export default defineConfig({
           { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
           { type: "number", name: "order", label: "Display Order" },
         ],
-        ui: {
-          filename: {
-            readonly: false,
-            slugify: (values) =>
-              values?.question?.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").slice(0, 40) || "faq",
-          },
-        },
       },
     ],
   },
