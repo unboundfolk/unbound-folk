@@ -1196,25 +1196,98 @@ export function AboutPage({
     { title: "How we work", copy: "We listen before we propose. We ask uncomfortable questions. We'd rather scope something smaller and do it well than overpromise and underdeliver." },
     { title: "Why clients stay", copy: "We're honest about timelines and limitations. We communicate during the project, not just at the start and end. And we measure success by whether the thing we built actually works for you." },
   ];
+
   return (
     <SiteShell global={global}>
-      <SubPageHero
-        eyebrow={hero?.eyebrow ?? "About"}
-        title={hero?.title ?? "We Started Unbound Folk Because Most Businesses Needed Both."}
-        copy={hero?.copy ?? "Not just a creative agency. Not just a dev shop. A studio that understands brand and operations — and builds for both without making you manage two different vendors."}
-        image={hero?.image ?? "/16.jpg"}
-        cta={hero?.cta ?? "Book a Discovery Call"}
-      />
-      <Section eyebrow={data?.beliefEyebrow ?? "How we think"} title={data?.beliefTitle ?? "Brand Gets You In the Door. Systems Keep You Standing."}>
-        <div className="grid gap-5 lg:grid-cols-3">
-          {beliefs.map((belief, i) => (
-            <Reveal key={i} className="rounded-3xl border border-white/10 bg-white/[0.04] p-7">
-              <h2 className="text-2xl font-bold text-white">{belief.title}</h2>
-              <p className="mt-4 leading-7 text-slate-300">{belief.copy}</p>
-            </Reveal>
-          ))}
+
+      {/* ── Cinematic full-bleed hero (no split layout) ── */}
+      <section className="relative min-h-[90dvh] overflow-hidden">
+        {/* Background image */}
+        <Image
+          src={hero?.image ?? "/uploads/about-hero.jpg"}
+          alt="About Unbound Folk"
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover object-center"
+        />
+        {/* Layered overlays for depth */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/60 to-slate-950/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/50" />
+
+        {/* Content — left-aligned, vertical center */}
+        <div className="relative flex min-h-[90dvh] flex-col justify-end px-5 pb-20 pt-32 sm:px-8 lg:px-16">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, ease: pageEase }}
+            className="max-w-2xl"
+          >
+            <p className="mb-6 text-xs font-bold uppercase tracking-[0.26em] text-lime-300">
+              {hero?.eyebrow ?? "About"}
+            </p>
+            <h1 className="text-5xl font-bold leading-[0.92] tracking-tighter text-white sm:text-6xl lg:text-7xl">
+              {hero?.title ?? "We Started Unbound Folk Because Most Businesses Needed Both."}
+            </h1>
+            <p className="mt-7 max-w-xl text-lg leading-8 text-slate-300">
+              {hero?.copy ?? "Not just a creative agency. Not just a dev shop. A studio that understands brand and operations — and builds for both without making you manage two different vendors."}
+            </p>
+            <div className="mt-9">
+              <ButtonLink href="/contact">
+                {hero?.cta ?? "Book a Discovery Call"} <ArrowRight size={16} />
+              </ButtonLink>
+            </div>
+          </motion.div>
         </div>
-      </Section>
+      </section>
+
+      {/* ── Divider pull-quote ── */}
+      <section className="border-y border-white/8 bg-white/[0.02] px-5 py-14 sm:px-8 lg:px-16">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mx-auto max-w-4xl text-2xl font-medium leading-[1.4] tracking-tight text-white/70 sm:text-3xl"
+        >
+          "Most studios pick a lane — <span className="text-white font-semibold">creative</span> or <span className="text-white font-semibold">tech</span>. We built Unbound Folk to cover both, because we saw too many clients managing two vendors who didn't talk to each other."
+        </motion.p>
+      </section>
+
+      {/* ── Beliefs — vertical numbered editorial layout ── */}
+      <section className="px-5 py-24 sm:px-8 lg:px-16">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-16">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-lime-300">
+              {data?.beliefEyebrow ?? "How we think"}
+            </p>
+            <h2 className="text-4xl font-bold leading-tight tracking-tighter text-white sm:text-5xl">
+              {data?.beliefTitle ?? "Brand Gets You In the Door. Systems Keep You Standing."}
+            </h2>
+          </div>
+
+          <div className="divide-y divide-white/10">
+            {beliefs.map((belief, i) => (
+              <Reveal key={i}>
+                <div className="grid grid-cols-[5rem_1fr] gap-6 py-10 sm:grid-cols-[8rem_1fr] sm:gap-10 lg:grid-cols-[10rem_1fr]">
+                  {/* Large decorative number */}
+                  <span
+                    className="select-none text-6xl font-bold leading-none tracking-tighter text-white/10 sm:text-8xl"
+                    aria-hidden="true"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="flex flex-col justify-center">
+                    <h3 className="text-2xl font-bold text-white sm:text-3xl">{belief.title}</h3>
+                    <p className="mt-4 text-lg leading-8 text-slate-300">{belief.copy}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CTASection />
     </SiteShell>
   );
