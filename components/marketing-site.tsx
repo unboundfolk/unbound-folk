@@ -135,6 +135,8 @@ export interface SystemsPageData {
 
 export interface AboutPageData {
   hero: SubPageHeroData;
+  foundersImage?: string;
+  foundersCaption?: string;
   beliefEyebrow: string;
   beliefTitle: string;
   beliefs: Array<{ title: string; copy: string }>;
@@ -1253,6 +1255,30 @@ export function AboutPage({
           "Most studios pick a lane — <span className="text-white font-semibold">creative</span> or <span className="text-white font-semibold">tech</span>. We built Unbound Folk to cover both, because we saw too many clients managing two vendors who didn't talk to each other."
         </motion.p>
       </section>
+
+      {/* ── Founders photo ── */}
+      {(data?.foundersImage) && (
+        <section className="px-5 pb-4 pt-20 sm:px-8 lg:px-16">
+          <Reveal>
+            <div className="mx-auto max-w-5xl">
+              <p className="mb-6 text-xs font-bold uppercase tracking-[0.24em] text-lime-300">The people behind it</p>
+              <div className="relative overflow-hidden rounded-2xl">
+                <Image
+                  src={data.foundersImage}
+                  alt="The founders of Unbound Folk"
+                  width={1600}
+                  height={900}
+                  className="w-full object-cover object-top"
+                  sizes="(max-width: 1280px) 100vw, 1024px"
+                />
+              </div>
+              {data.foundersCaption && (
+                <p className="mt-4 text-sm text-slate-500">{data.foundersCaption}</p>
+              )}
+            </div>
+          </Reveal>
+        </section>
+      )}
 
       {/* ── Beliefs — vertical numbered editorial layout ── */}
       <section className="px-5 py-24 sm:px-8 lg:px-16">
