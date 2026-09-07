@@ -28,11 +28,142 @@ export const HomepagePartsFragmentDoc = gql`
       copy
     }
   }
+  pillars {
+    __typename
+    eyebrow
+    title
+    creative {
+      __typename
+      title
+      description
+      services
+      image
+      href
+    }
+    systems {
+      __typename
+      title
+      description
+      services
+      image
+      href
+    }
+  }
+  why {
+    __typename
+    title
+    subtitle
+    points
+  }
+  process {
+    __typename
+    title
+    steps {
+      __typename
+      num
+      title
+      copy
+    }
+  }
   cta {
     __typename
     title
     copy
     button
+  }
+}
+    `;
+export const CreativePagePartsFragmentDoc = gql`
+    fragment CreativePageParts on CreativePage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    title
+    copy
+    image
+    cta
+  }
+  featuresEyebrow
+  featuresTitle
+  features {
+    __typename
+    title
+    copy
+  }
+  scopeEyebrow
+  scopeTitle
+  scopeCopy
+  ctaTitle
+  ctaCta
+  extraFaqs {
+    __typename
+    question
+    answer
+    order
+  }
+}
+    `;
+export const SystemsPagePartsFragmentDoc = gql`
+    fragment SystemsPageParts on SystemsPage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    title
+    copy
+    image
+    cta
+  }
+  featuresEyebrow
+  featuresTitle
+  features {
+    __typename
+    title
+    copy
+  }
+  useCasesEyebrow
+  useCasesTitle
+  useCases
+  ctaTitle
+  ctaCta
+  extraFaqs {
+    __typename
+    question
+    answer
+    order
+  }
+}
+    `;
+export const AboutPagePartsFragmentDoc = gql`
+    fragment AboutPageParts on AboutPage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    title
+    copy
+    image
+    cta
+  }
+  beliefEyebrow
+  beliefTitle
+  beliefs {
+    __typename
+    title
+    copy
+  }
+}
+    `;
+export const GlobalPartsFragmentDoc = gql`
+    fragment GlobalParts on Global {
+  __typename
+  footer {
+    __typename
+    tagline
+    email
+    phone
+    location
   }
 }
     `;
@@ -114,6 +245,234 @@ export const HomepageConnectionDocument = gql`
   }
 }
     ${HomepagePartsFragmentDoc}`;
+export const CreativePageDocument = gql`
+    query creativePage($relativePath: String!) {
+  creativePage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CreativePageParts
+  }
+}
+    ${CreativePagePartsFragmentDoc}`;
+export const CreativePageConnectionDocument = gql`
+    query creativePageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CreativePageFilter) {
+  creativePageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CreativePageParts
+      }
+    }
+  }
+}
+    ${CreativePagePartsFragmentDoc}`;
+export const SystemsPageDocument = gql`
+    query systemsPage($relativePath: String!) {
+  systemsPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SystemsPageParts
+  }
+}
+    ${SystemsPagePartsFragmentDoc}`;
+export const SystemsPageConnectionDocument = gql`
+    query systemsPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SystemsPageFilter) {
+  systemsPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SystemsPageParts
+      }
+    }
+  }
+}
+    ${SystemsPagePartsFragmentDoc}`;
+export const AboutPageDocument = gql`
+    query aboutPage($relativePath: String!) {
+  aboutPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...AboutPageParts
+  }
+}
+    ${AboutPagePartsFragmentDoc}`;
+export const AboutPageConnectionDocument = gql`
+    query aboutPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AboutPageFilter) {
+  aboutPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...AboutPageParts
+      }
+    }
+  }
+}
+    ${AboutPagePartsFragmentDoc}`;
+export const GlobalDocument = gql`
+    query global($relativePath: String!) {
+  global(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...GlobalParts
+  }
+}
+    ${GlobalPartsFragmentDoc}`;
+export const GlobalConnectionDocument = gql`
+    query globalConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: GlobalFilter) {
+  globalConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...GlobalParts
+      }
+    }
+  }
+}
+    ${GlobalPartsFragmentDoc}`;
 export const WorkDocument = gql`
     query work($relativePath: String!) {
   work(relativePath: $relativePath) {
@@ -235,6 +594,30 @@ export function getSdk(requester) {
     },
     homepageConnection(variables, options) {
       return requester(HomepageConnectionDocument, variables, options);
+    },
+    creativePage(variables, options) {
+      return requester(CreativePageDocument, variables, options);
+    },
+    creativePageConnection(variables, options) {
+      return requester(CreativePageConnectionDocument, variables, options);
+    },
+    systemsPage(variables, options) {
+      return requester(SystemsPageDocument, variables, options);
+    },
+    systemsPageConnection(variables, options) {
+      return requester(SystemsPageConnectionDocument, variables, options);
+    },
+    aboutPage(variables, options) {
+      return requester(AboutPageDocument, variables, options);
+    },
+    aboutPageConnection(variables, options) {
+      return requester(AboutPageConnectionDocument, variables, options);
+    },
+    global(variables, options) {
+      return requester(GlobalDocument, variables, options);
+    },
+    globalConnection(variables, options) {
+      return requester(GlobalConnectionDocument, variables, options);
     },
     work(variables, options) {
       return requester(WorkDocument, variables, options);

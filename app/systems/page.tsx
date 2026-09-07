@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const data = readJson<SystemsPageData>("content/pages/systems.json");
-  const global = readJson<GlobalData>("content/pages/global.json");
+  const data = readJson<SystemsPageData>("content/systems/systems.json");
+  const global = readJson<GlobalData>("content/global/global.json");
   const sharedFaqs = readJsonDir<FaqItem>("content/faqs").sort(
     (a, b) => (a.order ?? 0) - (b.order ?? 0)
   );

@@ -20,11 +20,138 @@ fragment HomepageParts on Homepage {
       copy
     }
   }
+  pillars {
+    __typename
+    eyebrow
+    title
+    creative {
+      __typename
+      title
+      description
+      services
+      image
+      href
+    }
+    systems {
+      __typename
+      title
+      description
+      services
+      image
+      href
+    }
+  }
+  why {
+    __typename
+    title
+    subtitle
+    points
+  }
+  process {
+    __typename
+    title
+    steps {
+      __typename
+      num
+      title
+      copy
+    }
+  }
   cta {
     __typename
     title
     copy
     button
+  }
+}
+
+fragment CreativePageParts on CreativePage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    title
+    copy
+    image
+    cta
+  }
+  featuresEyebrow
+  featuresTitle
+  features {
+    __typename
+    title
+    copy
+  }
+  scopeEyebrow
+  scopeTitle
+  scopeCopy
+  ctaTitle
+  ctaCta
+  extraFaqs {
+    __typename
+    question
+    answer
+    order
+  }
+}
+
+fragment SystemsPageParts on SystemsPage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    title
+    copy
+    image
+    cta
+  }
+  featuresEyebrow
+  featuresTitle
+  features {
+    __typename
+    title
+    copy
+  }
+  useCasesEyebrow
+  useCasesTitle
+  useCases
+  ctaTitle
+  ctaCta
+  extraFaqs {
+    __typename
+    question
+    answer
+    order
+  }
+}
+
+fragment AboutPageParts on AboutPage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    title
+    copy
+    image
+    cta
+  }
+  beliefEyebrow
+  beliefTitle
+  beliefs {
+    __typename
+    title
+    copy
+  }
+}
+
+fragment GlobalParts on Global {
+  __typename
+  footer {
+    __typename
+    tagline
+    email
+    phone
+    location
   }
 }
 

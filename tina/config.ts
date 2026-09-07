@@ -23,11 +23,9 @@ export default defineConfig({
       {
         name: "homepage",
         label: "Homepage",
-        path: "content/pages",
+        path: "content/homepage",
         format: "json",
-        match: { include: "homepage" },
         fields: [
-          // Hero
           {
             type: "object",
             name: "hero",
@@ -35,13 +33,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "headline", label: "Headline (line 1)" },
-              { type: "string", name: "headlineAccent", label: "Headline Accent (line 2 — lime green)" },
+              { type: "string", name: "headlineAccent", label: "Headline Accent (line 2)" },
               { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
               { type: "string", name: "ctaPrimary", label: "Primary CTA Label" },
               { type: "string", name: "ctaSecondary", label: "Secondary CTA Label" },
             ],
           },
-          // Problem
           {
             type: "object",
             name: "problem",
@@ -55,18 +52,17 @@ export default defineConfig({
                 label: "Cards",
                 list: true,
                 fields: [
-                  { type: "string", name: "label", label: "Number Label (e.g. 01)" },
+                  { type: "string", name: "label", label: "Number Label" },
                   { type: "string", name: "title", label: "Title" },
                   { type: "string", name: "copy", label: "Copy", ui: { component: "textarea" } },
                 ],
               },
             ],
           },
-          // Pillars
           {
             type: "object",
             name: "pillars",
-            label: "Pillars Section (Two Things, Done Properly)",
+            label: "Pillars Section",
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow Label" },
               { type: "string", name: "title", label: "Section Title" },
@@ -96,18 +92,16 @@ export default defineConfig({
               },
             ],
           },
-          // Why
           {
             type: "object",
             name: "why",
-            label: "Why Section (We're Built Differently)",
+            label: "Why Section",
             fields: [
               { type: "string", name: "title", label: "Headline" },
               { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
               { type: "string", name: "points", label: "Bullet Points", list: true },
             ],
           },
-          // Process
           {
             type: "object",
             name: "process",
@@ -120,14 +114,13 @@ export default defineConfig({
                 label: "Steps",
                 list: true,
                 fields: [
-                  { type: "string", name: "num", label: "Step Number (e.g. 01)" },
+                  { type: "string", name: "num", label: "Step Number" },
                   { type: "string", name: "title", label: "Step Title" },
                   { type: "string", name: "copy", label: "Step Description", ui: { component: "textarea" } },
                 ],
               },
             ],
           },
-          // CTA
           {
             type: "object",
             name: "cta",
@@ -145,9 +138,8 @@ export default defineConfig({
       {
         name: "creativePage",
         label: "Creative Page",
-        path: "content/pages",
+        path: "content/creative",
         format: "json",
-        match: { include: "creative" },
         fields: [
           {
             type: "object",
@@ -196,9 +188,8 @@ export default defineConfig({
       {
         name: "systemsPage",
         label: "Systems Page",
-        path: "content/pages",
+        path: "content/systems",
         format: "json",
-        match: { include: "systems" },
         fields: [
           {
             type: "object",
@@ -247,9 +238,8 @@ export default defineConfig({
       {
         name: "aboutPage",
         label: "About Page",
-        path: "content/pages",
+        path: "content/about",
         format: "json",
-        match: { include: "about" },
         fields: [
           {
             type: "object",
@@ -282,9 +272,8 @@ export default defineConfig({
       {
         name: "global",
         label: "Global Settings",
-        path: "content/pages",
+        path: "content/global",
         format: "json",
-        match: { include: "global" },
         fields: [
           {
             type: "object",

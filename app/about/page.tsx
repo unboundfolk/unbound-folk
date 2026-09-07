@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const data = readJson<AboutPageData>("content/pages/about.json");
-  const global = readJson<GlobalData>("content/pages/global.json");
+  const data = readJson<AboutPageData>("content/about/about.json");
+  const global = readJson<GlobalData>("content/global/global.json");
   return <AboutPage data={data} global={global} />;
 }

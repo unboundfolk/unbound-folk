@@ -14,6 +14,6 @@ export default function Page() {
   const workItems = readJsonDir<WorkItem>("content/work").sort(
     (a, b) => (a.order ?? 0) - (b.order ?? 0)
   );
-  const global = readJson<GlobalData>("content/pages/global.json");
+  const global = readJson<GlobalData>("content/global/global.json");
   return <WorkPage items={workItems} global={global} />;
 }

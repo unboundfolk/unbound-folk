@@ -56,6 +56,14 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   homepage(relativePath: String): Homepage!
   homepageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomepageFilter): HomepageConnection!
+  creativePage(relativePath: String): CreativePage!
+  creativePageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CreativePageFilter): CreativePageConnection!
+  systemsPage(relativePath: String): SystemsPage!
+  systemsPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SystemsPageFilter): SystemsPageConnection!
+  aboutPage(relativePath: String): AboutPage!
+  aboutPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutPageFilter): AboutPageConnection!
+  global(relativePath: String): Global!
+  globalConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GlobalFilter): GlobalConnection!
   work(relativePath: String): Work!
   workConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: WorkFilter): WorkConnection!
   faq(relativePath: String): Faq!
@@ -64,6 +72,10 @@ type Query {
 
 input DocumentFilter {
   homepage: HomepageFilter
+  creativePage: CreativePageFilter
+  systemsPage: SystemsPageFilter
+  aboutPage: AboutPageFilter
+  global: GlobalFilter
   work: WorkFilter
   faq: FaqFilter
 }
@@ -91,7 +103,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Homepage | Work | Faq | Folder
+union DocumentNode = Homepage | CreativePage | SystemsPage | AboutPage | Global | Work | Faq | Folder
 
 type HomepageHero {
   badge: String
@@ -114,6 +126,46 @@ type HomepageProblem {
   cards: [HomepageProblemCards]
 }
 
+type HomepagePillarsCreative {
+  title: String
+  description: String
+  services: [String]
+  image: String
+  href: String
+}
+
+type HomepagePillarsSystems {
+  title: String
+  description: String
+  services: [String]
+  image: String
+  href: String
+}
+
+type HomepagePillars {
+  eyebrow: String
+  title: String
+  creative: HomepagePillarsCreative
+  systems: HomepagePillarsSystems
+}
+
+type HomepageWhy {
+  title: String
+  subtitle: String
+  points: [String]
+}
+
+type HomepageProcessSteps {
+  num: String
+  title: String
+  copy: String
+}
+
+type HomepageProcess {
+  title: String
+  steps: [HomepageProcessSteps]
+}
+
 type HomepageCta {
   title: String
   copy: String
@@ -123,6 +175,9 @@ type HomepageCta {
 type Homepage implements Node & Document {
   hero: HomepageHero
   problem: HomepageProblem
+  pillars: HomepagePillars
+  why: HomepageWhy
+  process: HomepageProcess
   cta: HomepageCta
   id: ID!
   _sys: SystemInfo!
@@ -157,6 +212,53 @@ input HomepageProblemFilter {
   cards: HomepageProblemCardsFilter
 }
 
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input HomepagePillarsCreativeFilter {
+  title: StringFilter
+  description: StringFilter
+  services: StringFilter
+  image: ImageFilter
+  href: StringFilter
+}
+
+input HomepagePillarsSystemsFilter {
+  title: StringFilter
+  description: StringFilter
+  services: StringFilter
+  image: ImageFilter
+  href: StringFilter
+}
+
+input HomepagePillarsFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  creative: HomepagePillarsCreativeFilter
+  systems: HomepagePillarsSystemsFilter
+}
+
+input HomepageWhyFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  points: StringFilter
+}
+
+input HomepageProcessStepsFilter {
+  num: StringFilter
+  title: StringFilter
+  copy: StringFilter
+}
+
+input HomepageProcessFilter {
+  title: StringFilter
+  steps: HomepageProcessStepsFilter
+}
+
 input HomepageCtaFilter {
   title: StringFilter
   copy: StringFilter
@@ -166,6 +268,9 @@ input HomepageCtaFilter {
 input HomepageFilter {
   hero: HomepageHeroFilter
   problem: HomepageProblemFilter
+  pillars: HomepagePillarsFilter
+  why: HomepageWhyFilter
+  process: HomepageProcessFilter
   cta: HomepageCtaFilter
 }
 
@@ -180,6 +285,262 @@ type HomepageConnection implements Connection {
   edges: [HomepageConnectionEdges]
 }
 
+type CreativePageHero {
+  eyebrow: String
+  title: String
+  copy: String
+  image: String
+  cta: String
+}
+
+type CreativePageFeatures {
+  title: String
+  copy: String
+}
+
+type CreativePageExtraFaqs {
+  question: String
+  answer: String
+  order: Float
+}
+
+type CreativePage implements Node & Document {
+  hero: CreativePageHero
+  featuresEyebrow: String
+  featuresTitle: String
+  features: [CreativePageFeatures]
+  scopeEyebrow: String
+  scopeTitle: String
+  scopeCopy: String
+  ctaTitle: String
+  ctaCta: String
+  extraFaqs: [CreativePageExtraFaqs]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input CreativePageHeroFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  copy: StringFilter
+  image: ImageFilter
+  cta: StringFilter
+}
+
+input CreativePageFeaturesFilter {
+  title: StringFilter
+  copy: StringFilter
+}
+
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
+input CreativePageExtraFaqsFilter {
+  question: StringFilter
+  answer: StringFilter
+  order: NumberFilter
+}
+
+input CreativePageFilter {
+  hero: CreativePageHeroFilter
+  featuresEyebrow: StringFilter
+  featuresTitle: StringFilter
+  features: CreativePageFeaturesFilter
+  scopeEyebrow: StringFilter
+  scopeTitle: StringFilter
+  scopeCopy: StringFilter
+  ctaTitle: StringFilter
+  ctaCta: StringFilter
+  extraFaqs: CreativePageExtraFaqsFilter
+}
+
+type CreativePageConnectionEdges {
+  cursor: String!
+  node: CreativePage
+}
+
+type CreativePageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [CreativePageConnectionEdges]
+}
+
+type SystemsPageHero {
+  eyebrow: String
+  title: String
+  copy: String
+  image: String
+  cta: String
+}
+
+type SystemsPageFeatures {
+  title: String
+  copy: String
+}
+
+type SystemsPageExtraFaqs {
+  question: String
+  answer: String
+  order: Float
+}
+
+type SystemsPage implements Node & Document {
+  hero: SystemsPageHero
+  featuresEyebrow: String
+  featuresTitle: String
+  features: [SystemsPageFeatures]
+  useCasesEyebrow: String
+  useCasesTitle: String
+  useCases: [String]
+  ctaTitle: String
+  ctaCta: String
+  extraFaqs: [SystemsPageExtraFaqs]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input SystemsPageHeroFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  copy: StringFilter
+  image: ImageFilter
+  cta: StringFilter
+}
+
+input SystemsPageFeaturesFilter {
+  title: StringFilter
+  copy: StringFilter
+}
+
+input SystemsPageExtraFaqsFilter {
+  question: StringFilter
+  answer: StringFilter
+  order: NumberFilter
+}
+
+input SystemsPageFilter {
+  hero: SystemsPageHeroFilter
+  featuresEyebrow: StringFilter
+  featuresTitle: StringFilter
+  features: SystemsPageFeaturesFilter
+  useCasesEyebrow: StringFilter
+  useCasesTitle: StringFilter
+  useCases: StringFilter
+  ctaTitle: StringFilter
+  ctaCta: StringFilter
+  extraFaqs: SystemsPageExtraFaqsFilter
+}
+
+type SystemsPageConnectionEdges {
+  cursor: String!
+  node: SystemsPage
+}
+
+type SystemsPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SystemsPageConnectionEdges]
+}
+
+type AboutPageHero {
+  eyebrow: String
+  title: String
+  copy: String
+  image: String
+  cta: String
+}
+
+type AboutPageBeliefs {
+  title: String
+  copy: String
+}
+
+type AboutPage implements Node & Document {
+  hero: AboutPageHero
+  beliefEyebrow: String
+  beliefTitle: String
+  beliefs: [AboutPageBeliefs]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input AboutPageHeroFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  copy: StringFilter
+  image: ImageFilter
+  cta: StringFilter
+}
+
+input AboutPageBeliefsFilter {
+  title: StringFilter
+  copy: StringFilter
+}
+
+input AboutPageFilter {
+  hero: AboutPageHeroFilter
+  beliefEyebrow: StringFilter
+  beliefTitle: StringFilter
+  beliefs: AboutPageBeliefsFilter
+}
+
+type AboutPageConnectionEdges {
+  cursor: String!
+  node: AboutPage
+}
+
+type AboutPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [AboutPageConnectionEdges]
+}
+
+type GlobalFooter {
+  tagline: String
+  email: String
+  phone: String
+  location: String
+}
+
+type Global implements Node & Document {
+  footer: GlobalFooter
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input GlobalFooterFilter {
+  tagline: StringFilter
+  email: StringFilter
+  phone: StringFilter
+  location: StringFilter
+}
+
+input GlobalFilter {
+  footer: GlobalFooterFilter
+}
+
+type GlobalConnectionEdges {
+  cursor: String!
+  node: Global
+}
+
+type GlobalConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [GlobalConnectionEdges]
+}
+
 type Work implements Node & Document {
   title: String
   category: String
@@ -192,23 +553,6 @@ type Work implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
-}
-
-input NumberFilter {
-  lt: Float
-  lte: Float
-  gte: Float
-  gt: Float
-  eq: Float
-  exists: Boolean
-  in: [Float]
 }
 
 input WorkFilter {
@@ -267,6 +611,14 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updateHomepage(relativePath: String!, params: HomepageMutation!): Homepage!
   createHomepage(relativePath: String!, params: HomepageMutation!): Homepage!
+  updateCreativePage(relativePath: String!, params: CreativePageMutation!): CreativePage!
+  createCreativePage(relativePath: String!, params: CreativePageMutation!): CreativePage!
+  updateSystemsPage(relativePath: String!, params: SystemsPageMutation!): SystemsPage!
+  createSystemsPage(relativePath: String!, params: SystemsPageMutation!): SystemsPage!
+  updateAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
+  createAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
+  updateGlobal(relativePath: String!, params: GlobalMutation!): Global!
+  createGlobal(relativePath: String!, params: GlobalMutation!): Global!
   updateWork(relativePath: String!, params: WorkMutation!): Work!
   createWork(relativePath: String!, params: WorkMutation!): Work!
   updateFaq(relativePath: String!, params: FaqMutation!): Faq!
@@ -275,6 +627,10 @@ type Mutation {
 
 input DocumentUpdateMutation {
   homepage: HomepageMutation
+  creativePage: CreativePageMutation
+  systemsPage: SystemsPageMutation
+  aboutPage: AboutPageMutation
+  global: GlobalMutation
   work: WorkMutation
   faq: FaqMutation
   relativePath: String
@@ -282,6 +638,10 @@ input DocumentUpdateMutation {
 
 input DocumentMutation {
   homepage: HomepageMutation
+  creativePage: CreativePageMutation
+  systemsPage: SystemsPageMutation
+  aboutPage: AboutPageMutation
+  global: GlobalMutation
   work: WorkMutation
   faq: FaqMutation
 }
@@ -307,6 +667,46 @@ input HomepageProblemMutation {
   cards: [HomepageProblemCardsMutation]
 }
 
+input HomepagePillarsCreativeMutation {
+  title: String
+  description: String
+  services: [String]
+  image: String
+  href: String
+}
+
+input HomepagePillarsSystemsMutation {
+  title: String
+  description: String
+  services: [String]
+  image: String
+  href: String
+}
+
+input HomepagePillarsMutation {
+  eyebrow: String
+  title: String
+  creative: HomepagePillarsCreativeMutation
+  systems: HomepagePillarsSystemsMutation
+}
+
+input HomepageWhyMutation {
+  title: String
+  subtitle: String
+  points: [String]
+}
+
+input HomepageProcessStepsMutation {
+  num: String
+  title: String
+  copy: String
+}
+
+input HomepageProcessMutation {
+  title: String
+  steps: [HomepageProcessStepsMutation]
+}
+
 input HomepageCtaMutation {
   title: String
   copy: String
@@ -316,7 +716,105 @@ input HomepageCtaMutation {
 input HomepageMutation {
   hero: HomepageHeroMutation
   problem: HomepageProblemMutation
+  pillars: HomepagePillarsMutation
+  why: HomepageWhyMutation
+  process: HomepageProcessMutation
   cta: HomepageCtaMutation
+}
+
+input CreativePageHeroMutation {
+  eyebrow: String
+  title: String
+  copy: String
+  image: String
+  cta: String
+}
+
+input CreativePageFeaturesMutation {
+  title: String
+  copy: String
+}
+
+input CreativePageExtraFaqsMutation {
+  question: String
+  answer: String
+  order: Float
+}
+
+input CreativePageMutation {
+  hero: CreativePageHeroMutation
+  featuresEyebrow: String
+  featuresTitle: String
+  features: [CreativePageFeaturesMutation]
+  scopeEyebrow: String
+  scopeTitle: String
+  scopeCopy: String
+  ctaTitle: String
+  ctaCta: String
+  extraFaqs: [CreativePageExtraFaqsMutation]
+}
+
+input SystemsPageHeroMutation {
+  eyebrow: String
+  title: String
+  copy: String
+  image: String
+  cta: String
+}
+
+input SystemsPageFeaturesMutation {
+  title: String
+  copy: String
+}
+
+input SystemsPageExtraFaqsMutation {
+  question: String
+  answer: String
+  order: Float
+}
+
+input SystemsPageMutation {
+  hero: SystemsPageHeroMutation
+  featuresEyebrow: String
+  featuresTitle: String
+  features: [SystemsPageFeaturesMutation]
+  useCasesEyebrow: String
+  useCasesTitle: String
+  useCases: [String]
+  ctaTitle: String
+  ctaCta: String
+  extraFaqs: [SystemsPageExtraFaqsMutation]
+}
+
+input AboutPageHeroMutation {
+  eyebrow: String
+  title: String
+  copy: String
+  image: String
+  cta: String
+}
+
+input AboutPageBeliefsMutation {
+  title: String
+  copy: String
+}
+
+input AboutPageMutation {
+  hero: AboutPageHeroMutation
+  beliefEyebrow: String
+  beliefTitle: String
+  beliefs: [AboutPageBeliefsMutation]
+}
+
+input GlobalFooterMutation {
+  tagline: String
+  email: String
+  phone: String
+  location: String
+}
+
+input GlobalMutation {
+  footer: GlobalFooterMutation
 }
 
 input WorkMutation {

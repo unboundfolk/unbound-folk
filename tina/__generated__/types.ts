@@ -83,6 +83,14 @@ export type Query = {
   document: DocumentNode;
   homepage: Homepage;
   homepageConnection: HomepageConnection;
+  creativePage: CreativePage;
+  creativePageConnection: CreativePageConnection;
+  systemsPage: SystemsPage;
+  systemsPageConnection: SystemsPageConnection;
+  aboutPage: AboutPage;
+  aboutPageConnection: AboutPageConnection;
+  global: Global;
+  globalConnection: GlobalConnection;
   work: Work;
   workConnection: WorkConnection;
   faq: Faq;
@@ -126,6 +134,66 @@ export type QueryHomepageConnectionArgs = {
 };
 
 
+export type QueryCreativePageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryCreativePageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CreativePageFilter>;
+};
+
+
+export type QuerySystemsPageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QuerySystemsPageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SystemsPageFilter>;
+};
+
+
+export type QueryAboutPageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryAboutPageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AboutPageFilter>;
+};
+
+
+export type QueryGlobalArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGlobalConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<GlobalFilter>;
+};
+
+
 export type QueryWorkArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -157,6 +225,10 @@ export type QueryFaqConnectionArgs = {
 
 export type DocumentFilter = {
   homepage?: InputMaybe<HomepageFilter>;
+  creativePage?: InputMaybe<CreativePageFilter>;
+  systemsPage?: InputMaybe<SystemsPageFilter>;
+  aboutPage?: InputMaybe<AboutPageFilter>;
+  global?: InputMaybe<GlobalFilter>;
   work?: InputMaybe<WorkFilter>;
   faq?: InputMaybe<FaqFilter>;
 };
@@ -198,7 +270,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Homepage | Work | Faq | Folder;
+export type DocumentNode = Homepage | CreativePage | SystemsPage | AboutPage | Global | Work | Faq | Folder;
 
 export type HomepageHero = {
   __typename?: 'HomepageHero';
@@ -224,6 +296,52 @@ export type HomepageProblem = {
   cards?: Maybe<Array<Maybe<HomepageProblemCards>>>;
 };
 
+export type HomepagePillarsCreative = {
+  __typename?: 'HomepagePillarsCreative';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  services?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  image?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepagePillarsSystems = {
+  __typename?: 'HomepagePillarsSystems';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  services?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  image?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepagePillars = {
+  __typename?: 'HomepagePillars';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  creative?: Maybe<HomepagePillarsCreative>;
+  systems?: Maybe<HomepagePillarsSystems>;
+};
+
+export type HomepageWhy = {
+  __typename?: 'HomepageWhy';
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  points?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type HomepageProcessSteps = {
+  __typename?: 'HomepageProcessSteps';
+  num?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  copy?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageProcess = {
+  __typename?: 'HomepageProcess';
+  title?: Maybe<Scalars['String']['output']>;
+  steps?: Maybe<Array<Maybe<HomepageProcessSteps>>>;
+};
+
 export type HomepageCta = {
   __typename?: 'HomepageCta';
   title?: Maybe<Scalars['String']['output']>;
@@ -235,6 +353,9 @@ export type Homepage = Node & Document & {
   __typename?: 'Homepage';
   hero?: Maybe<HomepageHero>;
   problem?: Maybe<HomepageProblem>;
+  pillars?: Maybe<HomepagePillars>;
+  why?: Maybe<HomepageWhy>;
+  process?: Maybe<HomepageProcess>;
   cta?: Maybe<HomepageCta>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -269,6 +390,53 @@ export type HomepageProblemFilter = {
   cards?: InputMaybe<HomepageProblemCardsFilter>;
 };
 
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type HomepagePillarsCreativeFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  services?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type HomepagePillarsSystemsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  services?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type HomepagePillarsFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  creative?: InputMaybe<HomepagePillarsCreativeFilter>;
+  systems?: InputMaybe<HomepagePillarsSystemsFilter>;
+};
+
+export type HomepageWhyFilter = {
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  points?: InputMaybe<StringFilter>;
+};
+
+export type HomepageProcessStepsFilter = {
+  num?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  copy?: InputMaybe<StringFilter>;
+};
+
+export type HomepageProcessFilter = {
+  title?: InputMaybe<StringFilter>;
+  steps?: InputMaybe<HomepageProcessStepsFilter>;
+};
+
 export type HomepageCtaFilter = {
   title?: InputMaybe<StringFilter>;
   copy?: InputMaybe<StringFilter>;
@@ -278,6 +446,9 @@ export type HomepageCtaFilter = {
 export type HomepageFilter = {
   hero?: InputMaybe<HomepageHeroFilter>;
   problem?: InputMaybe<HomepageProblemFilter>;
+  pillars?: InputMaybe<HomepagePillarsFilter>;
+  why?: InputMaybe<HomepageWhyFilter>;
+  process?: InputMaybe<HomepageProcessFilter>;
   cta?: InputMaybe<HomepageCtaFilter>;
 };
 
@@ -294,6 +465,283 @@ export type HomepageConnection = Connection & {
   edges?: Maybe<Array<Maybe<HomepageConnectionEdges>>>;
 };
 
+export type CreativePageHero = {
+  __typename?: 'CreativePageHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  copy?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  cta?: Maybe<Scalars['String']['output']>;
+};
+
+export type CreativePageFeatures = {
+  __typename?: 'CreativePageFeatures';
+  title?: Maybe<Scalars['String']['output']>;
+  copy?: Maybe<Scalars['String']['output']>;
+};
+
+export type CreativePageExtraFaqs = {
+  __typename?: 'CreativePageExtraFaqs';
+  question?: Maybe<Scalars['String']['output']>;
+  answer?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Scalars['Float']['output']>;
+};
+
+export type CreativePage = Node & Document & {
+  __typename?: 'CreativePage';
+  hero?: Maybe<CreativePageHero>;
+  featuresEyebrow?: Maybe<Scalars['String']['output']>;
+  featuresTitle?: Maybe<Scalars['String']['output']>;
+  features?: Maybe<Array<Maybe<CreativePageFeatures>>>;
+  scopeEyebrow?: Maybe<Scalars['String']['output']>;
+  scopeTitle?: Maybe<Scalars['String']['output']>;
+  scopeCopy?: Maybe<Scalars['String']['output']>;
+  ctaTitle?: Maybe<Scalars['String']['output']>;
+  ctaCta?: Maybe<Scalars['String']['output']>;
+  extraFaqs?: Maybe<Array<Maybe<CreativePageExtraFaqs>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type CreativePageHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  copy?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  cta?: InputMaybe<StringFilter>;
+};
+
+export type CreativePageFeaturesFilter = {
+  title?: InputMaybe<StringFilter>;
+  copy?: InputMaybe<StringFilter>;
+};
+
+export type NumberFilter = {
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  eq?: InputMaybe<Scalars['Float']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
+export type CreativePageExtraFaqsFilter = {
+  question?: InputMaybe<StringFilter>;
+  answer?: InputMaybe<StringFilter>;
+  order?: InputMaybe<NumberFilter>;
+};
+
+export type CreativePageFilter = {
+  hero?: InputMaybe<CreativePageHeroFilter>;
+  featuresEyebrow?: InputMaybe<StringFilter>;
+  featuresTitle?: InputMaybe<StringFilter>;
+  features?: InputMaybe<CreativePageFeaturesFilter>;
+  scopeEyebrow?: InputMaybe<StringFilter>;
+  scopeTitle?: InputMaybe<StringFilter>;
+  scopeCopy?: InputMaybe<StringFilter>;
+  ctaTitle?: InputMaybe<StringFilter>;
+  ctaCta?: InputMaybe<StringFilter>;
+  extraFaqs?: InputMaybe<CreativePageExtraFaqsFilter>;
+};
+
+export type CreativePageConnectionEdges = {
+  __typename?: 'CreativePageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<CreativePage>;
+};
+
+export type CreativePageConnection = Connection & {
+  __typename?: 'CreativePageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<CreativePageConnectionEdges>>>;
+};
+
+export type SystemsPageHero = {
+  __typename?: 'SystemsPageHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  copy?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  cta?: Maybe<Scalars['String']['output']>;
+};
+
+export type SystemsPageFeatures = {
+  __typename?: 'SystemsPageFeatures';
+  title?: Maybe<Scalars['String']['output']>;
+  copy?: Maybe<Scalars['String']['output']>;
+};
+
+export type SystemsPageExtraFaqs = {
+  __typename?: 'SystemsPageExtraFaqs';
+  question?: Maybe<Scalars['String']['output']>;
+  answer?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Scalars['Float']['output']>;
+};
+
+export type SystemsPage = Node & Document & {
+  __typename?: 'SystemsPage';
+  hero?: Maybe<SystemsPageHero>;
+  featuresEyebrow?: Maybe<Scalars['String']['output']>;
+  featuresTitle?: Maybe<Scalars['String']['output']>;
+  features?: Maybe<Array<Maybe<SystemsPageFeatures>>>;
+  useCasesEyebrow?: Maybe<Scalars['String']['output']>;
+  useCasesTitle?: Maybe<Scalars['String']['output']>;
+  useCases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  ctaTitle?: Maybe<Scalars['String']['output']>;
+  ctaCta?: Maybe<Scalars['String']['output']>;
+  extraFaqs?: Maybe<Array<Maybe<SystemsPageExtraFaqs>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type SystemsPageHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  copy?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  cta?: InputMaybe<StringFilter>;
+};
+
+export type SystemsPageFeaturesFilter = {
+  title?: InputMaybe<StringFilter>;
+  copy?: InputMaybe<StringFilter>;
+};
+
+export type SystemsPageExtraFaqsFilter = {
+  question?: InputMaybe<StringFilter>;
+  answer?: InputMaybe<StringFilter>;
+  order?: InputMaybe<NumberFilter>;
+};
+
+export type SystemsPageFilter = {
+  hero?: InputMaybe<SystemsPageHeroFilter>;
+  featuresEyebrow?: InputMaybe<StringFilter>;
+  featuresTitle?: InputMaybe<StringFilter>;
+  features?: InputMaybe<SystemsPageFeaturesFilter>;
+  useCasesEyebrow?: InputMaybe<StringFilter>;
+  useCasesTitle?: InputMaybe<StringFilter>;
+  useCases?: InputMaybe<StringFilter>;
+  ctaTitle?: InputMaybe<StringFilter>;
+  ctaCta?: InputMaybe<StringFilter>;
+  extraFaqs?: InputMaybe<SystemsPageExtraFaqsFilter>;
+};
+
+export type SystemsPageConnectionEdges = {
+  __typename?: 'SystemsPageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<SystemsPage>;
+};
+
+export type SystemsPageConnection = Connection & {
+  __typename?: 'SystemsPageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<SystemsPageConnectionEdges>>>;
+};
+
+export type AboutPageHero = {
+  __typename?: 'AboutPageHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  copy?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  cta?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBeliefs = {
+  __typename?: 'AboutPageBeliefs';
+  title?: Maybe<Scalars['String']['output']>;
+  copy?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPage = Node & Document & {
+  __typename?: 'AboutPage';
+  hero?: Maybe<AboutPageHero>;
+  beliefEyebrow?: Maybe<Scalars['String']['output']>;
+  beliefTitle?: Maybe<Scalars['String']['output']>;
+  beliefs?: Maybe<Array<Maybe<AboutPageBeliefs>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type AboutPageHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  copy?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  cta?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBeliefsFilter = {
+  title?: InputMaybe<StringFilter>;
+  copy?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageFilter = {
+  hero?: InputMaybe<AboutPageHeroFilter>;
+  beliefEyebrow?: InputMaybe<StringFilter>;
+  beliefTitle?: InputMaybe<StringFilter>;
+  beliefs?: InputMaybe<AboutPageBeliefsFilter>;
+};
+
+export type AboutPageConnectionEdges = {
+  __typename?: 'AboutPageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<AboutPage>;
+};
+
+export type AboutPageConnection = Connection & {
+  __typename?: 'AboutPageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<AboutPageConnectionEdges>>>;
+};
+
+export type GlobalFooter = {
+  __typename?: 'GlobalFooter';
+  tagline?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+};
+
+export type Global = Node & Document & {
+  __typename?: 'Global';
+  footer?: Maybe<GlobalFooter>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type GlobalFooterFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  phone?: InputMaybe<StringFilter>;
+  location?: InputMaybe<StringFilter>;
+};
+
+export type GlobalFilter = {
+  footer?: InputMaybe<GlobalFooterFilter>;
+};
+
+export type GlobalConnectionEdges = {
+  __typename?: 'GlobalConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Global>;
+};
+
+export type GlobalConnection = Connection & {
+  __typename?: 'GlobalConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<GlobalConnectionEdges>>>;
+};
+
 export type Work = Node & Document & {
   __typename?: 'Work';
   title?: Maybe<Scalars['String']['output']>;
@@ -307,23 +755,6 @@ export type Work = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type ImageFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type NumberFilter = {
-  lt?: InputMaybe<Scalars['Float']['input']>;
-  lte?: InputMaybe<Scalars['Float']['input']>;
-  gte?: InputMaybe<Scalars['Float']['input']>;
-  gt?: InputMaybe<Scalars['Float']['input']>;
-  eq?: InputMaybe<Scalars['Float']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
 };
 
 export type WorkFilter = {
@@ -388,6 +819,14 @@ export type Mutation = {
   createFolder: DocumentNode;
   updateHomepage: Homepage;
   createHomepage: Homepage;
+  updateCreativePage: CreativePage;
+  createCreativePage: CreativePage;
+  updateSystemsPage: SystemsPage;
+  createSystemsPage: SystemsPage;
+  updateAboutPage: AboutPage;
+  createAboutPage: AboutPage;
+  updateGlobal: Global;
+  createGlobal: Global;
   updateWork: Work;
   createWork: Work;
   updateFaq: Faq;
@@ -440,6 +879,54 @@ export type MutationCreateHomepageArgs = {
 };
 
 
+export type MutationUpdateCreativePageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CreativePageMutation;
+};
+
+
+export type MutationCreateCreativePageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CreativePageMutation;
+};
+
+
+export type MutationUpdateSystemsPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SystemsPageMutation;
+};
+
+
+export type MutationCreateSystemsPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SystemsPageMutation;
+};
+
+
+export type MutationUpdateAboutPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AboutPageMutation;
+};
+
+
+export type MutationCreateAboutPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AboutPageMutation;
+};
+
+
+export type MutationUpdateGlobalArgs = {
+  relativePath: Scalars['String']['input'];
+  params: GlobalMutation;
+};
+
+
+export type MutationCreateGlobalArgs = {
+  relativePath: Scalars['String']['input'];
+  params: GlobalMutation;
+};
+
+
 export type MutationUpdateWorkArgs = {
   relativePath: Scalars['String']['input'];
   params: WorkMutation;
@@ -465,6 +952,10 @@ export type MutationCreateFaqArgs = {
 
 export type DocumentUpdateMutation = {
   homepage?: InputMaybe<HomepageMutation>;
+  creativePage?: InputMaybe<CreativePageMutation>;
+  systemsPage?: InputMaybe<SystemsPageMutation>;
+  aboutPage?: InputMaybe<AboutPageMutation>;
+  global?: InputMaybe<GlobalMutation>;
   work?: InputMaybe<WorkMutation>;
   faq?: InputMaybe<FaqMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
@@ -472,6 +963,10 @@ export type DocumentUpdateMutation = {
 
 export type DocumentMutation = {
   homepage?: InputMaybe<HomepageMutation>;
+  creativePage?: InputMaybe<CreativePageMutation>;
+  systemsPage?: InputMaybe<SystemsPageMutation>;
+  aboutPage?: InputMaybe<AboutPageMutation>;
+  global?: InputMaybe<GlobalMutation>;
   work?: InputMaybe<WorkMutation>;
   faq?: InputMaybe<FaqMutation>;
 };
@@ -497,6 +992,46 @@ export type HomepageProblemMutation = {
   cards?: InputMaybe<Array<InputMaybe<HomepageProblemCardsMutation>>>;
 };
 
+export type HomepagePillarsCreativeMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  services?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepagePillarsSystemsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  services?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepagePillarsMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  creative?: InputMaybe<HomepagePillarsCreativeMutation>;
+  systems?: InputMaybe<HomepagePillarsSystemsMutation>;
+};
+
+export type HomepageWhyMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  points?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type HomepageProcessStepsMutation = {
+  num?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  copy?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageProcessMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  steps?: InputMaybe<Array<InputMaybe<HomepageProcessStepsMutation>>>;
+};
+
 export type HomepageCtaMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   copy?: InputMaybe<Scalars['String']['input']>;
@@ -506,7 +1041,105 @@ export type HomepageCtaMutation = {
 export type HomepageMutation = {
   hero?: InputMaybe<HomepageHeroMutation>;
   problem?: InputMaybe<HomepageProblemMutation>;
+  pillars?: InputMaybe<HomepagePillarsMutation>;
+  why?: InputMaybe<HomepageWhyMutation>;
+  process?: InputMaybe<HomepageProcessMutation>;
   cta?: InputMaybe<HomepageCtaMutation>;
+};
+
+export type CreativePageHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  copy?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  cta?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreativePageFeaturesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  copy?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreativePageExtraFaqsMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+  answer?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type CreativePageMutation = {
+  hero?: InputMaybe<CreativePageHeroMutation>;
+  featuresEyebrow?: InputMaybe<Scalars['String']['input']>;
+  featuresTitle?: InputMaybe<Scalars['String']['input']>;
+  features?: InputMaybe<Array<InputMaybe<CreativePageFeaturesMutation>>>;
+  scopeEyebrow?: InputMaybe<Scalars['String']['input']>;
+  scopeTitle?: InputMaybe<Scalars['String']['input']>;
+  scopeCopy?: InputMaybe<Scalars['String']['input']>;
+  ctaTitle?: InputMaybe<Scalars['String']['input']>;
+  ctaCta?: InputMaybe<Scalars['String']['input']>;
+  extraFaqs?: InputMaybe<Array<InputMaybe<CreativePageExtraFaqsMutation>>>;
+};
+
+export type SystemsPageHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  copy?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  cta?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SystemsPageFeaturesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  copy?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SystemsPageExtraFaqsMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+  answer?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type SystemsPageMutation = {
+  hero?: InputMaybe<SystemsPageHeroMutation>;
+  featuresEyebrow?: InputMaybe<Scalars['String']['input']>;
+  featuresTitle?: InputMaybe<Scalars['String']['input']>;
+  features?: InputMaybe<Array<InputMaybe<SystemsPageFeaturesMutation>>>;
+  useCasesEyebrow?: InputMaybe<Scalars['String']['input']>;
+  useCasesTitle?: InputMaybe<Scalars['String']['input']>;
+  useCases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  ctaTitle?: InputMaybe<Scalars['String']['input']>;
+  ctaCta?: InputMaybe<Scalars['String']['input']>;
+  extraFaqs?: InputMaybe<Array<InputMaybe<SystemsPageExtraFaqsMutation>>>;
+};
+
+export type AboutPageHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  copy?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  cta?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBeliefsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  copy?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageMutation = {
+  hero?: InputMaybe<AboutPageHeroMutation>;
+  beliefEyebrow?: InputMaybe<Scalars['String']['input']>;
+  beliefTitle?: InputMaybe<Scalars['String']['input']>;
+  beliefs?: InputMaybe<Array<InputMaybe<AboutPageBeliefsMutation>>>;
+};
+
+export type GlobalFooterMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GlobalMutation = {
+  footer?: InputMaybe<GlobalFooterMutation>;
 };
 
 export type WorkMutation = {
@@ -554,6 +1187,53 @@ export type HomepageProblemFilter = {
   cards?: HomepageProblemCardsFilter | null | undefined;
 };
 
+export type ImageFilter = {
+  startsWith?: string | null | undefined;
+  eq?: string | null | undefined;
+  exists?: boolean | null | undefined;
+  in?: Array<string | null | undefined> | null | undefined;
+};
+
+export type HomepagePillarsCreativeFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  services?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
+  href?: StringFilter | null | undefined;
+};
+
+export type HomepagePillarsSystemsFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  services?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
+  href?: StringFilter | null | undefined;
+};
+
+export type HomepagePillarsFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  creative?: HomepagePillarsCreativeFilter | null | undefined;
+  systems?: HomepagePillarsSystemsFilter | null | undefined;
+};
+
+export type HomepageWhyFilter = {
+  title?: StringFilter | null | undefined;
+  subtitle?: StringFilter | null | undefined;
+  points?: StringFilter | null | undefined;
+};
+
+export type HomepageProcessStepsFilter = {
+  num?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  copy?: StringFilter | null | undefined;
+};
+
+export type HomepageProcessFilter = {
+  title?: StringFilter | null | undefined;
+  steps?: HomepageProcessStepsFilter | null | undefined;
+};
+
 export type HomepageCtaFilter = {
   title?: StringFilter | null | undefined;
   copy?: StringFilter | null | undefined;
@@ -563,14 +1243,23 @@ export type HomepageCtaFilter = {
 export type HomepageFilter = {
   hero?: HomepageHeroFilter | null | undefined;
   problem?: HomepageProblemFilter | null | undefined;
+  pillars?: HomepagePillarsFilter | null | undefined;
+  why?: HomepageWhyFilter | null | undefined;
+  process?: HomepageProcessFilter | null | undefined;
   cta?: HomepageCtaFilter | null | undefined;
 };
 
-export type ImageFilter = {
-  startsWith?: string | null | undefined;
-  eq?: string | null | undefined;
-  exists?: boolean | null | undefined;
-  in?: Array<string | null | undefined> | null | undefined;
+export type CreativePageHeroFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  copy?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
+  cta?: StringFilter | null | undefined;
+};
+
+export type CreativePageFeaturesFilter = {
+  title?: StringFilter | null | undefined;
+  copy?: StringFilter | null | undefined;
 };
 
 export type NumberFilter = {
@@ -581,6 +1270,88 @@ export type NumberFilter = {
   eq?: number | null | undefined;
   exists?: boolean | null | undefined;
   in?: Array<number | null | undefined> | null | undefined;
+};
+
+export type CreativePageExtraFaqsFilter = {
+  question?: StringFilter | null | undefined;
+  answer?: StringFilter | null | undefined;
+  order?: NumberFilter | null | undefined;
+};
+
+export type CreativePageFilter = {
+  hero?: CreativePageHeroFilter | null | undefined;
+  featuresEyebrow?: StringFilter | null | undefined;
+  featuresTitle?: StringFilter | null | undefined;
+  features?: CreativePageFeaturesFilter | null | undefined;
+  scopeEyebrow?: StringFilter | null | undefined;
+  scopeTitle?: StringFilter | null | undefined;
+  scopeCopy?: StringFilter | null | undefined;
+  ctaTitle?: StringFilter | null | undefined;
+  ctaCta?: StringFilter | null | undefined;
+  extraFaqs?: CreativePageExtraFaqsFilter | null | undefined;
+};
+
+export type SystemsPageHeroFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  copy?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
+  cta?: StringFilter | null | undefined;
+};
+
+export type SystemsPageFeaturesFilter = {
+  title?: StringFilter | null | undefined;
+  copy?: StringFilter | null | undefined;
+};
+
+export type SystemsPageExtraFaqsFilter = {
+  question?: StringFilter | null | undefined;
+  answer?: StringFilter | null | undefined;
+  order?: NumberFilter | null | undefined;
+};
+
+export type SystemsPageFilter = {
+  hero?: SystemsPageHeroFilter | null | undefined;
+  featuresEyebrow?: StringFilter | null | undefined;
+  featuresTitle?: StringFilter | null | undefined;
+  features?: SystemsPageFeaturesFilter | null | undefined;
+  useCasesEyebrow?: StringFilter | null | undefined;
+  useCasesTitle?: StringFilter | null | undefined;
+  useCases?: StringFilter | null | undefined;
+  ctaTitle?: StringFilter | null | undefined;
+  ctaCta?: StringFilter | null | undefined;
+  extraFaqs?: SystemsPageExtraFaqsFilter | null | undefined;
+};
+
+export type AboutPageHeroFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  copy?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
+  cta?: StringFilter | null | undefined;
+};
+
+export type AboutPageBeliefsFilter = {
+  title?: StringFilter | null | undefined;
+  copy?: StringFilter | null | undefined;
+};
+
+export type AboutPageFilter = {
+  hero?: AboutPageHeroFilter | null | undefined;
+  beliefEyebrow?: StringFilter | null | undefined;
+  beliefTitle?: StringFilter | null | undefined;
+  beliefs?: AboutPageBeliefsFilter | null | undefined;
+};
+
+export type GlobalFooterFilter = {
+  tagline?: StringFilter | null | undefined;
+  email?: StringFilter | null | undefined;
+  phone?: StringFilter | null | undefined;
+  location?: StringFilter | null | undefined;
+};
+
+export type GlobalFilter = {
+  footer?: GlobalFooterFilter | null | undefined;
 };
 
 export type WorkFilter = {
@@ -600,7 +1371,15 @@ export type FaqFilter = {
   order?: NumberFilter | null | undefined;
 };
 
-export type HomepagePartsFragment = { __typename: 'Homepage', hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null };
+export type HomepagePartsFragment = { __typename: 'Homepage', hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, pillars: { __typename: 'HomepagePillars', eyebrow: string | null, title: string | null, creative: { __typename: 'HomepagePillarsCreative', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null, systems: { __typename: 'HomepagePillarsSystems', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null } | null, why: { __typename: 'HomepageWhy', title: string | null, subtitle: string | null, points: Array<string | null> | null } | null, process: { __typename: 'HomepageProcess', title: string | null, steps: Array<{ __typename: 'HomepageProcessSteps', num: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null };
+
+export type CreativePagePartsFragment = { __typename: 'CreativePage', featuresEyebrow: string | null, featuresTitle: string | null, scopeEyebrow: string | null, scopeTitle: string | null, scopeCopy: string | null, ctaTitle: string | null, ctaCta: string | null, hero: { __typename: 'CreativePageHero', eyebrow: string | null, title: string | null, copy: string | null, image: string | null, cta: string | null } | null, features: Array<{ __typename: 'CreativePageFeatures', title: string | null, copy: string | null } | null> | null, extraFaqs: Array<{ __typename: 'CreativePageExtraFaqs', question: string | null, answer: string | null, order: number | null } | null> | null };
+
+export type SystemsPagePartsFragment = { __typename: 'SystemsPage', featuresEyebrow: string | null, featuresTitle: string | null, useCasesEyebrow: string | null, useCasesTitle: string | null, useCases: Array<string | null> | null, ctaTitle: string | null, ctaCta: string | null, hero: { __typename: 'SystemsPageHero', eyebrow: string | null, title: string | null, copy: string | null, image: string | null, cta: string | null } | null, features: Array<{ __typename: 'SystemsPageFeatures', title: string | null, copy: string | null } | null> | null, extraFaqs: Array<{ __typename: 'SystemsPageExtraFaqs', question: string | null, answer: string | null, order: number | null } | null> | null };
+
+export type AboutPagePartsFragment = { __typename: 'AboutPage', beliefEyebrow: string | null, beliefTitle: string | null, hero: { __typename: 'AboutPageHero', eyebrow: string | null, title: string | null, copy: string | null, image: string | null, cta: string | null } | null, beliefs: Array<{ __typename: 'AboutPageBeliefs', title: string | null, copy: string | null } | null> | null };
+
+export type GlobalPartsFragment = { __typename: 'Global', footer: { __typename: 'GlobalFooter', tagline: string | null, email: string | null, phone: string | null, location: string | null } | null };
 
 export type WorkPartsFragment = { __typename: 'Work', title: string | null, category: string | null, tags: Array<string | null> | null, image: string | null, problem: string | null, solution: string | null, outcome: string | null, order: number | null };
 
@@ -611,7 +1390,7 @@ export type HomepageQueryVariables = Exact<{
 }>;
 
 
-export type HomepageQuery = { homepage: { __typename: 'Homepage', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null } };
+export type HomepageQuery = { homepage: { __typename: 'Homepage', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, pillars: { __typename: 'HomepagePillars', eyebrow: string | null, title: string | null, creative: { __typename: 'HomepagePillarsCreative', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null, systems: { __typename: 'HomepagePillarsSystems', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null } | null, why: { __typename: 'HomepageWhy', title: string | null, subtitle: string | null, points: Array<string | null> | null } | null, process: { __typename: 'HomepageProcess', title: string | null, steps: Array<{ __typename: 'HomepageProcessSteps', num: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null } };
 
 export type HomepageConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -623,7 +1402,83 @@ export type HomepageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomepageConnectionQuery = { homepageConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Homepage', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null } | null } | null> | null } };
+export type HomepageConnectionQuery = { homepageConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Homepage', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, pillars: { __typename: 'HomepagePillars', eyebrow: string | null, title: string | null, creative: { __typename: 'HomepagePillarsCreative', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null, systems: { __typename: 'HomepagePillarsSystems', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null } | null, why: { __typename: 'HomepageWhy', title: string | null, subtitle: string | null, points: Array<string | null> | null } | null, process: { __typename: 'HomepageProcess', title: string | null, steps: Array<{ __typename: 'HomepageProcessSteps', num: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null } | null } | null> | null } };
+
+export type CreativePageQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type CreativePageQuery = { creativePage: { __typename: 'CreativePage', id: string, featuresEyebrow: string | null, featuresTitle: string | null, scopeEyebrow: string | null, scopeTitle: string | null, scopeCopy: string | null, ctaTitle: string | null, ctaCta: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'CreativePageHero', eyebrow: string | null, title: string | null, copy: string | null, image: string | null, cta: string | null } | null, features: Array<{ __typename: 'CreativePageFeatures', title: string | null, copy: string | null } | null> | null, extraFaqs: Array<{ __typename: 'CreativePageExtraFaqs', question: string | null, answer: string | null, order: number | null } | null> | null } };
+
+export type CreativePageConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: CreativePageFilter | null | undefined;
+}>;
+
+
+export type CreativePageConnectionQuery = { creativePageConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'CreativePage', id: string, featuresEyebrow: string | null, featuresTitle: string | null, scopeEyebrow: string | null, scopeTitle: string | null, scopeCopy: string | null, ctaTitle: string | null, ctaCta: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'CreativePageHero', eyebrow: string | null, title: string | null, copy: string | null, image: string | null, cta: string | null } | null, features: Array<{ __typename: 'CreativePageFeatures', title: string | null, copy: string | null } | null> | null, extraFaqs: Array<{ __typename: 'CreativePageExtraFaqs', question: string | null, answer: string | null, order: number | null } | null> | null } | null } | null> | null } };
+
+export type SystemsPageQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type SystemsPageQuery = { systemsPage: { __typename: 'SystemsPage', id: string, featuresEyebrow: string | null, featuresTitle: string | null, useCasesEyebrow: string | null, useCasesTitle: string | null, useCases: Array<string | null> | null, ctaTitle: string | null, ctaCta: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'SystemsPageHero', eyebrow: string | null, title: string | null, copy: string | null, image: string | null, cta: string | null } | null, features: Array<{ __typename: 'SystemsPageFeatures', title: string | null, copy: string | null } | null> | null, extraFaqs: Array<{ __typename: 'SystemsPageExtraFaqs', question: string | null, answer: string | null, order: number | null } | null> | null } };
+
+export type SystemsPageConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: SystemsPageFilter | null | undefined;
+}>;
+
+
+export type SystemsPageConnectionQuery = { systemsPageConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'SystemsPage', id: string, featuresEyebrow: string | null, featuresTitle: string | null, useCasesEyebrow: string | null, useCasesTitle: string | null, useCases: Array<string | null> | null, ctaTitle: string | null, ctaCta: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'SystemsPageHero', eyebrow: string | null, title: string | null, copy: string | null, image: string | null, cta: string | null } | null, features: Array<{ __typename: 'SystemsPageFeatures', title: string | null, copy: string | null } | null> | null, extraFaqs: Array<{ __typename: 'SystemsPageExtraFaqs', question: string | null, answer: string | null, order: number | null } | null> | null } | null } | null> | null } };
+
+export type AboutPageQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type AboutPageQuery = { aboutPage: { __typename: 'AboutPage', id: string, beliefEyebrow: string | null, beliefTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'AboutPageHero', eyebrow: string | null, title: string | null, copy: string | null, image: string | null, cta: string | null } | null, beliefs: Array<{ __typename: 'AboutPageBeliefs', title: string | null, copy: string | null } | null> | null } };
+
+export type AboutPageConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: AboutPageFilter | null | undefined;
+}>;
+
+
+export type AboutPageConnectionQuery = { aboutPageConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'AboutPage', id: string, beliefEyebrow: string | null, beliefTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'AboutPageHero', eyebrow: string | null, title: string | null, copy: string | null, image: string | null, cta: string | null } | null, beliefs: Array<{ __typename: 'AboutPageBeliefs', title: string | null, copy: string | null } | null> | null } | null } | null> | null } };
+
+export type GlobalQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type GlobalQuery = { global: { __typename: 'Global', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footer: { __typename: 'GlobalFooter', tagline: string | null, email: string | null, phone: string | null, location: string | null } | null } };
+
+export type GlobalConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: GlobalFilter | null | undefined;
+}>;
+
+
+export type GlobalConnectionQuery = { globalConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Global', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footer: { __typename: 'GlobalFooter', tagline: string | null, email: string | null, phone: string | null, location: string | null } | null } | null } | null> | null } };
 
 export type WorkQueryVariables = Exact<{
   relativePath: string;
@@ -686,11 +1541,142 @@ export const HomepagePartsFragmentDoc = gql`
       copy
     }
   }
+  pillars {
+    __typename
+    eyebrow
+    title
+    creative {
+      __typename
+      title
+      description
+      services
+      image
+      href
+    }
+    systems {
+      __typename
+      title
+      description
+      services
+      image
+      href
+    }
+  }
+  why {
+    __typename
+    title
+    subtitle
+    points
+  }
+  process {
+    __typename
+    title
+    steps {
+      __typename
+      num
+      title
+      copy
+    }
+  }
   cta {
     __typename
     title
     copy
     button
+  }
+}
+    `;
+export const CreativePagePartsFragmentDoc = gql`
+    fragment CreativePageParts on CreativePage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    title
+    copy
+    image
+    cta
+  }
+  featuresEyebrow
+  featuresTitle
+  features {
+    __typename
+    title
+    copy
+  }
+  scopeEyebrow
+  scopeTitle
+  scopeCopy
+  ctaTitle
+  ctaCta
+  extraFaqs {
+    __typename
+    question
+    answer
+    order
+  }
+}
+    `;
+export const SystemsPagePartsFragmentDoc = gql`
+    fragment SystemsPageParts on SystemsPage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    title
+    copy
+    image
+    cta
+  }
+  featuresEyebrow
+  featuresTitle
+  features {
+    __typename
+    title
+    copy
+  }
+  useCasesEyebrow
+  useCasesTitle
+  useCases
+  ctaTitle
+  ctaCta
+  extraFaqs {
+    __typename
+    question
+    answer
+    order
+  }
+}
+    `;
+export const AboutPagePartsFragmentDoc = gql`
+    fragment AboutPageParts on AboutPage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    title
+    copy
+    image
+    cta
+  }
+  beliefEyebrow
+  beliefTitle
+  beliefs {
+    __typename
+    title
+    copy
+  }
+}
+    `;
+export const GlobalPartsFragmentDoc = gql`
+    fragment GlobalParts on Global {
+  __typename
+  footer {
+    __typename
+    tagline
+    email
+    phone
+    location
   }
 }
     `;
@@ -772,6 +1758,234 @@ export const HomepageConnectionDocument = gql`
   }
 }
     ${HomepagePartsFragmentDoc}`;
+export const CreativePageDocument = gql`
+    query creativePage($relativePath: String!) {
+  creativePage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CreativePageParts
+  }
+}
+    ${CreativePagePartsFragmentDoc}`;
+export const CreativePageConnectionDocument = gql`
+    query creativePageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CreativePageFilter) {
+  creativePageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CreativePageParts
+      }
+    }
+  }
+}
+    ${CreativePagePartsFragmentDoc}`;
+export const SystemsPageDocument = gql`
+    query systemsPage($relativePath: String!) {
+  systemsPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SystemsPageParts
+  }
+}
+    ${SystemsPagePartsFragmentDoc}`;
+export const SystemsPageConnectionDocument = gql`
+    query systemsPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SystemsPageFilter) {
+  systemsPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SystemsPageParts
+      }
+    }
+  }
+}
+    ${SystemsPagePartsFragmentDoc}`;
+export const AboutPageDocument = gql`
+    query aboutPage($relativePath: String!) {
+  aboutPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...AboutPageParts
+  }
+}
+    ${AboutPagePartsFragmentDoc}`;
+export const AboutPageConnectionDocument = gql`
+    query aboutPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AboutPageFilter) {
+  aboutPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...AboutPageParts
+      }
+    }
+  }
+}
+    ${AboutPagePartsFragmentDoc}`;
+export const GlobalDocument = gql`
+    query global($relativePath: String!) {
+  global(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...GlobalParts
+  }
+}
+    ${GlobalPartsFragmentDoc}`;
+export const GlobalConnectionDocument = gql`
+    query globalConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: GlobalFilter) {
+  globalConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...GlobalParts
+      }
+    }
+  }
+}
+    ${GlobalPartsFragmentDoc}`;
 export const WorkDocument = gql`
     query work($relativePath: String!) {
   work(relativePath: $relativePath) {
@@ -894,6 +2108,30 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     homepageConnection(variables?: HomepageConnectionQueryVariables, options?: C): Promise<{data: HomepageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageConnectionQueryVariables, query: string}> {
         return requester<{data: HomepageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageConnectionQueryVariables, query: string}, HomepageConnectionQueryVariables>(HomepageConnectionDocument, variables, options);
+      },
+    creativePage(variables: CreativePageQueryVariables, options?: C): Promise<{data: CreativePageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CreativePageQueryVariables, query: string}> {
+        return requester<{data: CreativePageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CreativePageQueryVariables, query: string}, CreativePageQueryVariables>(CreativePageDocument, variables, options);
+      },
+    creativePageConnection(variables?: CreativePageConnectionQueryVariables, options?: C): Promise<{data: CreativePageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CreativePageConnectionQueryVariables, query: string}> {
+        return requester<{data: CreativePageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CreativePageConnectionQueryVariables, query: string}, CreativePageConnectionQueryVariables>(CreativePageConnectionDocument, variables, options);
+      },
+    systemsPage(variables: SystemsPageQueryVariables, options?: C): Promise<{data: SystemsPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SystemsPageQueryVariables, query: string}> {
+        return requester<{data: SystemsPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SystemsPageQueryVariables, query: string}, SystemsPageQueryVariables>(SystemsPageDocument, variables, options);
+      },
+    systemsPageConnection(variables?: SystemsPageConnectionQueryVariables, options?: C): Promise<{data: SystemsPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SystemsPageConnectionQueryVariables, query: string}> {
+        return requester<{data: SystemsPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SystemsPageConnectionQueryVariables, query: string}, SystemsPageConnectionQueryVariables>(SystemsPageConnectionDocument, variables, options);
+      },
+    aboutPage(variables: AboutPageQueryVariables, options?: C): Promise<{data: AboutPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageQueryVariables, query: string}> {
+        return requester<{data: AboutPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageQueryVariables, query: string}, AboutPageQueryVariables>(AboutPageDocument, variables, options);
+      },
+    aboutPageConnection(variables?: AboutPageConnectionQueryVariables, options?: C): Promise<{data: AboutPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageConnectionQueryVariables, query: string}> {
+        return requester<{data: AboutPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageConnectionQueryVariables, query: string}, AboutPageConnectionQueryVariables>(AboutPageConnectionDocument, variables, options);
+      },
+    global(variables: GlobalQueryVariables, options?: C): Promise<{data: GlobalQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GlobalQueryVariables, query: string}> {
+        return requester<{data: GlobalQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GlobalQueryVariables, query: string}, GlobalQueryVariables>(GlobalDocument, variables, options);
+      },
+    globalConnection(variables?: GlobalConnectionQueryVariables, options?: C): Promise<{data: GlobalConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GlobalConnectionQueryVariables, query: string}> {
+        return requester<{data: GlobalConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GlobalConnectionQueryVariables, query: string}, GlobalConnectionQueryVariables>(GlobalConnectionDocument, variables, options);
       },
     work(variables: WorkQueryVariables, options?: C): Promise<{data: WorkQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WorkQueryVariables, query: string}> {
         return requester<{data: WorkQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WorkQueryVariables, query: string}, WorkQueryVariables>(WorkDocument, variables, options);
