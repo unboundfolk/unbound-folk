@@ -20,11 +20,9 @@ var config_default = defineConfig({
       {
         name: "homepage",
         label: "Homepage",
-        path: "content/pages",
+        path: "content/homepage",
         format: "json",
-        match: { include: "homepage" },
         fields: [
-          // Hero
           {
             type: "object",
             name: "hero",
@@ -32,38 +30,36 @@ var config_default = defineConfig({
             fields: [
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "headline", label: "Headline (line 1)" },
-              { type: "string", name: "headlineAccent", label: "Headline Accent (line 2 \u2014 lime green)" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "headlineAccent", label: "Headline Accent (line 2)" },
+              { type: "string", name: "subtitle", label: "Subtitle" },
               { type: "string", name: "ctaPrimary", label: "Primary CTA Label" },
               { type: "string", name: "ctaSecondary", label: "Secondary CTA Label" }
             ]
           },
-          // Problem
           {
             type: "object",
             name: "problem",
             label: "Problem Section",
             fields: [
               { type: "string", name: "headline", label: "Headline" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "subtitle", label: "Subtitle" },
               {
                 type: "object",
                 name: "cards",
                 label: "Cards",
                 list: true,
                 fields: [
-                  { type: "string", name: "label", label: "Number Label (e.g. 01)" },
+                  { type: "string", name: "label", label: "Number Label" },
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "copy", label: "Copy", ui: { component: "textarea" } }
+                  { type: "string", name: "copy", label: "Copy" }
                 ]
               }
             ]
           },
-          // Pillars
           {
             type: "object",
             name: "pillars",
-            label: "Pillars Section (Two Things, Done Properly)",
+            label: "Pillars Section",
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow Label" },
               { type: "string", name: "title", label: "Section Title" },
@@ -73,7 +69,7 @@ var config_default = defineConfig({
                 label: "Creative Pillar",
                 fields: [
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  { type: "string", name: "description", label: "Description" },
                   { type: "string", name: "services", label: "Service Tags", list: true },
                   { type: "image", name: "image", label: "Cover Image" },
                   { type: "string", name: "href", label: "Link URL" }
@@ -85,7 +81,7 @@ var config_default = defineConfig({
                 label: "Systems Pillar",
                 fields: [
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  { type: "string", name: "description", label: "Description" },
                   { type: "string", name: "services", label: "Service Tags", list: true },
                   { type: "image", name: "image", label: "Cover Image" },
                   { type: "string", name: "href", label: "Link URL" }
@@ -93,18 +89,16 @@ var config_default = defineConfig({
               }
             ]
           },
-          // Why
           {
             type: "object",
             name: "why",
-            label: "Why Section (We're Built Differently)",
+            label: "Why Section",
             fields: [
               { type: "string", name: "title", label: "Headline" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "subtitle", label: "Subtitle" },
               { type: "string", name: "points", label: "Bullet Points", list: true }
             ]
           },
-          // Process
           {
             type: "object",
             name: "process",
@@ -117,21 +111,20 @@ var config_default = defineConfig({
                 label: "Steps",
                 list: true,
                 fields: [
-                  { type: "string", name: "num", label: "Step Number (e.g. 01)" },
+                  { type: "string", name: "num", label: "Step Number" },
                   { type: "string", name: "title", label: "Step Title" },
-                  { type: "string", name: "copy", label: "Step Description", ui: { component: "textarea" } }
+                  { type: "string", name: "copy", label: "Step Description" }
                 ]
               }
             ]
           },
-          // CTA
           {
             type: "object",
             name: "cta",
             label: "CTA Section",
             fields: [
               { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "copy", label: "Copy", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Copy" },
               { type: "string", name: "button", label: "Button Label" }
             ]
           }
@@ -141,9 +134,8 @@ var config_default = defineConfig({
       {
         name: "creativePage",
         label: "Creative Page",
-        path: "content/pages",
+        path: "content/creative",
         format: "json",
-        match: { include: "creative" },
         fields: [
           {
             type: "object",
@@ -152,7 +144,7 @@ var config_default = defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow Label" },
               { type: "string", name: "title", label: "Headline" },
-              { type: "string", name: "copy", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Subtitle" },
               { type: "image", name: "image", label: "Hero Image" },
               { type: "string", name: "cta", label: "CTA Button Label" }
             ]
@@ -166,12 +158,12 @@ var config_default = defineConfig({
             list: true,
             fields: [
               { type: "string", name: "title", label: "Feature Title" },
-              { type: "string", name: "copy", label: "Feature Description", ui: { component: "textarea" } }
+              { type: "string", name: "copy", label: "Feature Description" }
             ]
           },
           { type: "string", name: "scopeEyebrow", label: "Scope Section Eyebrow" },
           { type: "string", name: "scopeTitle", label: "Scope Section Title" },
-          { type: "string", name: "scopeCopy", label: "Scope Section Copy", ui: { component: "textarea" } },
+          { type: "string", name: "scopeCopy", label: "Scope Section Copy" },
           { type: "string", name: "ctaTitle", label: "CTA Title" },
           { type: "string", name: "ctaCta", label: "CTA Button Label" },
           {
@@ -181,7 +173,7 @@ var config_default = defineConfig({
             list: true,
             fields: [
               { type: "string", name: "question", label: "Question" },
-              { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
+              { type: "string", name: "answer", label: "Answer" },
               { type: "number", name: "order", label: "Display Order" }
             ]
           }
@@ -191,9 +183,8 @@ var config_default = defineConfig({
       {
         name: "systemsPage",
         label: "Systems Page",
-        path: "content/pages",
+        path: "content/systems",
         format: "json",
-        match: { include: "systems" },
         fields: [
           {
             type: "object",
@@ -202,7 +193,7 @@ var config_default = defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow Label" },
               { type: "string", name: "title", label: "Headline" },
-              { type: "string", name: "copy", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Subtitle" },
               { type: "image", name: "image", label: "Hero Image" },
               { type: "string", name: "cta", label: "CTA Button Label" }
             ]
@@ -216,7 +207,7 @@ var config_default = defineConfig({
             list: true,
             fields: [
               { type: "string", name: "title", label: "Feature Title" },
-              { type: "string", name: "copy", label: "Feature Description", ui: { component: "textarea" } }
+              { type: "string", name: "copy", label: "Feature Description" }
             ]
           },
           { type: "string", name: "useCasesEyebrow", label: "Use Cases Eyebrow" },
@@ -231,7 +222,7 @@ var config_default = defineConfig({
             list: true,
             fields: [
               { type: "string", name: "question", label: "Question" },
-              { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
+              { type: "string", name: "answer", label: "Answer" },
               { type: "number", name: "order", label: "Display Order" }
             ]
           }
@@ -241,9 +232,8 @@ var config_default = defineConfig({
       {
         name: "aboutPage",
         label: "About Page",
-        path: "content/pages",
+        path: "content/about",
         format: "json",
-        match: { include: "about" },
         fields: [
           {
             type: "object",
@@ -252,7 +242,7 @@ var config_default = defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow Label" },
               { type: "string", name: "title", label: "Headline" },
-              { type: "string", name: "copy", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Subtitle" },
               { type: "image", name: "image", label: "Hero Image" },
               { type: "string", name: "cta", label: "CTA Button Label" }
             ]
@@ -266,7 +256,7 @@ var config_default = defineConfig({
             list: true,
             fields: [
               { type: "string", name: "title", label: "Card Title" },
-              { type: "string", name: "copy", label: "Card Copy", ui: { component: "textarea" } }
+              { type: "string", name: "copy", label: "Card Copy" }
             ]
           }
         ]
@@ -275,16 +265,15 @@ var config_default = defineConfig({
       {
         name: "global",
         label: "Global Settings",
-        path: "content/pages",
+        path: "content/global",
         format: "json",
-        match: { include: "global" },
         fields: [
           {
             type: "object",
             name: "footer",
             label: "Footer",
             fields: [
-              { type: "string", name: "tagline", label: "Tagline", ui: { component: "textarea" } },
+              { type: "string", name: "tagline", label: "Tagline" },
               { type: "string", name: "email", label: "Email Address" },
               { type: "string", name: "phone", label: "Phone Number" },
               { type: "string", name: "location", label: "Location" }
@@ -300,23 +289,12 @@ var config_default = defineConfig({
         format: "json",
         fields: [
           { type: "string", name: "title", label: "Project Title" },
-          {
-            type: "string",
-            name: "category",
-            label: "Category",
-            options: ["Creative", "Automation", "Motion", "Systems", "AI", "Branding"]
-          },
-          {
-            type: "string",
-            name: "tags",
-            label: "Tags",
-            list: true,
-            options: ["Creative", "Systems", "Automation", "Motion", "AI", "Branding"]
-          },
+          { type: "string", name: "category", label: "Category" },
+          { type: "string", name: "tags", label: "Tags", list: true },
           { type: "image", name: "image", label: "Cover Image" },
-          { type: "string", name: "problem", label: "The Situation", ui: { component: "textarea" } },
-          { type: "string", name: "solution", label: "What We Built", ui: { component: "textarea" } },
-          { type: "string", name: "outcome", label: "The Result", ui: { component: "textarea" } },
+          { type: "string", name: "problem", label: "The Situation" },
+          { type: "string", name: "solution", label: "What We Built" },
+          { type: "string", name: "outcome", label: "The Result" },
           { type: "number", name: "order", label: "Display Order" }
         ]
       },
@@ -328,7 +306,7 @@ var config_default = defineConfig({
         format: "json",
         fields: [
           { type: "string", name: "question", label: "Question" },
-          { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
+          { type: "string", name: "answer", label: "Answer" },
           { type: "number", name: "order", label: "Display Order" }
         ]
       }

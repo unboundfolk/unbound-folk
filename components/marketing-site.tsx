@@ -49,12 +49,18 @@ export interface HomepageData {
     subtitle: string;
     cards: Array<{ label: string; title: string; copy: string }>;
   };
-  pillars?: {
-    eyebrow: string;
-    title: string;
-    creative: { title: string; description: string; services: string[]; image: string; href: string };
-    systems: { title: string; description: string; services: string[]; image: string; href: string };
-  };
+  pillarsEyebrow?: string;
+  pillarsTitle?: string;
+  pillarsCreativeTitle?: string;
+  pillarsCreativeDescription?: string;
+  pillarsCreativeServices?: string[];
+  pillarsCreativeImage?: string;
+  pillarsCreativeHref?: string;
+  pillarsSystemsTitle?: string;
+  pillarsSystemsDescription?: string;
+  pillarsSystemsServices?: string[];
+  pillarsSystemsImage?: string;
+  pillarsSystemsHref?: string;
   why?: {
     title: string;
     subtitle: string;
@@ -661,7 +667,7 @@ export function HomePage({
           ctaSecondary: "Play Showreel",
         }} />
         <ProblemSection problem={problem} />
-        <PillarsSection pillars={homepage?.pillars} />
+        <PillarsSection homepage={homepage} />
         <WhySection why={homepage?.why} />
         <ProcessSection process={homepage?.process} />
         <WorkPreview items={workItemsFromCms} />
@@ -739,29 +745,25 @@ function ProblemSection({ problem }: { problem?: HomepageData["problem"] }) {
   );
 }
 
-function PillarsSection({ pillars }: { pillars?: HomepageData["pillars"] }) {
-  const eyebrow = pillars?.eyebrow ?? "What we do";
-  const title = pillars?.title ?? "Two Things, Done Properly.";
-  const creative = pillars?.creative;
-  const systems = pillars?.systems;
+function PillarsSection({ homepage }: { homepage?: HomepageData }) {
   return (
-    <Section eyebrow={eyebrow} title={title}>
+    <Section eyebrow={homepage?.pillarsEyebrow ?? "What we do"} title={homepage?.pillarsTitle ?? "Two Things, Done Properly."}>
       <div className="grid gap-5 lg:grid-cols-2">
         <ServicePillar
           icon={<WandSparkles size={22} />}
-          title={creative?.title ?? "Creative"}
-          description={creative?.description ?? "Brand visuals, motion content, and AI-assisted production that make people stop and take notice."}
-          services={creative?.services ?? creativeServices}
-          href={creative?.href ?? "/creative"}
-          image={creative?.image ?? "/14.jpg"}
+          title={homepage?.pillarsCreativeTitle ?? "Creative"}
+          description={homepage?.pillarsCreativeDescription ?? "Brand visuals, motion content, and AI-assisted production that make people stop and take notice."}
+          services={homepage?.pillarsCreativeServices ?? creativeServices}
+          href={homepage?.pillarsCreativeHref ?? "/creative"}
+          image={homepage?.pillarsCreativeImage ?? "/14.jpg"}
         />
         <ServicePillar
           icon={<Cpu size={22} />}
-          title={systems?.title ?? "Systems"}
-          description={systems?.description ?? "Custom software, automation, and AI workflows that remove the friction holding your team back."}
-          services={systems?.services ?? systemServices}
-          href={systems?.href ?? "/systems"}
-          image={systems?.image ?? "/13.jpg"}
+          title={homepage?.pillarsSystemsTitle ?? "Systems"}
+          description={homepage?.pillarsSystemsDescription ?? "Custom software, automation, and AI workflows that remove the friction holding your team back."}
+          services={homepage?.pillarsSystemsServices ?? systemServices}
+          href={homepage?.pillarsSystemsHref ?? "/systems"}
+          image={homepage?.pillarsSystemsImage ?? "/13.jpg"}
         />
       </div>
     </Section>

@@ -23,24 +23,18 @@
       }
     ]
   },
-  "pillars": {
-    "eyebrow": "What we do",
-    "title": "Two Things, Done Properly.",
-    "creative": {
-      "title": "Creative",
-      "description": "Brand visuals, motion content, and AI-assisted production that make people stop and take notice.",
-      "services": ["3D Product Visuals", "Motion Graphics", "Social Media Content", "Brand Identity", "Graphic Design", "AI-Assisted Content"],
-      "image": "/14.jpg",
-      "href": "/creative"
-    },
-    "systems": {
-      "title": "Systems",
-      "description": "Custom software, automation, and AI workflows that remove the friction holding your team back.",
-      "services": ["Internal Tools", "CRM Systems", "Automation", "AI Workflows", "Dashboards", "Custom Software"],
-      "image": "/13.jpg",
-      "href": "/systems"
-    }
-  },
+  "pillarsEyebrow": "What we do",
+  "pillarsTitle": "Two Things, Done Properly.",
+  "pillarsCreativeTitle": "Creative",
+  "pillarsCreativeDescription": "Brand visuals, motion content, and AI-assisted production that make people stop and take notice.",
+  "pillarsCreativeServices": ["3D Product Visuals", "Motion Graphics", "Social Media Content", "Brand Identity", "Graphic Design", "AI-Assisted Content"],
+  "pillarsCreativeImage": "/14.jpg",
+  "pillarsCreativeHref": "/creative",
+  "pillarsSystemsTitle": "Systems",
+  "pillarsSystemsDescription": "Custom software, automation, and AI workflows that remove the friction holding your team back.",
+  "pillarsSystemsServices": ["Internal Tools", "CRM Systems", "Automation", "AI Workflows", "Dashboards", "Custom Software"],
+  "pillarsSystemsImage": "/13.jpg",
+  "pillarsSystemsHref": "/systems",
   "why": {
     "title": "We're Built Differently on Purpose.",
     "subtitle": "A lot of studios do creative or tech. We do both — and that's not an accident. It's how we're designed to work.",
