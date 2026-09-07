@@ -34,7 +34,7 @@ export default defineConfig({
               { type: "string", name: "badge", label: "Badge Text" },
               { type: "string", name: "headline", label: "Headline (line 1)" },
               { type: "string", name: "headlineAccent", label: "Headline Accent (line 2)" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "subtitle", label: "Subtitle" },
               { type: "string", name: "ctaPrimary", label: "Primary CTA Label" },
               { type: "string", name: "ctaSecondary", label: "Secondary CTA Label" },
             ],
@@ -45,7 +45,7 @@ export default defineConfig({
             label: "Problem Section",
             fields: [
               { type: "string", name: "headline", label: "Headline" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "subtitle", label: "Subtitle" },
               {
                 type: "object",
                 name: "cards",
@@ -54,7 +54,7 @@ export default defineConfig({
                 fields: [
                   { type: "string", name: "label", label: "Number Label" },
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "copy", label: "Copy", ui: { component: "textarea" } },
+                  { type: "string", name: "copy", label: "Copy" },
                 ],
               },
             ],
@@ -72,7 +72,7 @@ export default defineConfig({
                 label: "Creative Pillar",
                 fields: [
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  { type: "string", name: "description", label: "Description" },
                   { type: "string", name: "services", label: "Service Tags", list: true },
                   { type: "image", name: "image", label: "Cover Image" },
                   { type: "string", name: "href", label: "Link URL" },
@@ -84,7 +84,7 @@ export default defineConfig({
                 label: "Systems Pillar",
                 fields: [
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  { type: "string", name: "description", label: "Description" },
                   { type: "string", name: "services", label: "Service Tags", list: true },
                   { type: "image", name: "image", label: "Cover Image" },
                   { type: "string", name: "href", label: "Link URL" },
@@ -98,7 +98,7 @@ export default defineConfig({
             label: "Why Section",
             fields: [
               { type: "string", name: "title", label: "Headline" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "subtitle", label: "Subtitle" },
               { type: "string", name: "points", label: "Bullet Points", list: true },
             ],
           },
@@ -116,7 +116,7 @@ export default defineConfig({
                 fields: [
                   { type: "string", name: "num", label: "Step Number" },
                   { type: "string", name: "title", label: "Step Title" },
-                  { type: "string", name: "copy", label: "Step Description", ui: { component: "textarea" } },
+                  { type: "string", name: "copy", label: "Step Description" },
                 ],
               },
             ],
@@ -127,7 +127,7 @@ export default defineConfig({
             label: "CTA Section",
             fields: [
               { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "copy", label: "Copy", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Copy" },
               { type: "string", name: "button", label: "Button Label" },
             ],
           },
@@ -148,7 +148,7 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow Label" },
               { type: "string", name: "title", label: "Headline" },
-              { type: "string", name: "copy", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Subtitle" },
               { type: "image", name: "image", label: "Hero Image" },
               { type: "string", name: "cta", label: "CTA Button Label" },
             ],
@@ -162,12 +162,12 @@ export default defineConfig({
             list: true,
             fields: [
               { type: "string", name: "title", label: "Feature Title" },
-              { type: "string", name: "copy", label: "Feature Description", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Feature Description" },
             ],
           },
           { type: "string", name: "scopeEyebrow", label: "Scope Section Eyebrow" },
           { type: "string", name: "scopeTitle", label: "Scope Section Title" },
-          { type: "string", name: "scopeCopy", label: "Scope Section Copy", ui: { component: "textarea" } },
+          { type: "string", name: "scopeCopy", label: "Scope Section Copy" },
           { type: "string", name: "ctaTitle", label: "CTA Title" },
           { type: "string", name: "ctaCta", label: "CTA Button Label" },
           {
@@ -177,7 +177,7 @@ export default defineConfig({
             list: true,
             fields: [
               { type: "string", name: "question", label: "Question" },
-              { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
+              { type: "string", name: "answer", label: "Answer" },
               { type: "number", name: "order", label: "Display Order" },
             ],
           },
@@ -198,7 +198,7 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow Label" },
               { type: "string", name: "title", label: "Headline" },
-              { type: "string", name: "copy", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Subtitle" },
               { type: "image", name: "image", label: "Hero Image" },
               { type: "string", name: "cta", label: "CTA Button Label" },
             ],
@@ -212,7 +212,7 @@ export default defineConfig({
             list: true,
             fields: [
               { type: "string", name: "title", label: "Feature Title" },
-              { type: "string", name: "copy", label: "Feature Description", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Feature Description" },
             ],
           },
           { type: "string", name: "useCasesEyebrow", label: "Use Cases Eyebrow" },
@@ -227,7 +227,7 @@ export default defineConfig({
             list: true,
             fields: [
               { type: "string", name: "question", label: "Question" },
-              { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
+              { type: "string", name: "answer", label: "Answer" },
               { type: "number", name: "order", label: "Display Order" },
             ],
           },
@@ -248,7 +248,7 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow Label" },
               { type: "string", name: "title", label: "Headline" },
-              { type: "string", name: "copy", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Subtitle" },
               { type: "image", name: "image", label: "Hero Image" },
               { type: "string", name: "cta", label: "CTA Button Label" },
             ],
@@ -262,7 +262,7 @@ export default defineConfig({
             list: true,
             fields: [
               { type: "string", name: "title", label: "Card Title" },
-              { type: "string", name: "copy", label: "Card Copy", ui: { component: "textarea" } },
+              { type: "string", name: "copy", label: "Card Copy" },
             ],
           },
         ],
@@ -280,7 +280,7 @@ export default defineConfig({
             name: "footer",
             label: "Footer",
             fields: [
-              { type: "string", name: "tagline", label: "Tagline", ui: { component: "textarea" } },
+              { type: "string", name: "tagline", label: "Tagline" },
               { type: "string", name: "email", label: "Email Address" },
               { type: "string", name: "phone", label: "Phone Number" },
               { type: "string", name: "location", label: "Location" },
@@ -297,23 +297,12 @@ export default defineConfig({
         format: "json",
         fields: [
           { type: "string", name: "title", label: "Project Title" },
-          {
-            type: "string",
-            name: "category",
-            label: "Category",
-            options: ["Creative", "Automation", "Motion", "Systems", "AI", "Branding"],
-          },
-          {
-            type: "string",
-            name: "tags",
-            label: "Tags",
-            list: true,
-            options: ["Creative", "Systems", "Automation", "Motion", "AI", "Branding"],
-          },
+          { type: "string", name: "category", label: "Category" },
+          { type: "string", name: "tags", label: "Tags", list: true },
           { type: "image", name: "image", label: "Cover Image" },
-          { type: "string", name: "problem", label: "The Situation", ui: { component: "textarea" } },
-          { type: "string", name: "solution", label: "What We Built", ui: { component: "textarea" } },
-          { type: "string", name: "outcome", label: "The Result", ui: { component: "textarea" } },
+          { type: "string", name: "problem", label: "The Situation" },
+          { type: "string", name: "solution", label: "What We Built" },
+          { type: "string", name: "outcome", label: "The Result" },
           { type: "number", name: "order", label: "Display Order" },
         ],
       },
@@ -326,7 +315,7 @@ export default defineConfig({
         format: "json",
         fields: [
           { type: "string", name: "question", label: "Question" },
-          { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
+          { type: "string", name: "answer", label: "Answer" },
           { type: "number", name: "order", label: "Display Order" },
         ],
       },
