@@ -773,23 +773,25 @@ function PillarsSection({ homepage }: { homepage?: HomepageData }) {
 function ServicePillar({ icon, title, description, services, href, image }: { icon: React.ReactNode; title: string; description: string; services: string[]; href: string; image: string }) {
   return (
     <Reveal className="group overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.05] shadow-2xl shadow-black/20">
-      <div className="relative h-72 overflow-hidden">
-        <Image src={image} alt={`${title} by Unbound Folk`} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover transition duration-700 group-hover:scale-105" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
-        <div className="absolute bottom-6 left-7 flex h-11 w-11 items-center justify-center rounded-xl bg-lime-300 text-slate-950">{icon}</div>
-      </div>
-      <div className="p-7">
-        <h3 className="text-2xl font-bold text-white">{title}</h3>
-        <p className="mt-3 leading-7 text-slate-300">{description}</p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {services.map((service) => (
-            <span key={service} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-semibold text-slate-400">{service}</span>
-          ))}
+      <Link href={href} className="block">
+        <div className="relative h-72 overflow-hidden">
+          <Image src={image} alt={`${title} by Unbound Folk`} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover transition duration-700 group-hover:scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+          <div className="absolute bottom-6 left-7 flex h-11 w-11 items-center justify-center rounded-xl bg-lime-300 text-slate-950">{icon}</div>
         </div>
-        <Link href={href} className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-lime-300 transition hover:gap-3">
-          Explore {title} <ArrowRight size={15} />
-        </Link>
-      </div>
+        <div className="p-7">
+          <h3 className="text-2xl font-bold text-white">{title}</h3>
+          <p className="mt-3 leading-7 text-slate-300">{description}</p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {services.map((service) => (
+              <span key={service} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-semibold text-slate-400">{service}</span>
+            ))}
+          </div>
+          <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-lime-300 transition group-hover:gap-3">
+            Explore {title} <ArrowRight size={15} />
+          </span>
+        </div>
+      </Link>
     </Reveal>
   );
 }
