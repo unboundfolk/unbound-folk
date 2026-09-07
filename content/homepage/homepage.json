@@ -1,8 +1,8 @@
 {
   "hero": {
     "badge": "Creative Studio + Systems Partner · Malaysia",
-    "headline": "Sharp Brand.",
-    "headlineAccent": "Smart Systems.",
+    "headline": "Sharp Brand",
+    "headlineAccent": "Smart Systems",
     "subtitle": "We help businesses in Malaysia stand out visually and operate smarter — through creative design, AI, and custom-built systems.",
     "ctaPrimary": "Book a Discovery Call",
     "ctaSecondary": "Play Showreel"
@@ -27,13 +27,27 @@
   "pillarsTitle": "Two Things, Done Properly.",
   "pillarsCreativeTitle": "Creative",
   "pillarsCreativeDescription": "Brand visuals, motion content, and AI-assisted production that make people stop and take notice.",
-  "pillarsCreativeServices": ["3D Product Visuals", "Motion Graphics", "Social Media Content", "Brand Identity", "Graphic Design", "AI-Assisted Content"],
-  "pillarsCreativeImage": "/14.jpg",
+  "pillarsCreativeServices": [
+    "3D Product Visuals",
+    "Motion Graphics",
+    "Social Media Content",
+    "Brand Identity",
+    "Graphic Design",
+    "AI-Assisted Content"
+  ],
+  "pillarsCreativeImage": "/uploads/14.jpg",
   "pillarsCreativeHref": "/creative",
   "pillarsSystemsTitle": "Systems",
   "pillarsSystemsDescription": "Custom software, automation, and AI workflows that remove the friction holding your team back.",
-  "pillarsSystemsServices": ["Internal Tools", "CRM Systems", "Automation", "AI Workflows", "Dashboards", "Custom Software"],
-  "pillarsSystemsImage": "/13.jpg",
+  "pillarsSystemsServices": [
+    "Internal Tools",
+    "CRM Systems",
+    "Automation",
+    "AI Workflows",
+    "Dashboards",
+    "Custom Software"
+  ],
+  "pillarsSystemsImage": "/uploads/13.jpg",
   "pillarsSystemsHref": "/systems",
   "why": {
     "title": "We're Built Differently on Purpose.",
@@ -49,10 +63,26 @@
   "process": {
     "title": "Simple Process. No Runaround.",
     "steps": [
-      { "num": "01", "title": "Discover", "copy": "We spend real time understanding your business — your goals, your blockers, and what good would actually look like." },
-      { "num": "02", "title": "Define", "copy": "We scope the right solution together. No guesswork, no overselling. Just clarity on what we're building and why." },
-      { "num": "03", "title": "Build", "copy": "We design, develop, and deliver. You're kept in the loop throughout — no black boxes, no surprises." },
-      { "num": "04", "title": "Refine", "copy": "After launch, we improve based on what we see. Good work doesn't stop at handoff." }
+      {
+        "num": "01",
+        "title": "Discover",
+        "copy": "We spend real time understanding your business — your goals, your blockers, and what good would actually look like."
+      },
+      {
+        "num": "02",
+        "title": "Define",
+        "copy": "We scope the right solution together. No guesswork, no overselling. Just clarity on what we're building and why."
+      },
+      {
+        "num": "03",
+        "title": "Build",
+        "copy": "We design, develop, and deliver. You're kept in the loop throughout — no black boxes, no surprises."
+      },
+      {
+        "num": "04",
+        "title": "Refine",
+        "copy": "After launch, we improve based on what we see. Good work doesn't stop at handoff."
+      }
     ]
   },
   "cta": {
