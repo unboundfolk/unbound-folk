@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
-import { TinaEditProvider } from "@/components/tina-edit-provider";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -144,7 +143,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="antialiased">
-        <TinaEditProvider>{children}</TinaEditProvider>
+        {children}
       </body>
     </html>
   );
