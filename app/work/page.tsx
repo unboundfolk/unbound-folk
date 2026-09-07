@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { WorkPage } from "@/components/marketing-site";
+import { TinaWorkPage } from "@/components/tina-pages";
 import type { WorkItem, GlobalData } from "@/components/marketing-site";
 import { readJson, readJsonDir } from "@/lib/content";
 
@@ -15,5 +15,5 @@ export default function Page() {
     (a, b) => (a.order ?? 0) - (b.order ?? 0)
   );
   const global = readJson<GlobalData>("content/global/global.json");
-  return <WorkPage items={workItems} global={global} />;
+  return <TinaWorkPage workItems={workItems} global={global} />;
 }
