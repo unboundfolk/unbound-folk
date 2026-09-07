@@ -23,6 +23,44 @@
       }
     ]
   },
+  "pillars": {
+    "eyebrow": "What we do",
+    "title": "Two Things, Done Properly.",
+    "creative": {
+      "title": "Creative",
+      "description": "Brand visuals, motion content, and AI-assisted production that make people stop and take notice.",
+      "services": ["3D Product Visuals", "Motion Graphics", "Social Media Content", "Brand Identity", "Graphic Design", "AI-Assisted Content"],
+      "image": "/14.jpg",
+      "href": "/creative"
+    },
+    "systems": {
+      "title": "Systems",
+      "description": "Custom software, automation, and AI workflows that remove the friction holding your team back.",
+      "services": ["Internal Tools", "CRM Systems", "Automation", "AI Workflows", "Dashboards", "Custom Software"],
+      "image": "/13.jpg",
+      "href": "/systems"
+    }
+  },
+  "why": {
+    "title": "We're Built Differently on Purpose.",
+    "subtitle": "A lot of studios do creative or tech. We do both — and that's not an accident. It's how we're designed to work.",
+    "points": [
+      "We think about brand and operations together, not in silos",
+      "We build for the outcome, not to show off the tech",
+      "We move fast without cutting corners on quality",
+      "We use AI where it genuinely helps — and skip it where it doesn't",
+      "We stay communicative and don't disappear mid-project"
+    ]
+  },
+  "process": {
+    "title": "Simple Process. No Runaround.",
+    "steps": [
+      { "num": "01", "title": "Discover", "copy": "We spend real time understanding your business — your goals, your blockers, and what good would actually look like." },
+      { "num": "02", "title": "Define", "copy": "We scope the right solution together. No guesswork, no overselling. Just clarity on what we're building and why." },
+      { "num": "03", "title": "Build", "copy": "We design, develop, and deliver. You're kept in the loop throughout — no black boxes, no surprises." },
+      { "num": "04", "title": "Refine", "copy": "After launch, we improve based on what we see. Good work doesn't stop at handoff." }
+    ]
+  },
   "cta": {
     "title": "Ready to Stop Leaving Growth on the Table?",
     "copy": "Book a discovery call. We'll spend 30 minutes understanding where you're stuck — and tell you honestly whether we can help.",

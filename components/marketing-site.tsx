@@ -49,6 +49,21 @@ export interface HomepageData {
     subtitle: string;
     cards: Array<{ label: string; title: string; copy: string }>;
   };
+  pillars?: {
+    eyebrow: string;
+    title: string;
+    creative: { title: string; description: string; services: string[]; image: string; href: string };
+    systems: { title: string; description: string; services: string[]; image: string; href: string };
+  };
+  why?: {
+    title: string;
+    subtitle: string;
+    points: string[];
+  };
+  process?: {
+    title: string;
+    steps: Array<{ num: string; title: string; copy: string }>;
+  };
   cta: {
     title: string;
     copy: string;
@@ -71,6 +86,61 @@ export interface FaqItem {
   question: string;
   answer: string;
   order?: number;
+}
+
+export interface SubPageHeroData {
+  eyebrow: string;
+  title: string;
+  copy: string;
+  image: string;
+  cta: string;
+}
+
+export interface FeatureItemData {
+  title: string;
+  copy: string;
+}
+
+export interface CreativePageData {
+  hero: SubPageHeroData;
+  featuresEyebrow: string;
+  featuresTitle: string;
+  features: FeatureItemData[];
+  scopeEyebrow: string;
+  scopeTitle: string;
+  scopeCopy: string;
+  ctaTitle: string;
+  ctaCta: string;
+  extraFaqs: FaqItem[];
+}
+
+export interface SystemsPageData {
+  hero: SubPageHeroData;
+  featuresEyebrow: string;
+  featuresTitle: string;
+  features: FeatureItemData[];
+  useCasesEyebrow: string;
+  useCasesTitle: string;
+  useCases: string[];
+  ctaTitle: string;
+  ctaCta: string;
+  extraFaqs: FaqItem[];
+}
+
+export interface AboutPageData {
+  hero: SubPageHeroData;
+  beliefEyebrow: string;
+  beliefTitle: string;
+  beliefs: Array<{ title: string; copy: string }>;
+}
+
+export interface GlobalData {
+  footer: {
+    tagline: string;
+    email: string;
+    phone: string;
+    location: string;
+  };
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -320,7 +390,13 @@ function SiteHeader() {
   );
 }
 
-function Footer() {
+function Footer({ global }: { global?: GlobalData }) {
+  const footer = global?.footer;
+  const email = footer?.email ?? "hello@unboundfolk.com";
+  const phone = footer?.phone ?? "+60 18-986 5212";
+  const location = footer?.location ?? "Malaysia";
+  const tagline = footer?.tagline ?? "A creative-tech studio helping growing businesses in Malaysia look sharper and run smarter.";
+  const phoneHref = "https://wa.me/" + phone.replace(/[^0-9]/g, "");
   return (
     <footer className="border-t border-white/10 px-5 py-12 text-slate-300 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.4fr_1fr_1fr]">
@@ -329,9 +405,7 @@ function Footer() {
             <Image src="/uf-logo.svg" alt="Unbound Folk logo" width={36} height={36} />
             <span className="font-bold text-white">Unbound Folk</span>
           </div>
-          <p className="max-w-md text-sm leading-6">
-            A creative-tech studio helping growing businesses in Malaysia look sharper and run smarter.
-          </p>
+          <p className="max-w-md text-sm leading-6">{tagline}</p>
         </div>
         <div>
           <p className="mb-3 text-sm font-semibold text-white">Explore</p>
@@ -342,9 +416,9 @@ function Footer() {
         <div>
           <p className="mb-3 text-sm font-semibold text-white">Contact</p>
           <div className="grid gap-2 text-sm">
-            <a href="mailto:hello@unboundfolk.com" className="hover:text-lime-200">hello@unboundfolk.com</a>
-            <a href="https://wa.me/60189865212" className="hover:text-lime-200">+60 18-986 5212</a>
-            <span>Malaysia</span>
+            <a href={`mailto:${email}`} className="hover:text-lime-200">{email}</a>
+            <a href={phoneHref} className="hover:text-lime-200">{phone}</a>
+            <span>{location}</span>
           </div>
         </div>
       </div>
@@ -353,7 +427,7 @@ function Footer() {
   );
 }
 
-export function SiteShell({ children }: { children: React.ReactNode }) {
+export function SiteShell({ children, global }: { children: React.ReactNode; global?: GlobalData }) {
   return (
     <div
       className="min-h-screen overflow-hidden text-white"
@@ -374,7 +448,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       />
       <SiteHeader />
       {children}
-      <Footer />
+      <Footer global={global} />
       <Link
         href="/contact"
         className="fixed bottom-4 left-4 right-4 z-40 flex min-h-12 items-center justify-center rounded-full bg-lime-300 px-5 text-sm font-bold text-slate-950 shadow-2xl shadow-black/30 md:hidden"
@@ -564,17 +638,19 @@ export function HomePage({
   homepage,
   workItems: workItemsFromCms,
   faqs: faqsFromCms,
+  global,
 }: {
   homepage?: HomepageData;
   workItems?: WorkItem[];
   faqs?: FaqItem[];
+  global?: GlobalData;
 }) {
   const hero = homepage?.hero;
   const problem = homepage?.problem;
   const cta = homepage?.cta;
 
   return (
-    <SiteShell>
+    <SiteShell global={global}>
       <main>
         <HeroSection hero={hero ?? {
           badge: "Creative Studio + Systems Partner · Malaysia",
@@ -585,9 +661,9 @@ export function HomePage({
           ctaSecondary: "Play Showreel",
         }} />
         <ProblemSection problem={problem} />
-        <PillarsSection />
-        <WhySection />
-        <ProcessSection />
+        <PillarsSection pillars={homepage?.pillars} />
+        <WhySection why={homepage?.why} />
+        <ProcessSection process={homepage?.process} />
         <WorkPreview items={workItemsFromCms} />
         <FAQSection items={faqsFromCms?.map((f) => ({ q: f.question, a: f.answer }))} />
         <CTASection
@@ -663,25 +739,29 @@ function ProblemSection({ problem }: { problem?: HomepageData["problem"] }) {
   );
 }
 
-function PillarsSection() {
+function PillarsSection({ pillars }: { pillars?: HomepageData["pillars"] }) {
+  const eyebrow = pillars?.eyebrow ?? "What we do";
+  const title = pillars?.title ?? "Two Things, Done Properly.";
+  const creative = pillars?.creative;
+  const systems = pillars?.systems;
   return (
-    <Section eyebrow="What we do" title="Two Things, Done Properly.">
+    <Section eyebrow={eyebrow} title={title}>
       <div className="grid gap-5 lg:grid-cols-2">
         <ServicePillar
           icon={<WandSparkles size={22} />}
-          title="Creative"
-          description="Brand visuals, motion content, and AI-assisted production that make people stop and take notice."
-          services={creativeServices}
-          href="/creative"
-          image="/14.jpg"
+          title={creative?.title ?? "Creative"}
+          description={creative?.description ?? "Brand visuals, motion content, and AI-assisted production that make people stop and take notice."}
+          services={creative?.services ?? creativeServices}
+          href={creative?.href ?? "/creative"}
+          image={creative?.image ?? "/14.jpg"}
         />
         <ServicePillar
           icon={<Cpu size={22} />}
-          title="Systems"
-          description="Custom software, automation, and AI workflows that remove the friction holding your team back."
-          services={systemServices}
-          href="/systems"
-          image="/13.jpg"
+          title={systems?.title ?? "Systems"}
+          description={systems?.description ?? "Custom software, automation, and AI workflows that remove the friction holding your team back."}
+          services={systems?.services ?? systemServices}
+          href={systems?.href ?? "/systems"}
+          image={systems?.image ?? "/13.jpg"}
         />
       </div>
     </Section>
@@ -712,30 +792,30 @@ function ServicePillar({ icon, title, description, services, href, image }: { ic
   );
 }
 
-function WhySection() {
-  const points = [
-    "We think about brand and operations together, not in silos",
-    "We build for the outcome, not to show off the tech",
-    "We move fast without cutting corners on quality",
-    "We use AI where it genuinely helps — and skip it where it doesn't",
-    "We stay communicative and don't disappear mid-project",
-  ];
+const DEFAULT_WHY_POINTS = [
+  "We think about brand and operations together, not in silos",
+  "We build for the outcome, not to show off the tech",
+  "We move fast without cutting corners on quality",
+  "We use AI where it genuinely helps — and skip it where it doesn't",
+  "We stay communicative and don't disappear mid-project",
+];
+
+function WhySection({ why }: { why?: HomepageData["why"] }) {
+  const title = why?.title ?? "We're Built Differently on Purpose.";
+  const subtitle = why?.subtitle ?? "A lot of studios do creative or tech. We do both — and that's not an accident. It's how we're designed to work.";
+  const points = why?.points && why.points.length > 0 ? why.points : DEFAULT_WHY_POINTS;
   return (
     <section className="relative px-5 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal>
-            <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-5xl">
-              We're Built<br />Differently<br />on Purpose.
-            </h2>
-            <p className="mt-6 max-w-md text-base leading-7 text-slate-300">
-              A lot of studios do creative or tech. We do both — and that's not an accident. It's how we're designed to work.
-            </p>
+            <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-5xl">{title}</h2>
+            <p className="mt-6 max-w-md text-base leading-7 text-slate-300">{subtitle}</p>
           </Reveal>
           <div>
             {points.map((point, i) => (
               <Reveal
-                key={point}
+                key={i}
                 delay={i * 0.04}
                 className={cx("flex items-start gap-5 py-5", i < points.length - 1 && "border-b border-white/10")}
               >
@@ -750,29 +830,32 @@ function WhySection() {
   );
 }
 
-function ProcessSection() {
-  const steps = [
-    ["01", "Discover", "We spend real time understanding your business — your goals, your blockers, and what good would actually look like."],
-    ["02", "Define", "We scope the right solution together. No guesswork, no overselling. Just clarity on what we're building and why."],
-    ["03", "Build", "We design, develop, and deliver. You're kept in the loop throughout — no black boxes, no surprises."],
-    ["04", "Refine", "After launch, we improve based on what we see. Good work doesn't stop at handoff."],
-  ];
+const DEFAULT_PROCESS_STEPS = [
+  { num: "01", title: "Discover", copy: "We spend real time understanding your business — your goals, your blockers, and what good would actually look like." },
+  { num: "02", title: "Define", copy: "We scope the right solution together. No guesswork, no overselling. Just clarity on what we're building and why." },
+  { num: "03", title: "Build", copy: "We design, develop, and deliver. You're kept in the loop throughout — no black boxes, no surprises." },
+  { num: "04", title: "Refine", copy: "After launch, we improve based on what we see. Good work doesn't stop at handoff." },
+];
+
+function ProcessSection({ process }: { process?: HomepageData["process"] }) {
+  const title = process?.title ?? "Simple Process. No Runaround.";
+  const steps = process?.steps && process.steps.length > 0 ? process.steps : DEFAULT_PROCESS_STEPS;
   return (
     <section className="relative px-5 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <Reveal className="mb-14 max-w-2xl">
-          <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-5xl">Simple Process. No Runaround.</h2>
+          <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-5xl">{title}</h2>
         </Reveal>
         <div>
-          {steps.map(([num, title, copy], i) => (
+          {steps.map((step, i) => (
             <Reveal
-              key={title}
+              key={i}
               delay={i * 0.05}
               className="grid items-start gap-y-2 border-t border-white/10 py-8 sm:grid-cols-[64px_1fr] sm:gap-x-6 md:grid-cols-[64px_200px_1fr] md:items-center md:gap-x-10"
             >
-              <span className="font-mono text-sm font-bold tabular-nums text-lime-300/60">{num}</span>
-              <h3 className="text-lg font-semibold text-white">{title}</h3>
-              <p className="text-slate-300 leading-7 sm:col-start-2 md:col-start-auto">{copy}</p>
+              <span className="font-mono text-sm font-bold tabular-nums text-lime-300/60">{step.num}</span>
+              <h3 className="text-lg font-semibold text-white">{step.title}</h3>
+              <p className="text-slate-300 leading-7 sm:col-start-2 md:col-start-auto">{step.copy}</p>
             </Reveal>
           ))}
           <div className="border-t border-white/10" />
@@ -870,39 +953,67 @@ function CaseCard({ item }: { item: (typeof workItems)[number] }) {
   );
 }
 
-export function CreativePage() {
-  const creativeFaqs = [
-    ...faqs,
-    { q: "Do you do video shoots or photography?", a: "No. We don't do physical shoots or traditional video editing. Our work lives in the designed, animated, 3D, and AI-assisted space — which gives us more creative range with less logistical overhead for you." },
-    { q: "Can you maintain brand consistency across different content types?", a: "That's actually the core of how we work. We build visual systems, not one-off posts — so whether it's a product visual, a social graphic, or a motion asset, they all feel like they come from the same place." },
+// Default icons for creative features (by position)
+const CREATIVE_FEATURE_ICONS = [Layers3, Palette, Play, Sparkles, Bot, WandSparkles];
+// Default icons for systems features (by position)
+const SYSTEMS_FEATURE_ICONS = [MonitorCog, DatabaseZap, BrainCircuit, Workflow, BarChart3, Code2, Gauge, LineChart];
+
+export function CreativePage({
+  data,
+  sharedFaqs,
+  global,
+}: {
+  data?: CreativePageData;
+  sharedFaqs?: FaqItem[];
+  global?: GlobalData;
+}) {
+  const hero = data?.hero;
+  const allFaqs = [
+    ...(sharedFaqs ?? faqs).map((f) => ({ q: "question" in f ? f.question : (f as {q:string}).q, a: "answer" in f ? f.answer : (f as {a:string}).a })),
+    ...(data?.extraFaqs ?? [
+      { q: "Do you do video shoots or photography?", a: "No. We don't do physical shoots or traditional video editing. Our work lives in the designed, animated, 3D, and AI-assisted space — which gives us more creative range with less logistical overhead for you." },
+      { q: "Can you maintain brand consistency across different content types?", a: "That's actually the core of how we work. We build visual systems, not one-off posts — so whether it's a product visual, a social graphic, or a motion asset, they all feel like they come from the same place." },
+    ]).map((f) => ({ q: "question" in f ? f.question : (f as {q:string}).q, a: "answer" in f ? f.answer : (f as {a:string}).a })),
   ];
+  const features = data?.features && data.features.length > 0 ? data.features : [
+    { title: "3D product visuals", copy: "Product scenes and visual concepts built for campaigns, PDPs, and launches — without a photoshoot." },
+    { title: "Social media content", copy: "Designed posts, stories, and ad creatives that feel intentional, not templated." },
+    { title: "Motion graphics", copy: "Animated assets for product reveals, promos, and social content that actually moves people." },
+    { title: "Brand and graphic design", copy: "Logo direction, design systems, and digital templates that give your team something consistent to work with." },
+    { title: "AI content production", copy: "AI-assisted visual variations and content sets — directed with taste, reviewed for quality." },
+  ];
+  const featureItems: Array<[string, string, React.ComponentType<{ size?: number; className?: string }>]> =
+    features.map((f, i) => [f.title, f.copy, CREATIVE_FEATURE_ICONS[i % CREATIVE_FEATURE_ICONS.length]]);
   return (
-    <SiteShell>
+    <SiteShell global={global}>
       <SubPageHero
-        eyebrow="Creative"
-        title="Content That Earns Attention — Not Just Fills a Feed."
-        copy="We design brand visuals, motion graphics, and AI-assisted content for businesses that want to show up looking like they mean it."
-        image="/8.jpg"
-        cta="Start a Creative Project"
+        eyebrow={hero?.eyebrow ?? "Creative"}
+        title={hero?.title ?? "Content That Earns Attention — Not Just Fills a Feed."}
+        copy={hero?.copy ?? "We design brand visuals, motion graphics, and AI-assisted content for businesses that want to show up looking like they mean it."}
+        image={hero?.image ?? "/8.jpg"}
+        cta={hero?.cta ?? "Start a Creative Project"}
       />
-      <Section eyebrow="What we make" title="Sharp Work Across Every Format">
-        <FeatureGrid items={[
-          ["3D product visuals", "Product scenes and visual concepts built for campaigns, PDPs, and launches — without a photoshoot.", Layers3],
-          ["Social media content", "Designed posts, stories, and ad creatives that feel intentional, not templated.", Palette],
-          ["Motion graphics", "Animated assets for product reveals, promos, and social content that actually moves people.", Play],
-          ["Brand and graphic design", "Logo direction, design systems, and digital templates that give your team something consistent to work with.", Sparkles],
-          ["AI content production", "AI-assisted visual variations and content sets — directed with taste, reviewed for quality.", Bot],
-        ]} />
+      <Section eyebrow={data?.featuresEyebrow ?? "What we make"} title={data?.featuresTitle ?? "Sharp Work Across Every Format"}>
+        <FeatureGrid items={featureItems} />
       </Section>
-      <Section eyebrow="Honest about scope" title="What We Don't Do" copy="We don't shoot video on location, edit long-form footage, run your marketing strategy, or design physical packaging. Keeping our scope tight is how we keep our quality high." />
-      <FAQSection items={creativeFaqs} />
-      <CTASection title="Let's Make Your Brand Look Like It Means Business." cta="Start a Creative Project" />
+      <Section eyebrow={data?.scopeEyebrow ?? "Honest about scope"} title={data?.scopeTitle ?? "What We Don't Do"} copy={data?.scopeCopy ?? "We don't shoot video on location, edit long-form footage, run your marketing strategy, or design physical packaging. Keeping our scope tight is how we keep our quality high."} />
+      <FAQSection items={allFaqs} />
+      <CTASection title={data?.ctaTitle ?? "Let's Make Your Brand Look Like It Means Business."} cta={data?.ctaCta ?? "Start a Creative Project"} />
     </SiteShell>
   );
 }
 
-export function SystemsPage() {
-  const useCases = [
+export function SystemsPage({
+  data,
+  sharedFaqs,
+  global,
+}: {
+  data?: SystemsPageData;
+  sharedFaqs?: FaqItem[];
+  global?: GlobalData;
+}) {
+  const hero = data?.hero;
+  const useCases = data?.useCases && data.useCases.length > 0 ? data.useCases : [
     "Lead management system",
     "Quotation & invoice workflow",
     "Task delegation system",
@@ -912,43 +1023,48 @@ export function SystemsPage() {
     "AI document assistant",
     "Automated reporting dashboard",
   ];
-  const systemsFaqs = [
-    ...faqs,
-    { q: "Do you build fully custom software?", a: "Yes. We build internal tools, CRM systems, dashboards, portals, and web apps tailored to your specific workflow — not off-the-shelf tools bent to fit." },
-    { q: "What kinds of things can you automate?", a: "Almost anything repetitive: follow-ups, approvals, status updates, data routing, reminders, reporting. We start by mapping what your team actually does manually, then figure out what's worth automating." },
-    { q: "When does AI actually make sense in a business system?", a: "When it saves real time or makes decisions better. Document parsing, smart routing, content drafting, classification, summarisation — these are areas where AI earns its keep. We won't bolt it on just to say it's there." },
+  const allFaqs = [
+    ...(sharedFaqs ?? faqs).map((f) => ({ q: "question" in f ? f.question : (f as {q:string}).q, a: "answer" in f ? f.answer : (f as {a:string}).a })),
+    ...(data?.extraFaqs ?? [
+      { q: "Do you build fully custom software?", a: "Yes. We build internal tools, CRM systems, dashboards, portals, and web apps tailored to your specific workflow — not off-the-shelf tools bent to fit." },
+      { q: "What kinds of things can you automate?", a: "Almost anything repetitive: follow-ups, approvals, status updates, data routing, reminders, reporting. We start by mapping what your team actually does manually, then figure out what's worth automating." },
+      { q: "When does AI actually make sense in a business system?", a: "When it saves real time or makes decisions better. Document parsing, smart routing, content drafting, classification, summarisation — these are areas where AI earns its keep. We won't bolt it on just to say it's there." },
+    ]).map((f) => ({ q: "question" in f ? f.question : (f as {q:string}).q, a: "answer" in f ? f.answer : (f as {a:string}).a })),
   ];
+  const features = data?.features && data.features.length > 0 ? data.features : [
+    { title: "Custom internal tools", copy: "Built around how your team actually works — not how a generic SaaS vendor assumes you do." },
+    { title: "CRM and client management", copy: "One place to track leads, clients, tasks, and follow-ups. No more chasing threads across three apps." },
+    { title: "AI-powered workflows", copy: "Smart automation that handles drafting, routing, classifying, and summarising — with a human in the loop where it counts." },
+    { title: "Process automation", copy: "Repeatable tasks — approvals, reminders, handoffs, data entry — automated properly so they stop eating time." },
+    { title: "Dashboards and reporting", copy: "The numbers your team actually needs, presented clearly, updated automatically." },
+    { title: "Custom web apps", copy: "Purpose-built portals and applications when existing tools genuinely can't do the job." },
+  ];
+  const featureItems: Array<[string, string, React.ComponentType<{ size?: number; className?: string }>]> =
+    features.map((f, i) => [f.title, f.copy, SYSTEMS_FEATURE_ICONS[i % SYSTEMS_FEATURE_ICONS.length]]);
   return (
-    <SiteShell>
+    <SiteShell global={global}>
       <SubPageHero
-        eyebrow="Systems"
-        title="Your Team Is Too Good to Be Stuck Doing This Manually."
-        copy="We build the internal tools, automation, and AI workflows that take busywork off your plate — so your people can focus on the work that actually matters."
-        image="/13.jpg"
-        cta="Build My System"
+        eyebrow={hero?.eyebrow ?? "Systems"}
+        title={hero?.title ?? "Your Team Is Too Good to Be Stuck Doing This Manually."}
+        copy={hero?.copy ?? "We build the internal tools, automation, and AI workflows that take busywork off your plate — so your people can focus on the work that actually matters."}
+        image={hero?.image ?? "/13.jpg"}
+        cta={hero?.cta ?? "Build My System"}
       />
-      <Section eyebrow="What we build" title="From Messy Processes to Clean, Working Systems">
-        <FeatureGrid items={[
-          ["Custom internal tools", "Built around how your team actually works — not how a generic SaaS vendor assumes you do.", MonitorCog],
-          ["CRM and client management", "One place to track leads, clients, tasks, and follow-ups. No more chasing threads across three apps.", DatabaseZap],
-          ["AI-powered workflows", "Smart automation that handles drafting, routing, classifying, and summarising — with a human in the loop where it counts.", BrainCircuit],
-          ["Process automation", "Repeatable tasks — approvals, reminders, handoffs, data entry — automated properly so they stop eating time.", Workflow],
-          ["Dashboards and reporting", "The numbers your team actually needs, presented clearly, updated automatically.", BarChart3],
-          ["Custom web apps", "Purpose-built portals and applications when existing tools genuinely can't do the job.", Code2],
-        ]} />
+      <Section eyebrow={data?.featuresEyebrow ?? "What we build"} title={data?.featuresTitle ?? "From Messy Processes to Clean, Working Systems"}>
+        <FeatureGrid items={featureItems} />
       </Section>
-      <Section eyebrow="Things we've built" title="Real Systems for Real Problems">
+      <Section eyebrow={data?.useCasesEyebrow ?? "Things we've built"} title={data?.useCasesTitle ?? "Real Systems for Real Problems"}>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {useCases.map((item) => (
-            <Reveal key={item} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-sm font-semibold text-white">
+          {useCases.map((item, i) => (
+            <Reveal key={i} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-sm font-semibold text-white">
               <Gauge className="mb-5 text-lime-200" size={20} />
               {item}
             </Reveal>
           ))}
         </div>
       </Section>
-      <FAQSection items={systemsFaqs} />
-      <CTASection title="Ready to Build Something Your Team Will Actually Thank You For?" cta="Build My System" />
+      <FAQSection items={allFaqs} />
+      <CTASection title={data?.ctaTitle ?? "Ready to Build Something Your Team Will Actually Thank You For?"} cta={data?.ctaCta ?? "Build My System"} />
     </SiteShell>
   );
 }
@@ -993,14 +1109,14 @@ function FeatureGrid({ items }: { items: Array<[string, string, React.ComponentT
   );
 }
 
-export function WorkPage({ items }: { items?: WorkItem[] }) {
+export function WorkPage({ items, global }: { items?: WorkItem[]; global?: GlobalData }) {
   const allItems = items && items.length > 0 ? items : workItems;
   const filters = ["All", "Creative", "Systems", "AI", "Automation", "Branding", "Motion"];
   const [active, setActive] = useState("All");
   const filtered = useMemo(() => active === "All" ? allItems : allItems.filter((item) => item.tags.includes(active) || item.category === active), [active, allItems]);
 
   return (
-    <SiteShell>
+    <SiteShell global={global}>
       <SubPageHero
         eyebrow="Work"
         title="Projects That Solved Real Problems."
@@ -1063,26 +1179,34 @@ export function WorkPage({ items }: { items?: WorkItem[] }) {
   );
 }
 
-export function AboutPage() {
+export function AboutPage({
+  data,
+  global,
+}: {
+  data?: AboutPageData;
+  global?: GlobalData;
+}) {
+  const hero = data?.hero;
+  const beliefs = data?.beliefs && data.beliefs.length > 0 ? data.beliefs : [
+    { title: "What we believe", copy: "A business can look great online and still be a mess internally. It can run like a machine and still fail to make an impression. You need both sides working — and most studios only touch one." },
+    { title: "How we work", copy: "We listen before we propose. We ask uncomfortable questions. We'd rather scope something smaller and do it well than overpromise and underdeliver." },
+    { title: "Why clients stay", copy: "We're honest about timelines and limitations. We communicate during the project, not just at the start and end. And we measure success by whether the thing we built actually works for you." },
+  ];
   return (
-    <SiteShell>
+    <SiteShell global={global}>
       <SubPageHero
-        eyebrow="About"
-        title="We Started Unbound Folk Because Most Businesses Needed Both."
-        copy="Not just a creative agency. Not just a dev shop. A studio that understands brand and operations — and builds for both without making you manage two different vendors."
-        image="/16.jpg"
-        cta="Book a Discovery Call"
+        eyebrow={hero?.eyebrow ?? "About"}
+        title={hero?.title ?? "We Started Unbound Folk Because Most Businesses Needed Both."}
+        copy={hero?.copy ?? "Not just a creative agency. Not just a dev shop. A studio that understands brand and operations — and builds for both without making you manage two different vendors."}
+        image={hero?.image ?? "/16.jpg"}
+        cta={hero?.cta ?? "Book a Discovery Call"}
       />
-      <Section eyebrow="How we think" title="Brand Gets You In the Door. Systems Keep You Standing.">
+      <Section eyebrow={data?.beliefEyebrow ?? "How we think"} title={data?.beliefTitle ?? "Brand Gets You In the Door. Systems Keep You Standing."}>
         <div className="grid gap-5 lg:grid-cols-3">
-          {[
-            ["What we believe", "A business can look great online and still be a mess internally. It can run like a machine and still fail to make an impression. You need both sides working — and most studios only touch one."],
-            ["How we work", "We listen before we propose. We ask uncomfortable questions. We'd rather scope something smaller and do it well than overpromise and underdeliver."],
-            ["Why clients stay", "We're honest about timelines and limitations. We communicate during the project, not just at the start and end. And we measure success by whether the thing we built actually works for you."],
-          ].map(([title, copy]) => (
-            <Reveal key={title} className="rounded-3xl border border-white/10 bg-white/[0.04] p-7">
-              <h2 className="text-2xl font-bold text-white">{title}</h2>
-              <p className="mt-4 leading-7 text-slate-300">{copy}</p>
+          {beliefs.map((belief, i) => (
+            <Reveal key={i} className="rounded-3xl border border-white/10 bg-white/[0.04] p-7">
+              <h2 className="text-2xl font-bold text-white">{belief.title}</h2>
+              <p className="mt-4 leading-7 text-slate-300">{belief.copy}</p>
             </Reveal>
           ))}
         </div>
@@ -1104,7 +1228,7 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
-export function ContactPage() {
+export function ContactPage({ global }: { global?: GlobalData } = {}) {
   const [sent, setSent] = useState(false);
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -1125,7 +1249,7 @@ export function ContactPage() {
   }
 
   return (
-    <SiteShell>
+    <SiteShell global={global}>
       <section className="px-5 pb-20 pt-32 sm:px-6 lg:px-8 lg:pt-40">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1fr]">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: pageEase }}>

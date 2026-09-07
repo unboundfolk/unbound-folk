@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "eyebrow": "Creative",
+    "title": "Content That Earns Attention — Not Just Fills a Feed.",
+    "copy": "We design brand visuals, motion graphics, and AI-assisted content for businesses that want to show up looking like they mean it.",
+    "image": "/8.jpg",
+    "cta": "Start a Creative Project"
+  },
+  "featuresEyebrow": "What we make",
+  "featuresTitle": "Sharp Work Across Every Format",
+  "features": [
+    { "title": "3D product visuals", "copy": "Product scenes and visual concepts built for campaigns, PDPs, and launches — without a photoshoot." },
+    { "title": "Social media content", "copy": "Designed posts, stories, and ad creatives that feel intentional, not templated." },
+    { "title": "Motion graphics", "copy": "Animated assets for product reveals, promos, and social content that actually moves people." },
+    { "title": "Brand and graphic design", "copy": "Logo direction, design systems, and digital templates that give your team something consistent to work with." },
+    { "title": "AI content production", "copy": "AI-assisted visual variations and content sets — directed with taste, reviewed for quality." }
+  ],
+  "scopeEyebrow": "Honest about scope",
+  "scopeTitle": "What We Don't Do",
+  "scopeCopy": "We don't shoot video on location, edit long-form footage, run your marketing strategy, or design physical packaging. Keeping our scope tight is how we keep our quality high.",
+  "ctaTitle": "Let's Make Your Brand Look Like It Means Business.",
+  "ctaCta": "Start a Creative Project",
+  "extraFaqs": [
+    { "question": "Do you do video shoots or photography?", "answer": "No. We don't do physical shoots or traditional video editing. Our work lives in the designed, animated, 3D, and AI-assisted space — which gives us more creative range with less logistical overhead for you.", "order": 4 },
+    { "question": "Can you maintain brand consistency across different content types?", "answer": "That's actually the core of how we work. We build visual systems, not one-off posts — so whether it's a product visual, a social graphic, or a motion asset, they all feel like they come from the same place.", "order": 5 }
+  ]
+}

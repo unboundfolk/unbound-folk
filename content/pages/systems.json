@@ -1,0 +1,38 @@
+{
+  "hero": {
+    "eyebrow": "Systems",
+    "title": "Your Team Is Too Good to Be Stuck Doing This Manually.",
+    "copy": "We build the internal tools, automation, and AI workflows that take busywork off your plate — so your people can focus on the work that actually matters.",
+    "image": "/13.jpg",
+    "cta": "Build My System"
+  },
+  "featuresEyebrow": "What we build",
+  "featuresTitle": "From Messy Processes to Clean, Working Systems",
+  "features": [
+    { "title": "Custom internal tools", "copy": "Built around how your team actually works — not how a generic SaaS vendor assumes you do." },
+    { "title": "CRM and client management", "copy": "One place to track leads, clients, tasks, and follow-ups. No more chasing threads across three apps." },
+    { "title": "AI-powered workflows", "copy": "Smart automation that handles drafting, routing, classifying, and summarising — with a human in the loop where it counts." },
+    { "title": "Process automation", "copy": "Repeatable tasks — approvals, reminders, handoffs, data entry — automated properly so they stop eating time." },
+    { "title": "Dashboards and reporting", "copy": "The numbers your team actually needs, presented clearly, updated automatically." },
+    { "title": "Custom web apps", "copy": "Purpose-built portals and applications when existing tools genuinely can't do the job." }
+  ],
+  "useCasesEyebrow": "Things we've built",
+  "useCasesTitle": "Real Systems for Real Problems",
+  "useCases": [
+    "Lead management system",
+    "Quotation & invoice workflow",
+    "Task delegation system",
+    "Client portal",
+    "Inventory tracking",
+    "Approval workflow",
+    "AI document assistant",
+    "Automated reporting dashboard"
+  ],
+  "ctaTitle": "Ready to Build Something Your Team Will Actually Thank You For?",
+  "ctaCta": "Build My System",
+  "extraFaqs": [
+    { "question": "Do you build fully custom software?", "answer": "Yes. We build internal tools, CRM systems, dashboards, portals, and web apps tailored to your specific workflow — not off-the-shelf tools bent to fit.", "order": 4 },
+    { "question": "What kinds of things can you automate?", "answer": "Almost anything repetitive: follow-ups, approvals, status updates, data routing, reminders, reporting. We start by mapping what your team actually does manually, then figure out what's worth automating.", "order": 5 },
+    { "question": "When does AI actually make sense in a business system?", "answer": "When it saves real time or makes decisions better. Document parsing, smart routing, content drafting, classification, summarisation — these are areas where AI earns its keep. We won't bolt it on just to say it's there.", "order": 6 }
+  ]
+}
