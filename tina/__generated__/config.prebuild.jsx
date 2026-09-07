@@ -22,6 +22,7 @@ var config_default = defineConfig({
         label: "Homepage",
         path: "content/homepage",
         format: "json",
+        ui: { router: () => "/" },
         fields: [
           {
             type: "object",
@@ -115,6 +116,7 @@ var config_default = defineConfig({
         label: "Creative Page",
         path: "content/creative",
         format: "json",
+        ui: { router: () => "/creative" },
         fields: [
           {
             type: "object",
@@ -164,6 +166,7 @@ var config_default = defineConfig({
         label: "Systems Page",
         path: "content/systems",
         format: "json",
+        ui: { router: () => "/systems" },
         fields: [
           {
             type: "object",
@@ -213,6 +216,7 @@ var config_default = defineConfig({
         label: "About Page",
         path: "content/about",
         format: "json",
+        ui: { router: () => "/about" },
         fields: [
           {
             type: "object",
@@ -246,6 +250,7 @@ var config_default = defineConfig({
         label: "Global Settings",
         path: "content/global",
         format: "json",
+        ui: { router: () => "/" },
         fields: [
           {
             type: "object",
@@ -266,6 +271,7 @@ var config_default = defineConfig({
         label: "Work Items",
         path: "content/work",
         format: "json",
+        ui: { router: () => "/work" },
         fields: [
           { type: "string", name: "title", label: "Project Title" },
           { type: "string", name: "category", label: "Category" },
@@ -283,6 +289,7 @@ var config_default = defineConfig({
         label: "Shared FAQs",
         path: "content/faqs",
         format: "json",
+        ui: { router: () => "/" },
         fields: [
           { type: "string", name: "question", label: "Question" },
           { type: "string", name: "answer", label: "Answer" },
