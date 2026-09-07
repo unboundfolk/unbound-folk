@@ -35,7 +35,7 @@
     "Graphic Design",
     "AI-Assisted Content"
   ],
-  "pillarsCreativeImage": "/uploads/14.jpg",
+  "pillarsCreativeImage": "/uploads/creative-pillar.jpg",
   "pillarsCreativeHref": "/creative",
   "pillarsSystemsTitle": "Systems",
   "pillarsSystemsDescription": "Custom software, automation, and AI workflows that remove the friction holding your team back.",
@@ -47,7 +47,7 @@
     "Dashboards",
     "Custom Software"
   ],
-  "pillarsSystemsImage": "/uploads/13.jpg",
+  "pillarsSystemsImage": "/uploads/systems-pillar.jpg",
   "pillarsSystemsHref": "/systems",
   "why": {
     "title": "We're Built Differently on Purpose.",
