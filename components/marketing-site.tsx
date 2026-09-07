@@ -1211,7 +1211,7 @@ export function AboutPage({
           fill
           sizes="100vw"
           priority
-          className="object-cover object-center"
+          className="object-cover object-top"
         />
         {/* Layered overlays for depth */}
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/60 to-slate-950/20" />
