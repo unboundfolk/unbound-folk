@@ -20,27 +20,18 @@ fragment HomepageParts on Homepage {
       copy
     }
   }
-  pillars {
-    __typename
-    eyebrow
-    title
-    creative {
-      __typename
-      title
-      description
-      services
-      image
-      href
-    }
-    systems {
-      __typename
-      title
-      description
-      services
-      image
-      href
-    }
-  }
+  pillarsEyebrow
+  pillarsTitle
+  pillarsCreativeTitle
+  pillarsCreativeDescription
+  pillarsCreativeServices
+  pillarsCreativeImage
+  pillarsCreativeHref
+  pillarsSystemsTitle
+  pillarsSystemsDescription
+  pillarsSystemsServices
+  pillarsSystemsImage
+  pillarsSystemsHref
   why {
     __typename
     title

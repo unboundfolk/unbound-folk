@@ -126,29 +126,6 @@ type HomepageProblem {
   cards: [HomepageProblemCards]
 }
 
-type HomepagePillarsCreative {
-  title: String
-  description: String
-  services: [String]
-  image: String
-  href: String
-}
-
-type HomepagePillarsSystems {
-  title: String
-  description: String
-  services: [String]
-  image: String
-  href: String
-}
-
-type HomepagePillars {
-  eyebrow: String
-  title: String
-  creative: HomepagePillarsCreative
-  systems: HomepagePillarsSystems
-}
-
 type HomepageWhy {
   title: String
   subtitle: String
@@ -175,7 +152,18 @@ type HomepageCta {
 type Homepage implements Node & Document {
   hero: HomepageHero
   problem: HomepageProblem
-  pillars: HomepagePillars
+  pillarsEyebrow: String
+  pillarsTitle: String
+  pillarsCreativeTitle: String
+  pillarsCreativeDescription: String
+  pillarsCreativeServices: [String]
+  pillarsCreativeImage: String
+  pillarsCreativeHref: String
+  pillarsSystemsTitle: String
+  pillarsSystemsDescription: String
+  pillarsSystemsServices: [String]
+  pillarsSystemsImage: String
+  pillarsSystemsHref: String
   why: HomepageWhy
   process: HomepageProcess
   cta: HomepageCta
@@ -219,29 +207,6 @@ input ImageFilter {
   in: [String]
 }
 
-input HomepagePillarsCreativeFilter {
-  title: StringFilter
-  description: StringFilter
-  services: StringFilter
-  image: ImageFilter
-  href: StringFilter
-}
-
-input HomepagePillarsSystemsFilter {
-  title: StringFilter
-  description: StringFilter
-  services: StringFilter
-  image: ImageFilter
-  href: StringFilter
-}
-
-input HomepagePillarsFilter {
-  eyebrow: StringFilter
-  title: StringFilter
-  creative: HomepagePillarsCreativeFilter
-  systems: HomepagePillarsSystemsFilter
-}
-
 input HomepageWhyFilter {
   title: StringFilter
   subtitle: StringFilter
@@ -268,7 +233,18 @@ input HomepageCtaFilter {
 input HomepageFilter {
   hero: HomepageHeroFilter
   problem: HomepageProblemFilter
-  pillars: HomepagePillarsFilter
+  pillarsEyebrow: StringFilter
+  pillarsTitle: StringFilter
+  pillarsCreativeTitle: StringFilter
+  pillarsCreativeDescription: StringFilter
+  pillarsCreativeServices: StringFilter
+  pillarsCreativeImage: ImageFilter
+  pillarsCreativeHref: StringFilter
+  pillarsSystemsTitle: StringFilter
+  pillarsSystemsDescription: StringFilter
+  pillarsSystemsServices: StringFilter
+  pillarsSystemsImage: ImageFilter
+  pillarsSystemsHref: StringFilter
   why: HomepageWhyFilter
   process: HomepageProcessFilter
   cta: HomepageCtaFilter
@@ -667,29 +643,6 @@ input HomepageProblemMutation {
   cards: [HomepageProblemCardsMutation]
 }
 
-input HomepagePillarsCreativeMutation {
-  title: String
-  description: String
-  services: [String]
-  image: String
-  href: String
-}
-
-input HomepagePillarsSystemsMutation {
-  title: String
-  description: String
-  services: [String]
-  image: String
-  href: String
-}
-
-input HomepagePillarsMutation {
-  eyebrow: String
-  title: String
-  creative: HomepagePillarsCreativeMutation
-  systems: HomepagePillarsSystemsMutation
-}
-
 input HomepageWhyMutation {
   title: String
   subtitle: String
@@ -716,7 +669,18 @@ input HomepageCtaMutation {
 input HomepageMutation {
   hero: HomepageHeroMutation
   problem: HomepageProblemMutation
-  pillars: HomepagePillarsMutation
+  pillarsEyebrow: String
+  pillarsTitle: String
+  pillarsCreativeTitle: String
+  pillarsCreativeDescription: String
+  pillarsCreativeServices: [String]
+  pillarsCreativeImage: String
+  pillarsCreativeHref: String
+  pillarsSystemsTitle: String
+  pillarsSystemsDescription: String
+  pillarsSystemsServices: [String]
+  pillarsSystemsImage: String
+  pillarsSystemsHref: String
   why: HomepageWhyMutation
   process: HomepageProcessMutation
   cta: HomepageCtaMutation

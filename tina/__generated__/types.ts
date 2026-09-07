@@ -296,32 +296,6 @@ export type HomepageProblem = {
   cards?: Maybe<Array<Maybe<HomepageProblemCards>>>;
 };
 
-export type HomepagePillarsCreative = {
-  __typename?: 'HomepagePillarsCreative';
-  title?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  services?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  image?: Maybe<Scalars['String']['output']>;
-  href?: Maybe<Scalars['String']['output']>;
-};
-
-export type HomepagePillarsSystems = {
-  __typename?: 'HomepagePillarsSystems';
-  title?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  services?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  image?: Maybe<Scalars['String']['output']>;
-  href?: Maybe<Scalars['String']['output']>;
-};
-
-export type HomepagePillars = {
-  __typename?: 'HomepagePillars';
-  eyebrow?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-  creative?: Maybe<HomepagePillarsCreative>;
-  systems?: Maybe<HomepagePillarsSystems>;
-};
-
 export type HomepageWhy = {
   __typename?: 'HomepageWhy';
   title?: Maybe<Scalars['String']['output']>;
@@ -353,7 +327,18 @@ export type Homepage = Node & Document & {
   __typename?: 'Homepage';
   hero?: Maybe<HomepageHero>;
   problem?: Maybe<HomepageProblem>;
-  pillars?: Maybe<HomepagePillars>;
+  pillarsEyebrow?: Maybe<Scalars['String']['output']>;
+  pillarsTitle?: Maybe<Scalars['String']['output']>;
+  pillarsCreativeTitle?: Maybe<Scalars['String']['output']>;
+  pillarsCreativeDescription?: Maybe<Scalars['String']['output']>;
+  pillarsCreativeServices?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  pillarsCreativeImage?: Maybe<Scalars['String']['output']>;
+  pillarsCreativeHref?: Maybe<Scalars['String']['output']>;
+  pillarsSystemsTitle?: Maybe<Scalars['String']['output']>;
+  pillarsSystemsDescription?: Maybe<Scalars['String']['output']>;
+  pillarsSystemsServices?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  pillarsSystemsImage?: Maybe<Scalars['String']['output']>;
+  pillarsSystemsHref?: Maybe<Scalars['String']['output']>;
   why?: Maybe<HomepageWhy>;
   process?: Maybe<HomepageProcess>;
   cta?: Maybe<HomepageCta>;
@@ -397,29 +382,6 @@ export type ImageFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type HomepagePillarsCreativeFilter = {
-  title?: InputMaybe<StringFilter>;
-  description?: InputMaybe<StringFilter>;
-  services?: InputMaybe<StringFilter>;
-  image?: InputMaybe<ImageFilter>;
-  href?: InputMaybe<StringFilter>;
-};
-
-export type HomepagePillarsSystemsFilter = {
-  title?: InputMaybe<StringFilter>;
-  description?: InputMaybe<StringFilter>;
-  services?: InputMaybe<StringFilter>;
-  image?: InputMaybe<ImageFilter>;
-  href?: InputMaybe<StringFilter>;
-};
-
-export type HomepagePillarsFilter = {
-  eyebrow?: InputMaybe<StringFilter>;
-  title?: InputMaybe<StringFilter>;
-  creative?: InputMaybe<HomepagePillarsCreativeFilter>;
-  systems?: InputMaybe<HomepagePillarsSystemsFilter>;
-};
-
 export type HomepageWhyFilter = {
   title?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
@@ -446,7 +408,18 @@ export type HomepageCtaFilter = {
 export type HomepageFilter = {
   hero?: InputMaybe<HomepageHeroFilter>;
   problem?: InputMaybe<HomepageProblemFilter>;
-  pillars?: InputMaybe<HomepagePillarsFilter>;
+  pillarsEyebrow?: InputMaybe<StringFilter>;
+  pillarsTitle?: InputMaybe<StringFilter>;
+  pillarsCreativeTitle?: InputMaybe<StringFilter>;
+  pillarsCreativeDescription?: InputMaybe<StringFilter>;
+  pillarsCreativeServices?: InputMaybe<StringFilter>;
+  pillarsCreativeImage?: InputMaybe<ImageFilter>;
+  pillarsCreativeHref?: InputMaybe<StringFilter>;
+  pillarsSystemsTitle?: InputMaybe<StringFilter>;
+  pillarsSystemsDescription?: InputMaybe<StringFilter>;
+  pillarsSystemsServices?: InputMaybe<StringFilter>;
+  pillarsSystemsImage?: InputMaybe<ImageFilter>;
+  pillarsSystemsHref?: InputMaybe<StringFilter>;
   why?: InputMaybe<HomepageWhyFilter>;
   process?: InputMaybe<HomepageProcessFilter>;
   cta?: InputMaybe<HomepageCtaFilter>;
@@ -992,29 +965,6 @@ export type HomepageProblemMutation = {
   cards?: InputMaybe<Array<InputMaybe<HomepageProblemCardsMutation>>>;
 };
 
-export type HomepagePillarsCreativeMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  services?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  image?: InputMaybe<Scalars['String']['input']>;
-  href?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type HomepagePillarsSystemsMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  services?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  image?: InputMaybe<Scalars['String']['input']>;
-  href?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type HomepagePillarsMutation = {
-  eyebrow?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  creative?: InputMaybe<HomepagePillarsCreativeMutation>;
-  systems?: InputMaybe<HomepagePillarsSystemsMutation>;
-};
-
 export type HomepageWhyMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
@@ -1041,7 +991,18 @@ export type HomepageCtaMutation = {
 export type HomepageMutation = {
   hero?: InputMaybe<HomepageHeroMutation>;
   problem?: InputMaybe<HomepageProblemMutation>;
-  pillars?: InputMaybe<HomepagePillarsMutation>;
+  pillarsEyebrow?: InputMaybe<Scalars['String']['input']>;
+  pillarsTitle?: InputMaybe<Scalars['String']['input']>;
+  pillarsCreativeTitle?: InputMaybe<Scalars['String']['input']>;
+  pillarsCreativeDescription?: InputMaybe<Scalars['String']['input']>;
+  pillarsCreativeServices?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  pillarsCreativeImage?: InputMaybe<Scalars['String']['input']>;
+  pillarsCreativeHref?: InputMaybe<Scalars['String']['input']>;
+  pillarsSystemsTitle?: InputMaybe<Scalars['String']['input']>;
+  pillarsSystemsDescription?: InputMaybe<Scalars['String']['input']>;
+  pillarsSystemsServices?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  pillarsSystemsImage?: InputMaybe<Scalars['String']['input']>;
+  pillarsSystemsHref?: InputMaybe<Scalars['String']['input']>;
   why?: InputMaybe<HomepageWhyMutation>;
   process?: InputMaybe<HomepageProcessMutation>;
   cta?: InputMaybe<HomepageCtaMutation>;
@@ -1194,29 +1155,6 @@ export type ImageFilter = {
   in?: Array<string | null | undefined> | null | undefined;
 };
 
-export type HomepagePillarsCreativeFilter = {
-  title?: StringFilter | null | undefined;
-  description?: StringFilter | null | undefined;
-  services?: StringFilter | null | undefined;
-  image?: ImageFilter | null | undefined;
-  href?: StringFilter | null | undefined;
-};
-
-export type HomepagePillarsSystemsFilter = {
-  title?: StringFilter | null | undefined;
-  description?: StringFilter | null | undefined;
-  services?: StringFilter | null | undefined;
-  image?: ImageFilter | null | undefined;
-  href?: StringFilter | null | undefined;
-};
-
-export type HomepagePillarsFilter = {
-  eyebrow?: StringFilter | null | undefined;
-  title?: StringFilter | null | undefined;
-  creative?: HomepagePillarsCreativeFilter | null | undefined;
-  systems?: HomepagePillarsSystemsFilter | null | undefined;
-};
-
 export type HomepageWhyFilter = {
   title?: StringFilter | null | undefined;
   subtitle?: StringFilter | null | undefined;
@@ -1243,7 +1181,18 @@ export type HomepageCtaFilter = {
 export type HomepageFilter = {
   hero?: HomepageHeroFilter | null | undefined;
   problem?: HomepageProblemFilter | null | undefined;
-  pillars?: HomepagePillarsFilter | null | undefined;
+  pillarsEyebrow?: StringFilter | null | undefined;
+  pillarsTitle?: StringFilter | null | undefined;
+  pillarsCreativeTitle?: StringFilter | null | undefined;
+  pillarsCreativeDescription?: StringFilter | null | undefined;
+  pillarsCreativeServices?: StringFilter | null | undefined;
+  pillarsCreativeImage?: ImageFilter | null | undefined;
+  pillarsCreativeHref?: StringFilter | null | undefined;
+  pillarsSystemsTitle?: StringFilter | null | undefined;
+  pillarsSystemsDescription?: StringFilter | null | undefined;
+  pillarsSystemsServices?: StringFilter | null | undefined;
+  pillarsSystemsImage?: ImageFilter | null | undefined;
+  pillarsSystemsHref?: StringFilter | null | undefined;
   why?: HomepageWhyFilter | null | undefined;
   process?: HomepageProcessFilter | null | undefined;
   cta?: HomepageCtaFilter | null | undefined;
@@ -1371,7 +1320,7 @@ export type FaqFilter = {
   order?: NumberFilter | null | undefined;
 };
 
-export type HomepagePartsFragment = { __typename: 'Homepage', hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, pillars: { __typename: 'HomepagePillars', eyebrow: string | null, title: string | null, creative: { __typename: 'HomepagePillarsCreative', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null, systems: { __typename: 'HomepagePillarsSystems', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null } | null, why: { __typename: 'HomepageWhy', title: string | null, subtitle: string | null, points: Array<string | null> | null } | null, process: { __typename: 'HomepageProcess', title: string | null, steps: Array<{ __typename: 'HomepageProcessSteps', num: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null };
+export type HomepagePartsFragment = { __typename: 'Homepage', pillarsEyebrow: string | null, pillarsTitle: string | null, pillarsCreativeTitle: string | null, pillarsCreativeDescription: string | null, pillarsCreativeServices: Array<string | null> | null, pillarsCreativeImage: string | null, pillarsCreativeHref: string | null, pillarsSystemsTitle: string | null, pillarsSystemsDescription: string | null, pillarsSystemsServices: Array<string | null> | null, pillarsSystemsImage: string | null, pillarsSystemsHref: string | null, hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, why: { __typename: 'HomepageWhy', title: string | null, subtitle: string | null, points: Array<string | null> | null } | null, process: { __typename: 'HomepageProcess', title: string | null, steps: Array<{ __typename: 'HomepageProcessSteps', num: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null };
 
 export type CreativePagePartsFragment = { __typename: 'CreativePage', featuresEyebrow: string | null, featuresTitle: string | null, scopeEyebrow: string | null, scopeTitle: string | null, scopeCopy: string | null, ctaTitle: string | null, ctaCta: string | null, hero: { __typename: 'CreativePageHero', eyebrow: string | null, title: string | null, copy: string | null, image: string | null, cta: string | null } | null, features: Array<{ __typename: 'CreativePageFeatures', title: string | null, copy: string | null } | null> | null, extraFaqs: Array<{ __typename: 'CreativePageExtraFaqs', question: string | null, answer: string | null, order: number | null } | null> | null };
 
@@ -1390,7 +1339,7 @@ export type HomepageQueryVariables = Exact<{
 }>;
 
 
-export type HomepageQuery = { homepage: { __typename: 'Homepage', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, pillars: { __typename: 'HomepagePillars', eyebrow: string | null, title: string | null, creative: { __typename: 'HomepagePillarsCreative', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null, systems: { __typename: 'HomepagePillarsSystems', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null } | null, why: { __typename: 'HomepageWhy', title: string | null, subtitle: string | null, points: Array<string | null> | null } | null, process: { __typename: 'HomepageProcess', title: string | null, steps: Array<{ __typename: 'HomepageProcessSteps', num: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null } };
+export type HomepageQuery = { homepage: { __typename: 'Homepage', id: string, pillarsEyebrow: string | null, pillarsTitle: string | null, pillarsCreativeTitle: string | null, pillarsCreativeDescription: string | null, pillarsCreativeServices: Array<string | null> | null, pillarsCreativeImage: string | null, pillarsCreativeHref: string | null, pillarsSystemsTitle: string | null, pillarsSystemsDescription: string | null, pillarsSystemsServices: Array<string | null> | null, pillarsSystemsImage: string | null, pillarsSystemsHref: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, why: { __typename: 'HomepageWhy', title: string | null, subtitle: string | null, points: Array<string | null> | null } | null, process: { __typename: 'HomepageProcess', title: string | null, steps: Array<{ __typename: 'HomepageProcessSteps', num: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null } };
 
 export type HomepageConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -1402,7 +1351,7 @@ export type HomepageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomepageConnectionQuery = { homepageConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Homepage', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, pillars: { __typename: 'HomepagePillars', eyebrow: string | null, title: string | null, creative: { __typename: 'HomepagePillarsCreative', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null, systems: { __typename: 'HomepagePillarsSystems', title: string | null, description: string | null, services: Array<string | null> | null, image: string | null, href: string | null } | null } | null, why: { __typename: 'HomepageWhy', title: string | null, subtitle: string | null, points: Array<string | null> | null } | null, process: { __typename: 'HomepageProcess', title: string | null, steps: Array<{ __typename: 'HomepageProcessSteps', num: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null } | null } | null> | null } };
+export type HomepageConnectionQuery = { homepageConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Homepage', id: string, pillarsEyebrow: string | null, pillarsTitle: string | null, pillarsCreativeTitle: string | null, pillarsCreativeDescription: string | null, pillarsCreativeServices: Array<string | null> | null, pillarsCreativeImage: string | null, pillarsCreativeHref: string | null, pillarsSystemsTitle: string | null, pillarsSystemsDescription: string | null, pillarsSystemsServices: Array<string | null> | null, pillarsSystemsImage: string | null, pillarsSystemsHref: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomepageHero', badge: string | null, headline: string | null, headlineAccent: string | null, subtitle: string | null, ctaPrimary: string | null, ctaSecondary: string | null } | null, problem: { __typename: 'HomepageProblem', headline: string | null, subtitle: string | null, cards: Array<{ __typename: 'HomepageProblemCards', label: string | null, title: string | null, copy: string | null } | null> | null } | null, why: { __typename: 'HomepageWhy', title: string | null, subtitle: string | null, points: Array<string | null> | null } | null, process: { __typename: 'HomepageProcess', title: string | null, steps: Array<{ __typename: 'HomepageProcessSteps', num: string | null, title: string | null, copy: string | null } | null> | null } | null, cta: { __typename: 'HomepageCta', title: string | null, copy: string | null, button: string | null } | null } | null } | null> | null } };
 
 export type CreativePageQueryVariables = Exact<{
   relativePath: string;
@@ -1541,27 +1490,18 @@ export const HomepagePartsFragmentDoc = gql`
       copy
     }
   }
-  pillars {
-    __typename
-    eyebrow
-    title
-    creative {
-      __typename
-      title
-      description
-      services
-      image
-      href
-    }
-    systems {
-      __typename
-      title
-      description
-      services
-      image
-      href
-    }
-  }
+  pillarsEyebrow
+  pillarsTitle
+  pillarsCreativeTitle
+  pillarsCreativeDescription
+  pillarsCreativeServices
+  pillarsCreativeImage
+  pillarsCreativeHref
+  pillarsSystemsTitle
+  pillarsSystemsDescription
+  pillarsSystemsServices
+  pillarsSystemsImage
+  pillarsSystemsHref
   why {
     __typename
     title
@@ -2192,7 +2132,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.4/content/3c766213-b1a1-4b9b-814d-37d2acb5f95f/github/main",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )

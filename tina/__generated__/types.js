@@ -28,27 +28,18 @@ export const HomepagePartsFragmentDoc = gql`
       copy
     }
   }
-  pillars {
-    __typename
-    eyebrow
-    title
-    creative {
-      __typename
-      title
-      description
-      services
-      image
-      href
-    }
-    systems {
-      __typename
-      title
-      description
-      services
-      image
-      href
-    }
-  }
+  pillarsEyebrow
+  pillarsTitle
+  pillarsCreativeTitle
+  pillarsCreativeDescription
+  pillarsCreativeServices
+  pillarsCreativeImage
+  pillarsCreativeHref
+  pillarsSystemsTitle
+  pillarsSystemsDescription
+  pillarsSystemsServices
+  pillarsSystemsImage
+  pillarsSystemsHref
   why {
     __typename
     title
@@ -653,7 +644,7 @@ const generateRequester = (client) => {
 export const ExperimentalGetTinaClient = () => getSdk(
   generateRequester(
     createClient({
-      url: "https://content.tinajs.io/2.4/content/3c766213-b1a1-4b9b-814d-37d2acb5f95f/github/main",
+      url: "http://localhost:4001/graphql",
       queries
     })
   )

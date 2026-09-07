@@ -56,39 +56,18 @@ var config_default = defineConfig({
               }
             ]
           },
-          {
-            type: "object",
-            name: "pillars",
-            label: "Pillars Section",
-            fields: [
-              { type: "string", name: "eyebrow", label: "Eyebrow Label" },
-              { type: "string", name: "title", label: "Section Title" },
-              {
-                type: "object",
-                name: "creative",
-                label: "Creative Pillar",
-                fields: [
-                  { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description" },
-                  { type: "string", name: "services", label: "Service Tags", list: true },
-                  { type: "image", name: "image", label: "Cover Image" },
-                  { type: "string", name: "href", label: "Link URL" }
-                ]
-              },
-              {
-                type: "object",
-                name: "systems",
-                label: "Systems Pillar",
-                fields: [
-                  { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description" },
-                  { type: "string", name: "services", label: "Service Tags", list: true },
-                  { type: "image", name: "image", label: "Cover Image" },
-                  { type: "string", name: "href", label: "Link URL" }
-                ]
-              }
-            ]
-          },
+          { type: "string", name: "pillarsEyebrow", label: "Pillars Eyebrow" },
+          { type: "string", name: "pillarsTitle", label: "Pillars Title" },
+          { type: "string", name: "pillarsCreativeTitle", label: "Creative Pillar: Title" },
+          { type: "string", name: "pillarsCreativeDescription", label: "Creative Pillar: Description" },
+          { type: "string", name: "pillarsCreativeServices", label: "Creative Pillar: Service Tags", list: true },
+          { type: "image", name: "pillarsCreativeImage", label: "Creative Pillar: Image" },
+          { type: "string", name: "pillarsCreativeHref", label: "Creative Pillar: Link" },
+          { type: "string", name: "pillarsSystemsTitle", label: "Systems Pillar: Title" },
+          { type: "string", name: "pillarsSystemsDescription", label: "Systems Pillar: Description" },
+          { type: "string", name: "pillarsSystemsServices", label: "Systems Pillar: Service Tags", list: true },
+          { type: "image", name: "pillarsSystemsImage", label: "Systems Pillar: Image" },
+          { type: "string", name: "pillarsSystemsHref", label: "Systems Pillar: Link" },
           {
             type: "object",
             name: "why",
