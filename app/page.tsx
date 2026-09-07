@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomePage } from "@/components/marketing-site";
+import { TinaHomePage } from "@/components/tina-pages";
 import type { HomepageData, WorkItem, FaqItem, GlobalData } from "@/components/marketing-site";
 import { readJson, readJsonDir } from "@/lib/content";
 
@@ -19,5 +19,5 @@ export default function Page() {
   const faqs = readJsonDir<FaqItem>("content/faqs").sort(
     (a, b) => (a.order ?? 0) - (b.order ?? 0)
   );
-  return <HomePage homepage={homepage} workItems={workItems} faqs={faqs} global={global} />;
+  return <TinaHomePage initialData={homepage} workItems={workItems} faqs={faqs} global={global} />;
 }

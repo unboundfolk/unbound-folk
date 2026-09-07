@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SystemsPage } from "@/components/marketing-site";
+import { TinaSystemsPage } from "@/components/tina-pages";
 import type { SystemsPageData, FaqItem, GlobalData } from "@/components/marketing-site";
 import { readJson, readJsonDir } from "@/lib/content";
 
@@ -16,5 +16,5 @@ export default function Page() {
   const sharedFaqs = readJsonDir<FaqItem>("content/faqs").sort(
     (a, b) => (a.order ?? 0) - (b.order ?? 0)
   );
-  return <SystemsPage data={data} sharedFaqs={sharedFaqs} global={global} />;
+  return <TinaSystemsPage initialData={data} sharedFaqs={sharedFaqs} global={global} />;
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AboutPage } from "@/components/marketing-site";
+import { TinaAboutPage } from "@/components/tina-pages";
 import type { AboutPageData, GlobalData } from "@/components/marketing-site";
 import { readJson } from "@/lib/content";
 
@@ -13,5 +13,5 @@ export const metadata: Metadata = {
 export default function Page() {
   const data = readJson<AboutPageData>("content/about/about.json");
   const global = readJson<GlobalData>("content/global/global.json");
-  return <AboutPage data={data} global={global} />;
+  return <TinaAboutPage initialData={data} global={global} />;
 }

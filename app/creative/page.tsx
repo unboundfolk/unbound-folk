@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CreativePage } from "@/components/marketing-site";
+import { TinaCreativePage } from "@/components/tina-pages";
 import type { CreativePageData, FaqItem, GlobalData } from "@/components/marketing-site";
 import { readJson, readJsonDir } from "@/lib/content";
 
@@ -16,5 +16,5 @@ export default function Page() {
   const sharedFaqs = readJsonDir<FaqItem>("content/faqs").sort(
     (a, b) => (a.order ?? 0) - (b.order ?? 0)
   );
-  return <CreativePage data={data} sharedFaqs={sharedFaqs} global={global} />;
+  return <TinaCreativePage initialData={data} sharedFaqs={sharedFaqs} global={global} />;
 }
