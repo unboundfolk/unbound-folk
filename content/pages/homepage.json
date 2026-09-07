@@ -1,0 +1,31 @@
+{
+  "hero": {
+    "badge": "Creative Studio + Systems Partner · Malaysia",
+    "headline": "Sharp Brand.",
+    "headlineAccent": "Smart Systems.",
+    "subtitle": "We help businesses in Malaysia stand out visually and operate smarter — through creative design, AI, and custom-built systems.",
+    "ctaPrimary": "Book a Discovery Call",
+    "ctaSecondary": "Play Showreel"
+  },
+  "problem": {
+    "headline": "Most Businesses Are Losing on Two Fronts at Once.",
+    "subtitle": "Externally, your brand isn't making the impression it should. Internally, your team is burning time on things that should be automatic. Both are fixable — and more connected than you think.",
+    "cards": [
+      {
+        "label": "01",
+        "title": "How you look",
+        "copy": "First impressions happen fast. If your visuals, content, or brand feel inconsistent or dated, customers move on before you get to say anything."
+      },
+      {
+        "label": "02",
+        "title": "How you operate",
+        "copy": "Manual follow-ups, scattered approvals, data in five places — these don't just slow your team down. They quietly cap how big you can grow."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Stop Leaving Growth on the Table?",
+    "copy": "Book a discovery call. We'll spend 30 minutes understanding where you're stuck — and tell you honestly whether we can help.",
+    "button": "Book a Discovery Call"
+  }
+}

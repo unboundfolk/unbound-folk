@@ -1,0 +1,10 @@
+{
+  "title": "AI Content Production Desk",
+  "category": "AI",
+  "tags": ["AI", "Creative"],
+  "image": "/3.jpg",
+  "problem": "A content team was spending most of their week writing captions, resizing assets, and briefing designers on things that barely changed between posts.",
+  "solution": "We built an AI-assisted production flow that handles first-draft copy, auto-formats assets per platform, and routes jobs to the right person — automatically.",
+  "outcome": "Output doubled. The team now spends time on strategy and quality control instead of manual production work.",
+  "order": 5
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Approval Workflow Portal",
+  "category": "Systems",
+  "tags": ["Systems", "Automation"],
+  "image": "/10.jpg",
+  "problem": "Every approval lived in a different chat thread. Nobody knew what was pending, who was responsible, or whether something had actually been signed off.",
+  "solution": "We built a lightweight internal portal for raising requests, tracking statuses, leaving comments, and keeping an audit trail everyone can see.",
+  "outcome": "Approvals that used to take three days now clear in one. And when something stalls, it's obvious why.",
+  "order": 4
+}
