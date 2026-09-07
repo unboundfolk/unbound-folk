@@ -34,6 +34,46 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 
+// ─── TinaCMS content types ───────────────────────────────────────────────────
+export interface HomepageData {
+  hero: {
+    badge: string;
+    headline: string;
+    headlineAccent: string;
+    subtitle: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+  };
+  problem: {
+    headline: string;
+    subtitle: string;
+    cards: Array<{ label: string; title: string; copy: string }>;
+  };
+  cta: {
+    title: string;
+    copy: string;
+    button: string;
+  };
+}
+
+export interface WorkItem {
+  title: string;
+  category: string;
+  tags: string[];
+  image: string;
+  problem: string;
+  solution: string;
+  outcome: string;
+  order?: number;
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+  order?: number;
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Creative", href: "/creative" },
@@ -434,7 +474,7 @@ function ShowreelModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-function HeroSection() {
+function HeroSection({ hero }: { hero: HomepageData["hero"] }) {
   const reduce = useReducedMotion();
   const [showReel, setShowReel] = useState(false);
   return (
@@ -451,7 +491,6 @@ function HeroSection() {
         aria-hidden="true"
       >
         <source src={LOOP_URL} type="video/mp4" />
-        {/* Fallback image while video loads */}
         <Image src="/12.jpg" alt="" fill className="object-cover" priority aria-hidden="true" />
       </video>
 
@@ -460,7 +499,6 @@ function HeroSection() {
 
       {/* ── Additional gradient for text legibility ── */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#05070a]/80 via-transparent to-[#05070a]/40" aria-hidden="true" />
-
 
       {/* ── Centred content ── */}
       <div className="relative z-10 flex min-h-[100dvh] flex-col items-center justify-center px-5 pb-24 pt-32 text-center sm:px-8">
@@ -473,34 +511,33 @@ function HeroSection() {
           {/* Pill badge */}
           <span className="mb-8 inline-flex items-center gap-2 rounded-full border border-lime-300/30 bg-lime-300/10 px-5 py-2 text-xs font-bold uppercase tracking-[0.22em] text-lime-200 backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-lime-300" />
-            Creative Studio + Systems Partner · Malaysia
+            {hero.badge}
           </span>
 
           {/* Headline */}
           <h1 className="text-5xl font-bold leading-[0.9] tracking-tighter text-white drop-shadow-xl sm:text-6xl lg:text-7xl xl:text-[6rem]">
-            Sharp Brand.<br />
-            <span className="text-lime-300">Smart Systems.</span>
+            {hero.headline}<br />
+            <span className="text-lime-300">{hero.headlineAccent}</span>
           </h1>
 
           {/* Subtitle */}
           <p className="mt-7 max-w-xl text-lg leading-8 text-white/75 drop-shadow-sm">
-            We help businesses in Malaysia stand out visually and operate smarter — through creative design, AI, and custom-built systems.
+            {hero.subtitle}
           </p>
 
           {/* CTAs */}
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <ButtonLink href="/contact">
-              Book a Discovery Call <ArrowRight size={16} />
+              {hero.ctaPrimary} <ArrowRight size={16} />
             </ButtonLink>
             <button
               onClick={() => setShowReel(true)}
               className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 text-sm font-bold text-white backdrop-blur-sm transition hover:border-white/40 hover:bg-white/15"
             >
-              <Play size={14} fill="currentColor" /> Play Showreel
+              <Play size={14} fill="currentColor" /> {hero.ctaSecondary}
             </button>
           </div>
         </motion.div>
-
       </div>
 
       {/* ── Scroll indicator ── */}
@@ -523,19 +560,41 @@ function HeroSection() {
   );
 }
 
-export function HomePage() {
+export function HomePage({
+  homepage,
+  workItems: workItemsFromCms,
+  faqs: faqsFromCms,
+}: {
+  homepage?: HomepageData;
+  workItems?: WorkItem[];
+  faqs?: FaqItem[];
+}) {
+  const hero = homepage?.hero;
+  const problem = homepage?.problem;
+  const cta = homepage?.cta;
+
   return (
     <SiteShell>
       <main>
-        <HeroSection />
-
-        <ProblemSection />
+        <HeroSection hero={hero ?? {
+          badge: "Creative Studio + Systems Partner · Malaysia",
+          headline: "Sharp Brand.",
+          headlineAccent: "Smart Systems.",
+          subtitle: "We help businesses in Malaysia stand out visually and operate smarter — through creative design, AI, and custom-built systems.",
+          ctaPrimary: "Book a Discovery Call",
+          ctaSecondary: "Play Showreel",
+        }} />
+        <ProblemSection problem={problem} />
         <PillarsSection />
         <WhySection />
         <ProcessSection />
-        <WorkPreview />
-        <FAQSection />
-        <CTASection />
+        <WorkPreview items={workItemsFromCms} />
+        <FAQSection items={faqsFromCms?.map((f) => ({ q: f.question, a: f.answer }))} />
+        <CTASection
+          title={cta?.title}
+          copy={cta?.copy}
+          cta={cta?.button}
+        />
       </main>
     </SiteShell>
   );
@@ -566,32 +625,31 @@ function TrustSection() {
   );
 }
 
-function ProblemSection() {
+const DEFAULT_PROBLEM: HomepageData["problem"] = {
+  headline: "Most Businesses Are Losing on Two Fronts at Once.",
+  subtitle: "Externally, your brand isn't making the impression it should. Internally, your team is burning time on things that should be automatic. Both are fixable — and more connected than you think.",
+  cards: [
+    { label: "01", title: "How you look", copy: "First impressions happen fast. If your visuals, content, or brand feel inconsistent or dated, customers move on before you get to say anything." },
+    { label: "02", title: "How you operate", copy: "Manual follow-ups, scattered approvals, data in five places — these don't just slow your team down. They quietly cap how big you can grow." },
+  ],
+};
+
+function ProblemSection({ problem }: { problem?: HomepageData["problem"] }) {
+  const { headline, subtitle, cards } = problem ?? DEFAULT_PROBLEM;
   return (
     <section className="relative px-5 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-5xl">
-              Most Businesses Are Losing on Two Fronts at Once.
+              {headline}
             </h2>
             <p className="mt-6 max-w-lg text-base leading-7 text-slate-400">
-              Externally, your brand isn't making the impression it should. Internally, your team is burning time on things that should be automatic. Both are fixable — and more connected than you think.
+              {subtitle}
             </p>
           </Reveal>
           <div className="flex flex-col gap-4">
-            {[
-              {
-                label: "01",
-                title: "How you look",
-                copy: "First impressions happen fast. If your visuals, content, or brand feel inconsistent or dated, customers move on before you get to say anything.",
-              },
-              {
-                label: "02",
-                title: "How you operate",
-                copy: "Manual follow-ups, scattered approvals, data in five places — these don't just slow your team down. They quietly cap how big you can grow.",
-              },
-            ].map(({ label, title, copy }) => (
+            {cards.map(({ label, title, copy }) => (
               <Reveal key={title} className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition hover:border-lime-300/20 hover:bg-white/[0.05]">
                 <span className="mb-4 block font-mono text-xs font-bold tracking-[0.18em] text-lime-300/50">{label}</span>
                 <p className="text-xl font-bold text-white">{title}</p>
@@ -724,8 +782,9 @@ function ProcessSection() {
   );
 }
 
-function WorkPreview() {
-  const [featured, ...rest] = workItems.slice(0, 3);
+function WorkPreview({ items }: { items?: WorkItem[] }) {
+  const displayItems = items && items.length > 0 ? items : workItems;
+  const [featured, ...rest] = displayItems.slice(0, 3);
   return (
     <Section eyebrow="Selected work" title="A Few Things We're Proud Of">
       <div className="grid gap-5 lg:grid-cols-3">
@@ -934,10 +993,11 @@ function FeatureGrid({ items }: { items: Array<[string, string, React.ComponentT
   );
 }
 
-export function WorkPage() {
+export function WorkPage({ items }: { items?: WorkItem[] }) {
+  const allItems = items && items.length > 0 ? items : workItems;
   const filters = ["All", "Creative", "Systems", "AI", "Automation", "Branding", "Motion"];
   const [active, setActive] = useState("All");
-  const filtered = useMemo(() => active === "All" ? workItems : workItems.filter((item) => item.tags.includes(active) || item.category === active), [active]);
+  const filtered = useMemo(() => active === "All" ? allItems : allItems.filter((item) => item.tags.includes(active) || item.category === active), [active, allItems]);
 
   return (
     <SiteShell>
