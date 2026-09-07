@@ -3,11 +3,11 @@
 /**
  * Tina visual-editor wrappers.
  *
- * Every collection has its own useTina() call so ALL content can be edited
- * with live preview in the TinaCMS admin iframe.
+ * Each page has ONE useTina() call for its primary CMS document.
+ * This is the minimum needed for live field updates in the visual editor.
  *
- * On normal site visits useTina() is a no-op — it returns the static data
- * passed in, so there is zero performance cost.
+ * Work items, FAQs, and global settings are passed as static props —
+ * changes to those collections save normally and redeploy via Vercel.
  */
 
 import { useTina } from "tinacms/dist/react";
@@ -40,46 +40,6 @@ import type {
   GlobalData,
 } from "@/components/marketing-site";
 
-// ─── helpers ──────────────────────────────────────────────────────────────
-
-/** Shape the initial work items array into the TinaCloud connection format */
-function toWorkConnection(items: WorkItem[]) {
-  return {
-    workConnection: {
-      totalCount: items.length,
-      pageInfo: { hasPreviousPage: false, hasNextPage: false, startCursor: "", endCursor: "" },
-      edges: items.map((item) => ({ cursor: "", node: item })),
-    },
-  };
-}
-
-/** Shape the initial faqs array into the TinaCloud connection format */
-function toFaqConnection(items: FaqItem[]) {
-  return {
-    faqConnection: {
-      totalCount: items.length,
-      pageInfo: { hasPreviousPage: false, hasNextPage: false, startCursor: "", endCursor: "" },
-      edges: items.map((item) => ({ cursor: "", node: item })),
-    },
-  };
-}
-
-/** Extract work items from a TinaCloud connection response */
-function fromWorkConnection(conn: { workConnection?: { edges?: Array<{ node?: WorkItem | null } | null> | null } | null }): WorkItem[] {
-  return (conn.workConnection?.edges ?? [])
-    .map((e) => e?.node)
-    .filter((n): n is WorkItem => !!n)
-    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-}
-
-/** Extract faqs from a TinaCloud connection response */
-function fromFaqConnection(conn: { faqConnection?: { edges?: Array<{ node?: FaqItem | null } | null> | null } | null }): FaqItem[] {
-  return (conn.faqConnection?.edges ?? [])
-    .map((e) => e?.node)
-    .filter((n): n is FaqItem => !!n)
-    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-}
-
 // ─── Homepage ──────────────────────────────────────────────────────────────
 
 interface TinaHomePageProps {
@@ -89,41 +49,18 @@ interface TinaHomePageProps {
   global: GlobalData;
 }
 
-export function TinaHomePage({ initialData, workItems, faqs, global: globalData }: TinaHomePageProps) {
-  // Homepage content
-  const { data: hp } = useTina({
+export function TinaHomePage({ initialData, workItems, faqs, global }: TinaHomePageProps) {
+  const { data } = useTina({
     query: HomepageDocument,
     variables: { relativePath: "homepage.json" },
     data: { homepage: initialData },
   });
-
-  // Work items (live when editing any work item)
-  const { data: wk } = useTina({
-    query: WorkConnectionDocument,
-    variables: {},
-    data: toWorkConnection(workItems),
-  });
-
-  // FAQs (live when editing any faq)
-  const { data: fq } = useTina({
-    query: FaqConnectionDocument,
-    variables: {},
-    data: toFaqConnection(faqs),
-  });
-
-  // Global / footer
-  const { data: gl } = useTina({
-    query: GlobalDocument,
-    variables: { relativePath: "global.json" },
-    data: { global: globalData },
-  });
-
   return (
     <HomePage
-      homepage={hp.homepage as HomepageData}
-      workItems={fromWorkConnection(wk)}
-      faqs={fromFaqConnection(fq)}
-      global={gl.global as GlobalData}
+      homepage={data.homepage as HomepageData}
+      workItems={workItems}
+      faqs={faqs}
+      global={global}
     />
   );
 }
@@ -136,30 +73,17 @@ interface TinaCreativePageProps {
   global: GlobalData;
 }
 
-export function TinaCreativePage({ initialData, sharedFaqs, global: globalData }: TinaCreativePageProps) {
-  const { data: pd } = useTina({
+export function TinaCreativePage({ initialData, sharedFaqs, global }: TinaCreativePageProps) {
+  const { data } = useTina({
     query: CreativePageDocument,
     variables: { relativePath: "creative.json" },
     data: { creativePage: initialData },
   });
-
-  const { data: fq } = useTina({
-    query: FaqConnectionDocument,
-    variables: {},
-    data: toFaqConnection(sharedFaqs),
-  });
-
-  const { data: gl } = useTina({
-    query: GlobalDocument,
-    variables: { relativePath: "global.json" },
-    data: { global: globalData },
-  });
-
   return (
     <CreativePage
-      data={pd.creativePage as CreativePageData}
-      sharedFaqs={fromFaqConnection(fq)}
-      global={gl.global as GlobalData}
+      data={data.creativePage as CreativePageData}
+      sharedFaqs={sharedFaqs}
+      global={global}
     />
   );
 }
@@ -172,30 +96,17 @@ interface TinaSystemsPageProps {
   global: GlobalData;
 }
 
-export function TinaSystemsPage({ initialData, sharedFaqs, global: globalData }: TinaSystemsPageProps) {
-  const { data: pd } = useTina({
+export function TinaSystemsPage({ initialData, sharedFaqs, global }: TinaSystemsPageProps) {
+  const { data } = useTina({
     query: SystemsPageDocument,
     variables: { relativePath: "systems.json" },
     data: { systemsPage: initialData },
   });
-
-  const { data: fq } = useTina({
-    query: FaqConnectionDocument,
-    variables: {},
-    data: toFaqConnection(sharedFaqs),
-  });
-
-  const { data: gl } = useTina({
-    query: GlobalDocument,
-    variables: { relativePath: "global.json" },
-    data: { global: globalData },
-  });
-
   return (
     <SystemsPage
-      data={pd.systemsPage as SystemsPageData}
-      sharedFaqs={fromFaqConnection(fq)}
-      global={gl.global as GlobalData}
+      data={data.systemsPage as SystemsPageData}
+      sharedFaqs={sharedFaqs}
+      global={global}
     />
   );
 }
@@ -207,25 +118,35 @@ interface TinaAboutPageProps {
   global: GlobalData;
 }
 
-export function TinaAboutPage({ initialData, global: globalData }: TinaAboutPageProps) {
-  const { data: pd } = useTina({
+export function TinaAboutPage({ initialData, global }: TinaAboutPageProps) {
+  const { data } = useTina({
     query: AboutPageDocument,
     variables: { relativePath: "about.json" },
     data: { aboutPage: initialData },
   });
-
-  const { data: gl } = useTina({
-    query: GlobalDocument,
-    variables: { relativePath: "global.json" },
-    data: { global: globalData },
-  });
-
   return (
     <AboutPage
-      data={pd.aboutPage as AboutPageData}
-      global={gl.global as GlobalData}
+      data={data.aboutPage as AboutPageData}
+      global={global}
     />
   );
+}
+
+// ─── Global Settings ───────────────────────────────────────────────────────
+// Separate wrapper so footer updates show live on any page that uses it.
+
+interface TinaGlobalProps {
+  initialGlobal: GlobalData;
+  children: (global: GlobalData) => React.ReactNode;
+}
+
+export function TinaGlobal({ initialGlobal, children }: TinaGlobalProps) {
+  const { data } = useTina({
+    query: GlobalDocument,
+    variables: { relativePath: "global.json" },
+    data: { global: initialGlobal },
+  });
+  return <>{children(data.global as GlobalData)}</>;
 }
 
 // ─── Work Page ─────────────────────────────────────────────────────────────
@@ -235,23 +156,33 @@ interface TinaWorkPageProps {
   global: GlobalData;
 }
 
-export function TinaWorkPage({ workItems, global: globalData }: TinaWorkPageProps) {
-  const { data: wk } = useTina({
+export function TinaWorkPage({ workItems, global }: TinaWorkPageProps) {
+  // Work items are a list collection — useTina with connection doc
+  const { data } = useTina({
     query: WorkConnectionDocument,
     variables: {},
-    data: toWorkConnection(workItems),
+    data: {
+      workConnection: {
+        totalCount: workItems.length,
+        pageInfo: {
+          hasPreviousPage: false,
+          hasNextPage: false,
+          startCursor: "",
+          endCursor: "",
+        },
+        edges: workItems.map((item) => ({ cursor: "", node: item })),
+      },
+    },
   });
 
-  const { data: gl } = useTina({
-    query: GlobalDocument,
-    variables: { relativePath: "global.json" },
-    data: { global: globalData },
-  });
+  // Extract items from live or static connection
+  const liveItems: WorkItem[] = (
+    (data as { workConnection?: { edges?: Array<{ node?: WorkItem } | null> | null } })
+      .workConnection?.edges ?? []
+  )
+    .map((e) => e?.node)
+    .filter((n): n is WorkItem => !!n)
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
-  return (
-    <WorkPage
-      items={fromWorkConnection(wk)}
-      global={gl.global as GlobalData}
-    />
-  );
+  return <WorkPage items={liveItems.length ? liveItems : workItems} global={global} />;
 }
