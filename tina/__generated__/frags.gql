@@ -1,0 +1,48 @@
+fragment HomepageParts on Homepage {
+  __typename
+  hero {
+    __typename
+    badge
+    headline
+    headlineAccent
+    subtitle
+    ctaPrimary
+    ctaSecondary
+  }
+  problem {
+    __typename
+    headline
+    subtitle
+    cards {
+      __typename
+      label
+      title
+      copy
+    }
+  }
+  cta {
+    __typename
+    title
+    copy
+    button
+  }
+}
+
+fragment WorkParts on Work {
+  __typename
+  title
+  category
+  tags
+  image
+  problem
+  solution
+  outcome
+  order
+}
+
+fragment FaqParts on Faq {
+  __typename
+  question
+  answer
+  order
+}
