@@ -1211,11 +1211,10 @@ export function AboutPage({
           fill
           sizes="100vw"
           priority
-          className="object-cover object-top"
+          className="object-cover object-[center_30%]"
         />
-        {/* Layered overlays for depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/60 to-slate-950/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/50" />
+        {/* Only bottom gradient — keeps faces fully visible */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/10" />
 
         {/* Content — left-aligned, vertical center */}
         <div className="relative flex min-h-[90dvh] flex-col justify-end px-5 pb-20 pt-32 sm:px-8 lg:px-16">
