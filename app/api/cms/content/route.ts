@@ -84,13 +84,22 @@ export async function POST(req: Request) {
     const abs = safePath(relPath);
     const json = JSON.stringify(data, null, 2);
 
-    fs.mkdirSync(path.dirname(abs), { recursive: true });
-    fs.writeFileSync(abs, json, "utf-8");
+    // Try local filesystem write (works in dev, read-only on Vercel — non-fatal)
+    try {
+      fs.mkdirSync(path.dirname(abs), { recursive: true });
+      fs.writeFileSync(abs, json, "utf-8");
+    } catch (fsErr) {
+      console.warn("[cms/content] Local fs write skipped (read-only env):", (fsErr as Error).message);
+    }
 
-    // Optionally commit to GitHub so Vercel redeploys
-    await commitToGitHub(relPath, json).catch((e) =>
-      console.warn("[cms/content] GitHub commit skipped:", e.message)
-    );
+    // Always commit to GitHub — this is the source of truth in production
+    const token = process.env.GITHUB_TOKEN;
+    if (!token) {
+      console.warn("[cms/content] No GITHUB_TOKEN — changes won't persist on Vercel");
+      return NextResponse.json({ ok: true, warning: "No GITHUB_TOKEN set — changes saved locally only" });
+    }
+
+    await commitToGitHub(relPath, json);
 
     return NextResponse.json({ ok: true });
   } catch (err) {
