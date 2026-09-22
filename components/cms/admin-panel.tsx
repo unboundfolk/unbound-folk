@@ -367,8 +367,9 @@ function DirCollectionEditor({
           data: item.data,
         }),
       });
+      const json = await res.json().catch(() => ({})) as { error?: string };
       if (res.ok) toast("Saved! Vercel will redeploy in ~1 min.", true);
-      else toast("Save failed — check console.", false);
+      else toast(json.error ?? "Save failed — check console.", false);
     } finally {
       setSaving(false);
     }
@@ -494,8 +495,9 @@ function SingleCollectionEditor({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ collection: collection.file, data }),
       });
+      const json = await res.json().catch(() => ({})) as { error?: string };
       if (res.ok) toast("Saved! Vercel will redeploy in ~1 min.", true);
-      else toast("Save failed — check console.", false);
+      else toast(json.error ?? "Save failed — check console.", false);
     } finally {
       setSaving(false);
     }

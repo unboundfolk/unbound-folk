@@ -92,11 +92,14 @@ export async function POST(req: Request) {
       console.warn("[cms/content] Local fs write skipped (read-only env):", (fsErr as Error).message);
     }
 
-    // Always commit to GitHub — this is the source of truth in production
+    // Commit to GitHub — required for persistence on Vercel
     const token = process.env.GITHUB_TOKEN;
     if (!token) {
-      console.warn("[cms/content] No GITHUB_TOKEN — changes won't persist on Vercel");
-      return NextResponse.json({ ok: true, warning: "No GITHUB_TOKEN set — changes saved locally only" });
+      console.error("[cms/content] GITHUB_TOKEN not set — save will NOT persist on Vercel");
+      return NextResponse.json(
+        { error: "GITHUB_TOKEN not configured in Vercel environment variables. Changes cannot be saved." },
+        { status: 500 }
+      );
     }
 
     await commitToGitHub(relPath, json);
