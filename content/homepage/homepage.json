@@ -3,30 +3,30 @@
     "badge": "Creative Studio + Systems Partner · Kuala Lumpur, Malaysia",
     "headline": "Sharp Brand",
     "headlineAccent": "Smart Systems",
-    "subtitle": "We help businesses in Kuala Lumpur and across Malaysia look sharper and run smoother. Brand content, AI creative production, and internal systems that actually work.",
+    "subtitle": "We help growing businesses in Kuala Lumpur and across Malaysia look sharper and operate better. Brand design, motion content, AI creative production, and business systems that actually work.",
     "ctaPrimary": "Talk to us",
     "ctaSecondary": "See our work"
   },
   "problem": {
-    "headline": "Most growing businesses are losing on two fronts.",
-    "subtitle": "Both are fixable. And they are more connected than you think.",
+    "headline": "Most businesses look fine. Or run fine. Rarely both.",
+    "subtitle": "They're more connected than you think. And both are fixable.",
     "cards": [
       {
         "label": "01",
         "title": "How you look",
-        "copy": "First impressions happen fast. If your visuals, content, or brand feel inconsistent or dated, customers move on before you get to say anything."
+        "copy": "First impressions are fast. If your visuals or brand feel inconsistent or dated, customers move on before you get to say anything."
       },
       {
         "label": "02",
         "title": "How you operate",
-        "copy": "Manual follow-ups, scattered approvals, data in five places — these don't just slow your team down. They quietly cap how big you can grow."
+        "copy": "Manual follow-ups. Scattered approvals. Data in five places. These don't just slow your team down. They quietly cap how big you can grow."
       }
     ]
   },
   "pillarsEyebrow": "What we do",
   "pillarsTitle": "Two Things, Done Properly.",
   "pillarsCreativeTitle": "Creative",
-  "pillarsCreativeDescription": "Brand visuals, motion content, and AI-assisted production that make people stop and take notice.",
+  "pillarsCreativeDescription": "Brand visuals, motion content, and AI production that earns a second look.",
   "pillarsCreativeServices": [
     "3D Product Visuals",
     "Motion Graphics",
@@ -38,7 +38,7 @@
   "pillarsCreativeImage": "/uploads/creative-pillar.jpg",
   "pillarsCreativeHref": "/creative",
   "pillarsSystemsTitle": "Systems",
-  "pillarsSystemsDescription": "Custom software, automation, and AI workflows that remove the friction holding your team back.",
+  "pillarsSystemsDescription": "Custom software, automation, and AI workflows built to give your team their time back.",
   "pillarsSystemsServices": [
     "Internal Tools",
     "CRM Systems",
@@ -51,13 +51,13 @@
   "pillarsSystemsHref": "/systems",
   "why": {
     "title": "We're Built Differently on Purpose.",
-    "subtitle": "A lot of studios do creative or tech. We do both — and that's not an accident. It's how we're designed to work.",
+    "subtitle": "A lot of studios do creative or tech. We do both. Not by accident. It's how we're built to work.",
     "points": [
       "We think about brand and operations together, not in silos",
       "We build for the outcome, not to show off the tech",
       "We move fast without cutting corners on quality",
-      "We use AI where it genuinely helps — and skip it where it doesn't",
-      "We stay communicative and don't disappear mid-project"
+      "We stay communicative and don't disappear mid-project",
+      "We use AI where it genuinely helps. And skip it where it doesn't."
     ]
   },
   "process": {
@@ -66,17 +66,17 @@
       {
         "num": "01",
         "title": "Discover",
-        "copy": "We spend real time understanding your business — your goals, your blockers, and what good would actually look like."
+        "copy": "We get into your business goals, blockers, and what good actually looks like."
       },
       {
         "num": "02",
         "title": "Define",
-        "copy": "We scope the right solution together. No guesswork, no overselling. Just clarity on what we're building and why."
+        "copy": "We scope the right solution together. No guesswork. No overselling. Just clarity on what we're building and why."
       },
       {
         "num": "03",
         "title": "Build",
-        "copy": "We design, develop, and deliver. You're kept in the loop throughout — no black boxes, no surprises."
+        "copy": "We design, develop, and deliver. You're in the loop throughout. No black boxes. No surprises."
       },
       {
         "num": "04",
@@ -86,8 +86,8 @@
     ]
   },
   "cta": {
-    "title": "Ready to Stop Leaving Growth on the Table?",
-    "copy": "Book a discovery call. We'll spend 30 minutes understanding where you're stuck — and tell you honestly whether we can help.",
+    "title": "Make Your Move.",
+    "copy": "Book a discovery call. We'll spend 30 minutes understanding where you're stuck. And tell you honestly whether we can help.",
     "button": "Book a Discovery Call"
   }
 }
