@@ -27,15 +27,25 @@ export async function POST(req: Request) {
     const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}.${ext}`;
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Write locally (dev) + commit to GitHub (production)
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    fs.mkdirSync(uploadDir, { recursive: true });
-    fs.writeFileSync(path.join(uploadDir, filename), buffer);
+    // Try local write (works in dev, read-only on Vercel — non-fatal)
+    try {
+      const uploadDir = path.join(process.cwd(), "public", "uploads");
+      fs.mkdirSync(uploadDir, { recursive: true });
+      fs.writeFileSync(path.join(uploadDir, filename), buffer);
+    } catch {
+      console.warn("[cms/upload] Local fs write skipped (read-only env)");
+    }
 
-    // Commit image to GitHub so it persists on Vercel
-    await commitImageToGitHub(`public/uploads/${filename}`, buffer).catch((e) =>
-      console.warn("[cms/upload] GitHub commit skipped:", e.message)
-    );
+    // Commit to GitHub — required for persistence on Vercel
+    const token = process.env.GITHUB_TOKEN;
+    if (!token) {
+      return NextResponse.json(
+        { error: "GITHUB_TOKEN not configured — image cannot be saved on Vercel" },
+        { status: 500 }
+      );
+    }
+
+    await commitImageToGitHub(`public/uploads/${filename}`, buffer);
 
     return NextResponse.json({ url: `/uploads/${filename}` });
   } catch (err) {
